@@ -1,6 +1,9 @@
 # Softnix Enterprise Data Catalog — UI prototype
 
-Frontend-only prototype of the EDC web app from the PRD (Oct 9, 2026). All data is mock data in `src/data/mock.ts`; no backend yet.
+Frontend-only prototype of the EDC web app.
+
+> **Requirements:** [`PRD.md`](./PRD.md) is the main PRD developers build from (v2.0 Implementation Spec). [`PRD_Reference.md`](./PRD_Reference.md) is the original PRD v1.1 (QbD), kept for reference only; if they conflict, `PRD.md` wins.
+ All data is mock data in `src/data/mock.ts`; no backend yet.
 
 ```bash
 npm install

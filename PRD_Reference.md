@@ -1,3 +1,5 @@
+> **เอกสารอ้างอิง (PRD v1.1 QbD)** — ไม่ใช่ฉบับหลักสำหรับการพัฒนา ให้ developer ยึด [`PRD.md`](./PRD.md) (v2.0 Implementation Spec) เป็นหลัก หากขัดกันให้ยึด `PRD.md`
+
 # PRD — Enterprise Data Catalog (Softnix Data Platform)
 
 Oct 13, 2026 · v1.1 (QbD) · @Rujirapong R

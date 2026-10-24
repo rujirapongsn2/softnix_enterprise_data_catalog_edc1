@@ -6,7 +6,8 @@
 | วันที่ | 24 ต.ค. 2026 |
 | เจ้าของเอกสาร | Rujirapong R. (Softnix) |
 | ผู้อ่านหลัก | Product, Tech Lead, Backend/Frontend/Data Engineer, QA, DevOps |
-| เอกสารต้นทาง | [`PRD_Enterprise_Data_Catalog_Softnix_Data_Platform_v1.1_QbD.md`](./PRD_Enterprise_Data_Catalog_Softnix_Data_Platform_v1.1_QbD.md) (PRD v1.1 QbD, 13 ต.ค. 2026) และ GUI prototype ใน repo นี้ (`src/`, `help-content/`) |
+| เอกสารต้นทาง | [`PRD_Reference.md`](./PRD_Reference.md) (PRD v1.1 QbD, 13 ต.ค. 2026) และ GUI prototype ใน repo นี้ (`src/`, `help-content/`) |
+| สถานะเอกสาร | **ฉบับหลัก (source of truth) สำหรับ developer** — `PRD_Reference.md` (v1.1) ใช้อ้างอิงที่มาเท่านั้น หากขัดกันให้ยึดเอกสารนี้ |
 | สถานะ | รอพี่ทอมรีวิว · คำถามเปิดอยู่ในหัวข้อ 22 |
 
 ## 0. วิธีอ่านเอกสารนี้
