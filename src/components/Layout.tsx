@@ -1,15 +1,15 @@
 import { createContext, lazy, Suspense, useContext, useEffect, useRef, useState, type ReactNode } from 'react'
-import { NavLink, Outlet, useNavigate, useSearchParams } from 'react-router-dom'
+import { NavLink, Outlet, useLocation, useNavigate, useSearchParams } from 'react-router-dom'
 import {
   Home, Search, BookOpen, Boxes, Inbox, ShieldAlert, Gauge, KeyRound, LayoutDashboard, PlugZap, History,
   Settings, Activity, BellRing, ChevronsLeft, ChevronsRight, Bell, HelpCircle, Sparkles, CheckCircle2, Clock, Bookmark,
-  ShieldCheck, ChevronDown, Check, Repeat2, PanelLeft,
+  ShieldCheck, ChevronDown, Check, Repeat2, PanelLeft, Menu,
 } from 'lucide-react'
 import { useI18n } from '../i18n'
 import { assets, terms, tasks, people } from '../data/mock'
 import { useRole } from '../auth/role'
 import { ROLES, FUNCTIONS, levelOf } from '../auth/permissions'
-import { typeIcon, LifecycleBadge } from './ui'
+import { typeIcon, LifecycleBadge, avatarBg } from './ui'
 import AskSoftnix from './AskSoftnix'
 // Help panel + its content index load on first open (keeps the main bundle small)
 const HelpPanel = lazy(() => import('../help/HelpPanel'))
@@ -22,6 +22,11 @@ export const useShell = () => useContext(ShellCtx)
 export default function Layout() {
   const { t } = useI18n()
   const [collapsed, setCollapsed] = useState(false)
+  // Below 900px the sidebar is an off-canvas drawer; above it, the same button collapses it to icons.
+  const [navOpen, setNavOpen] = useState(false)
+  const { pathname } = useLocation()
+  useEffect(() => setNavOpen(false), [pathname])
+  const toggleNav = () => (window.matchMedia('(max-width: 900px)').matches ? setNavOpen(o => !o) : setCollapsed(c => !c))
   const [toastMsg, setToastMsg] = useState<string | null>(null)
   const [askOpen, setAskOpen] = useState(false)
   const [askSeed, setAskSeed] = useState<string | undefined>()
@@ -46,6 +51,7 @@ export default function Layout() {
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'j') { e.preventDefault(); setAskOpen(o => !o) }
+      if (e.key === 'Escape') setNavOpen(false)
     }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
@@ -61,8 +67,9 @@ export default function Layout() {
 
   return (
     <ShellCtx.Provider value={{ toast, ask }}>
-      <div className={`shell ${helpOpen ? 'help-open' : ''}`}>
-        <aside className={`sidenav ${collapsed ? 'collapsed' : ''}`}>
+      <div className={`shell ${helpOpen ? 'help-open' : ''} ${navOpen ? 'nav-open' : ''}`}>
+        {navOpen && <div className="nav-scrim" onClick={() => setNavOpen(false)} aria-hidden />}
+        <aside id="sidenav" aria-label="Main navigation" className={`sidenav ${collapsed ? 'collapsed' : ''}`}>
           <div className="brand">
                         <img src="/softnix-mark.png" alt="Softnix" className="brand-mark-img" />
             <div className="brand-text"><img src="/softnix-logo-color.png" alt="Softnix" className="brand-logo" /><span>Enterprise Data Catalog (EDC1)</span></div>
@@ -95,15 +102,14 @@ export default function Layout() {
         </aside>
 
         <div className="main">
-          <Topbar helpOpen={helpOpen} onHelp={toggleHelp} onToggleNav={() => setCollapsed(c => !c)} />
+          <Topbar helpOpen={helpOpen} onHelp={toggleHelp} onToggleNav={toggleNav} navOpen={navOpen} />
           <div className="content"><Outlet /></div>
         </div>
       </div>
 
       {!askOpen && !helpOpen && (
-        <button className="ask-fab" onClick={() => ask()} aria-label="Open Ask Softnix (Ctrl/⌘ + J)">
-          <span className="orb"><Sparkles size={18} /></span>{t('askSoftnix')}
-          <span className="kbd" style={{ background: 'rgba(255,255,255,.15)', color: 'white', borderColor: 'rgba(255,255,255,.3)' }}>⌘J</span>
+        <button className="ask-fab" onClick={() => ask()} aria-label="Open Ask Softnix (Ctrl/⌘ + J)" title="Open Ask Softnix (Ctrl/⌘ + J)">
+          <Sparkles size={18} /><span className="ask-fab-label">{t('askSoftnix')}</span>
         </button>
       )}
       {askOpen && <AskSoftnix seed={askSeed} onClose={() => setAskOpen(false)} />}
@@ -113,11 +119,11 @@ export default function Layout() {
   )
 }
 
-function Topbar({ helpOpen, onHelp, onToggleNav }: { helpOpen: boolean; onHelp: () => void; onToggleNav: () => void }) {
+function Topbar({ helpOpen, onHelp, onToggleNav, navOpen }: { helpOpen: boolean; onHelp: () => void; onToggleNav: () => void; navOpen: boolean }) {
   const { lang, setLang } = useI18n()
   return (
     <header className="topbar">
-      <button className="icon-btn nav-toggle" aria-label="Toggle sidebar" title="Toggle sidebar" onClick={onToggleNav}><PanelLeft size={18} /></button>
+      <button className="icon-btn nav-toggle" aria-label="Toggle sidebar" title="Toggle sidebar" aria-controls="sidenav" aria-expanded={navOpen} onClick={onToggleNav}><PanelLeft size={18} className="only-wide" /><Menu size={20} className="only-narrow" /></button>
       <GlobalSearch />
       <div className="spacer" />
       <div className="lang-toggle" role="group" aria-label="Language">
@@ -153,19 +159,19 @@ function RoleSwitcher() {
     <div className="role-menu-wrap" ref={ref}>
       <span className="role-pill" style={{ marginRight: 10 }} title="Current role — permissions follow this role"><i className="role-dot" style={{ background: def.color }} />Role: {def.name}</span>
       <button className="user-chip btnlike" onClick={() => setOpen(o => !o)} aria-haspopup="menu" aria-expanded={open} title="Switch role">
-        <span className="avatar" style={{ background: p.color }}>{ini}</span>
+        <span className="avatar" style={{ background: avatarBg(p.color) }}>{ini}</span>
         <div className="meta"><b>{p.name}</b><span>{def.name} · {scopeOf[role]}</span></div>
         <ChevronDown size={14} color="var(--text-3)" />
       </button>
       {open && (
         <div className="role-menu" role="menu">
-          <div className="rm-h"><div className="row"><Repeat2 size={15} color="var(--primary)" /><b>Switch role</b><span className="faint small" style={{ marginLeft: 'auto' }}>demo · PRD §3</span></div>
+          <div className="rm-h"><div className="row"><Repeat2 size={15} color="var(--primary)" /><b>Switch role</b><span className="faint small" style={{ marginLeft: 'auto' }}>demo</span></div>
             <div className="faint small" style={{ marginTop: 2 }}>See how menus, pages and actions change for each role. Your choice is remembered on this browser.</div></div>
           <div className="rm-list">
             {ROLES.map(r => (
               <button key={r.id} className={`role-opt ${r.id === role ? 'on' : ''}`} role="menuitemradio" aria-checked={r.id === role}
                 onClick={() => { setRole(r.id); setOpen(false); toast(`Now viewing as ${r.name} (${people[r.persona].name})`) }}>
-                <span className="avatar sm" style={{ background: r.color, marginTop: 2 }}>{people[r.persona].name.split(' ').map(s => s[0]).slice(0, 2).join('')}</span>
+                <span className="avatar sm" style={{ background: avatarBg(r.color), marginTop: 2 }}>{people[r.persona].name.split(' ').map(s => s[0]).slice(0, 2).join('')}</span>
                 <span className="grow"><span className="ro-t">{r.name}</span> <span className="faint small">· {r.th}</span><span className="faint small" style={{ display: 'block' }}>{r.rights}</span></span>
                 {r.id === role && <Check size={15} color="var(--primary)" />}
               </button>

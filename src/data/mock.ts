@@ -259,7 +259,7 @@ export const connectors: Connector[] = [
   { id: 'c3', name: 'Trino query log & profiling', kind: 'Trino', group: 'Lakehouse', status: 'Healthy', assets: 0, lastRun: '1 h ago · 412 tables profiled', schedule: 'Nightly 01:00–05:00 (resource group: edc_low)' },
   { id: 'c4', name: 'Great Expectations results', kind: 'GX', group: 'Lakehouse', status: 'Healthy', assets: 0, lastRun: '35 min ago · 1,930 validations', schedule: 'Push via API' },
   { id: 'c5', name: 'Oracle CRM (PRD)', kind: 'Oracle', group: 'Database', status: 'Warning', assets: 2310, lastRun: '6 h ago · 3 tables skipped (permission)', schedule: 'Daily 23:00', agent: true },
-  { id: 'c6', name: 'Oracle ERP (PRD)', kind: 'Oracle', group: 'Database', status: 'Failed', assets: 5120, lastRun: '2 d ago · ORA-12170 connect timeout', schedule: 'Daily 23:00', agent: true },
+  { id: 'c6', name: 'Oracle ERP (PRD)', kind: 'Oracle', group: 'Database', status: 'Failed', assets: 5120, lastRun: '2 d ago · Can’t reach database (timeout)', schedule: 'Daily 23:00', agent: true },
   { id: 'c7', name: 'Snowflake Marketing', kind: 'Snowflake', group: 'Cloud', status: 'Healthy', assets: 860, lastRun: '3 h ago', schedule: 'Every 6 h', lineage: true },
   { id: 'c8', name: 'Power BI Service', kind: 'Power BI', group: 'BI', status: 'Healthy', assets: 342, lastRun: '5 h ago', schedule: 'Daily 06:00', lineage: true },
 ]

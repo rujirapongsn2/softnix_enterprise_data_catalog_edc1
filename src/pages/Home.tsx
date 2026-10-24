@@ -1,18 +1,19 @@
 import { Link, useNavigate } from 'react-router-dom'
-import { ArrowRight, Sparkles, Star, TrendingUp, AlertTriangle, Search, BookOpen, ShieldAlert, Bell } from 'lucide-react'
+import { ArrowRight, Sparkles, Star, TrendingUp, AlertTriangle, Search, BookOpen, ShieldAlert, Bell, KeyRound, PencilLine, BadgeCheck, Circle } from 'lucide-react'
 import { assets, tasks, connectors, terms } from '../data/mock'
-import { Card, ClsBadge, LifecycleBadge, Meter, Stars, typeIcon, Avatar } from '../components/ui'
+import { Card, ClsBadge, LifecycleBadge, Meter, Endorsements, typeIcon, Avatar } from '../components/ui'
 import { useI18n } from '../i18n'
 import { useShell } from '../components/Layout'
 import { useRole } from '../auth/role'
 import { people } from '../data/mock'
 
 export default function Home() {
-  const { t, lang } = useI18n()
+  const { t, lang, fmtDate } = useI18n()
   const { ask } = useShell()
   const { def } = useRole()
   const nav = useNavigate()
   const followed = assets.filter(a => ['gold-customer-360', 'silver-billing', 'report-churn', 'gold-churn-features'].includes(a.id))
+  const totalAssets = connectors.reduce((n, c) => n + (c.assets ?? 0), 0)
   const trending = [...assets].filter(a => a.lifecycle === 'Certified').sort((a, b) => b.usage - a.usage).slice(0, 5)
 
   return (
@@ -21,10 +22,10 @@ export default function Home() {
       <section className="home-hero">
         <div className="row wrap" style={{ alignItems: 'flex-end', gap: 24 }}>
           <div className="grow">
-            <div className="hh-date">Thursday, 9 October 2026</div>
+            <div className="hh-date">{fmtDate(new Date(2026, 9, 9), 'long')}</div>
             <h1>{t('welcome')}, {people[def.persona].name.split(' ')[0]}</h1>
             <div className="hh-sub">
-              {lang === 'th' ? `บทบาท: ${def.th} · คุณมีงานรออนุมัติ 6 รายการ เกินกำหนด 2 รายการ` : `Signed in as ${def.name}. You have 6 open tasks — 2 are overdue. 18,420 assets catalogued across 8 sources.`}
+              {lang === 'th' ? `บทบาท: ${def.th} · คุณมีงานค้าง 6 รายการ เกินกำหนด 2 รายการ · มีข้อมูลในแคตตาล็อก ${totalAssets.toLocaleString()} รายการจาก ${connectors.length} แหล่ง` : `Signed in as ${def.name}. You have 6 open tasks — 2 are overdue. ${totalAssets.toLocaleString()} assets catalogued across ${connectors.length} sources.`}
             </div>
           </div>
           <div className="row" style={{ gap: 8 }}>
@@ -71,7 +72,7 @@ export default function Home() {
                   <div className="ellipsis"><b>{a.name}</b></div>
                   <div className="faint small ellipsis">
                     {a.id === 'gold-customer-360' && 'Schema change: + last_channel (non-breaking · contract CTR-CUST-360)'}
-                    {a.id === 'silver-billing' && <span style={{ color: 'var(--bad)' }}>Freshness SLA breached · 2 d</span>}
+                    {a.id === 'silver-billing' && <span style={{ color: 'var(--bad-text)' }}>Freshness SLA breached · 2 d</span>}
                     {a.id === 'report-churn' && '3 new comments'}
                     {a.id === 'gold-churn-features' && 'Submitted for certification'}
                   </div>
@@ -82,7 +83,7 @@ export default function Home() {
           </div>
         </Card>
 
-        <Card title={<h3 className="row"><Sparkles size={15} color="var(--ai)" />AI curation</h3>} actions={<Link to="/privacy" className="small">Review</Link>}>
+        <Card title={<h2 className="row"><Sparkles size={15} color="var(--ai)" />AI curation</h2>} actions={<Link to="/privacy" className="small">Review</Link>}>
           <div className="row" style={{ alignItems: 'baseline', gap: 6 }}><span style={{ fontSize: 28, fontWeight: 700 }}>214</span><span className="muted">suggestions waiting for you</span></div>
           <div className="col" style={{ marginTop: 10, gap: 10 }}>
             {[
@@ -98,21 +99,21 @@ export default function Home() {
             ))}
           </div>
           <div className="divider" />
-          <div className="small muted">Acceptance rate last 30 days: <b style={{ color: 'var(--ok)' }}>82%</b> · edited 11% · rejected 7%</div>
+          <div className="small muted">Acceptance rate last 30 days: <b style={{ color: 'var(--ok-text)' }}>82%</b> · edited 11% · rejected 7%</div>
         </Card>
 
-        <Card title={<h3 className="row"><TrendingUp size={15} />Popular certified data</h3>} className="span2">
+        <Card title={<h2 className="row"><TrendingUp size={15} />Popular certified data</h2>} className="span2">
           <div className="tbl-wrap">
-            <table className="tbl">
-              <thead><tr><th>Asset</th><th>Domain</th><th>Classification</th><th>Rating</th><th>Queries / 30d</th><th /></tr></thead>
+            <table className="tbl sticky-last">
+              <thead><tr><th>Asset</th><th>Domain</th><th>Classification</th><th>Endorsed</th><th className="num">Queries / 30d</th><th>Status</th></tr></thead>
               <tbody>
                 {trending.map(a => (
                   <tr key={a.id} style={{ cursor: 'pointer' }} onClick={() => nav(`/asset/${a.id}`)}>
                     <td><div className="row"><span style={{ color: 'var(--primary)' }}>{typeIcon(a.type, 15)}</span><div style={{ minWidth: 0 }}><b>{a.businessName[lang]}</b><div className="faint small mono ellipsis" style={{ maxWidth: 260 }}>{a.path}</div></div></div></td>
                     <td>{a.domain}</td>
                     <td><ClsBadge value={a.classification} /></td>
-                    <td><Stars value={a.rating} /></td>
-                    <td>{a.usage.toLocaleString()}</td>
+                    <td><Endorsements count={a.ratings} /></td>
+                    <td className="num">{a.usage.toLocaleString()}</td>
                     <td>{a.authoritative ? <span className="badge blue"><Star size={11} />Authoritative</span> : <LifecycleBadge value={a.lifecycle} />}</td>
                   </tr>
                 ))}
@@ -133,7 +134,7 @@ export default function Home() {
               ))}
             </div>
           </Card>
-          <Card title={<h3 className="row"><BookOpen size={15} />New in glossary</h3>}>
+          <Card title={<h2 className="row"><BookOpen size={15} />New in glossary</h2>}>
             {terms.filter(x => x.status !== 'Approved').slice(0, 3).map(x => (
               <Link key={x.id} to={`/glossary/${x.id}`} className="row" style={{ padding: '5px 0' }}>
                 <span className="grow">{x.en} <span className="faint">· {x.th}</span></span><LifecycleBadge value={x.status} />
@@ -165,14 +166,14 @@ function Kpi({ label, value, target }: { label: string; value: number; target: n
 
 export function TaskDot({ kind }: { kind: string }) {
   const map: Record<string, [string, React.ReactNode]> = {
-    'Access Request': ['var(--primary)', '🔑'],
-    'Change Request': ['var(--ai)', '✎'],
-    Certification: ['var(--ok)', '✔'],
+    'Access Request': ['var(--primary)', <KeyRound key="k" size={13} />],
+    'Change Request': ['var(--ai)', <PencilLine key="p" size={13} />],
+    Certification: ['var(--ok-text)', <BadgeCheck key="c" size={13} />],
     'PII Review': ['var(--bad)', <ShieldAlert key="s" size={13} />],
     'Data Issue': ['var(--warn)', <AlertTriangle key="a" size={13} />],
     'Glossary Approval': ['var(--info)', <BookOpen key="b" size={13} />],
   }
-  const [c, ic] = map[kind] ?? ['var(--text-3)', '•']
+  const [c, ic] = map[kind] ?? ['var(--text-3)', <Circle key="o" size={8} />]
   return <span style={{ width: 28, height: 28, borderRadius: 8, background: `color-mix(in srgb, ${c} 12%, white)`, color: c, display: 'grid', placeItems: 'center', fontSize: 12, flex: 'none' }}>{ic}</span>
 }
 

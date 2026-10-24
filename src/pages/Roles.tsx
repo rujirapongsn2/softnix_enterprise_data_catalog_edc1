@@ -1,4 +1,5 @@
 import { Fragment, useState } from 'react'
+import { SHOW_SPEC_REFS } from '../demo'
 import { Check, Eye, Minus, ShieldCheck, UserPlus, Users, RotateCcw, Info } from 'lucide-react'
 import { FUNCTIONS, ROLES, type Level, type RoleId } from '../auth/permissions'
 import { useRole, GuardBtn } from '../auth/role'
@@ -51,7 +52,7 @@ export default function Roles() {
   return (
     <div className="page">
       <div className="page-h">
-        <div><h1>Roles &amp; Permissions</h1><div className="sub">Designed access per PRD v1.1 §3 (DAMA-DMBOK2 roles) · RBAC with domain scope · one matrix drives every menu, page and button in this prototype</div></div>
+        <div><h1>Roles &amp; Permissions</h1><div className="sub">DAMA-DMBOK2 roles · RBAC with domain scope · one matrix drives every menu, page and button in this prototype</div></div>
         <div className="actions">
           <button className="btn ghost" onClick={() => { resetStored(); toast('Demo records created in forms were cleared') }}><RotateCcw size={14} />Reset demo data</button>
         </div>
@@ -75,7 +76,7 @@ export default function Roles() {
               <table className="tbl matrix">
                 <thead>
                   <tr>
-                    <th style={{ minWidth: 240 }}>Function</th><th>Where</th><th>PRD</th>
+                    <th style={{ minWidth: 240 }}>Function</th><th>Where</th>{SHOW_SPEC_REFS && <th>PRD</th>}
                     {ROLES.map(r => (
                       <th key={r.id} className={`rc ${r.id === role ? 'me' : ''}`}>
                         <button className="link-btn" style={{ color: r.id === role ? 'var(--primary-700)' : 'var(--text-2)', fontWeight: 600, fontSize: 11.5 }} onClick={() => setRole(r.id)} title={`Switch to ${r.name}`}>
@@ -88,12 +89,12 @@ export default function Roles() {
                 <tbody>
                   {groups.map(g => (
                     <Fragment key={g}>
-                      <tr className="cur-group"><td colSpan={3 + ROLES.length}>{g}</td></tr>
+                      <tr className="cur-group"><td colSpan={(SHOW_SPEC_REFS ? 3 : 2) + ROLES.length}>{g}</td></tr>
                       {list.filter(f => (f.kind === 'page' ? `Pages · ${f.group}` : `Actions · ${f.group}`) === g).map(f => (
                         <tr key={f.id}>
-                          <td><b style={{ fontWeight: 500 }}>{f.label}</b><div className="faint mono" style={{ fontSize: 10.5 }}>{f.id}</div></td>
+                          <td><b style={{ fontWeight: 500 }}>{f.label}</b><div className="faint mono" style={{ fontSize: 11.5 }}>{f.id}</div></td>
                           <td className="small muted">{f.where}</td>
-                          <td className="mono faint small">{f.prd}</td>
+                          {SHOW_SPEC_REFS && <td className="mono faint small">{f.prd}</td>}
                           {ROLES.map(r => <td key={r.id} className={`rc ${r.id === role ? 'me' : ''}`}><PermCell l={f.levels[r.id]} /></td>)}
                         </tr>
                       ))}
@@ -136,7 +137,7 @@ export default function Roles() {
                   <tbody>
                     {users.map(u => (
                       <tr key={u.id} className="new-row">
-                        <td><div className="row"><span className="avatar sm" style={{ background: '#94a3b8' }}>{u.name.split(' ').map(s => s[0]).slice(0, 2).join('')}</span><div><b>{u.name}</b><div className="faint small">{u.email}</div></div></div></td>
+                        <td><div className="row"><span className="avatar sm" style={{ background: '#64748b' }}>{u.name.split(' ').map(s => s[0]).slice(0, 2).join('')}</span><div><b>{u.name}</b><div className="faint small">{u.email}</div></div></div></td>
                         <td className="small">{u.roles.map(roleName).join(', ')}</td><td className="small">{u.domains.join(', ') || 'All'}</td>
                         <td className="small muted">Invitation{u.mfa ? ' · MFA' : ''}{u.expires ? ` · until ${u.expires}` : ''}</td><td><span className="badge amber">Invited</span></td>
                       </tr>

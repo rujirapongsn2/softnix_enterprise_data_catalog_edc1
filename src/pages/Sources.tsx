@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Plus, Play, Settings2, Database, Cloud, BarChart3, Waves, Server, X, CheckCircle2, AlertTriangle, XCircle, Loader2, HardDrive, FileCode2, Clock } from 'lucide-react'
+import { Plus, Play, Settings2, Database, Cloud, BarChart3, Waves, Server, X, CheckCircle2, AlertTriangle, XCircle, Loader2, HardDrive, FileCode2, Clock, PlugZap, ScrollText, RotateCw } from 'lucide-react'
 import { connectors, type Connector } from '../data/mock'
 import { Card, Seg } from '../components/ui'
 import { useShell } from '../components/Layout'
@@ -21,6 +21,8 @@ export default function Sources() {
   const [sel, setSel] = useState<Connector | null>(null)
   const [created, addCreated] = useStored<Connector>('sources')
   const [adding, setAdding] = useState(false)
+  const [logOpen, setLogOpen] = useState(false)
+  const open = (c: Connector, log = false) => { setSel(c); setLogOpen(log) }
   const list = [...created, ...connectors].filter(c => group === 'all' || c.group === group)
 
   return (
@@ -31,8 +33,8 @@ export default function Sources() {
       </div>
 
       <div className="grid g4" style={{ marginBottom: 16 }}>
-        {[['Sources', String(connectors.length + created.length)], ['Assets harvested', '28,256'], ['Schema changes (24h)', '17'], ['Failed sources', '1']].map(([l, v]) => (
-          <div key={l} className="card stat"><div className="l">{l}</div><div className="v" style={{ color: l === 'Failed sources' ? 'var(--bad)' : undefined }}>{v}</div></div>
+        {[['Sources', String(connectors.length + created.length)], ['Assets harvested', [...connectors, ...created].reduce((n, c) => n + (c.assets ?? 0), 0).toLocaleString()], ['Schema changes (24h)', '17'], ['Failed sources', String([...connectors, ...created].filter(c => c.status === 'Failed').length)]].map(([l, v]) => (
+          <div key={l} className="card stat"><div className="l">{l}</div><div className="v" style={{ color: l === 'Failed sources' ? 'var(--bad-text)' : undefined }}>{v}</div></div>
         ))}
       </div>
 
@@ -42,16 +44,25 @@ export default function Sources() {
 
       <div style={{ display: 'grid', gridTemplateColumns: sel ? '1fr 380px' : '1fr', gap: 16, alignItems: 'start' }}>
         <div className="card tbl-wrap">
-          <table className="tbl">
-            <thead><tr><th>Source</th><th>Type</th><th>Status</th><th>Assets</th><th>Last run</th><th>Schedule</th><th /></tr></thead>
+          <table className="tbl sticky-last">
+            <thead><tr><th>Source</th><th>Type</th><th>Status</th><th className="num">Assets</th><th>Last run</th><th>Schedule</th><th>Harvest</th></tr></thead>
             <tbody>
               {list.map(c => (
-                <tr key={c.id} className={c.isNew ? 'new-row' : undefined} style={{ cursor: 'pointer', background: sel?.id === c.id ? 'var(--primary-50)' : undefined }} onClick={() => setSel(c)}>
+                <tr key={c.id} className={c.isNew ? 'new-row' : undefined} style={{ cursor: 'pointer', background: sel?.id === c.id ? 'var(--primary-50)' : undefined }} onClick={() => open(c)}>
                   <td><div className="row"><SourceLogo kind={c.kind} size={32} fallback={<span className="asset-icon" style={{ width: 32, height: 32 }}>{groupIcon[c.group]}</span>} /><div><b>{c.name}</b><div className="row" style={{ gap: 4 }}>{c.isNew && <span className="badge blue">new</span>}{c.lineage && <span className="badge cyan">lineage</span>}{c.agent && <span className="badge gray">remote agent</span>}</div></div></div></td>
                   <td>{c.kind}</td>
                   <td><span className={`badge ${statusUi[c.status][0]}`}>{statusUi[c.status][1]}{c.status}</span></td>
-                  <td>{c.assets ? c.assets.toLocaleString() : '—'}</td>
-                  <td className="small" style={{ color: c.status === 'Failed' ? 'var(--bad)' : undefined }}>{c.lastRun}</td>
+                  <td className="num">{c.assets ? c.assets.toLocaleString() : '—'}</td>
+                  <td className="small">
+                    <span style={{ color: c.status === 'Failed' ? 'var(--bad-text)' : undefined }}>{c.lastRun}</span>
+                    {c.status === 'Failed' && (
+                      <div className="row fix-actions" onClick={e => e.stopPropagation()}>
+                        <GuardBtn cap="source.run" className="link-btn small" onClick={() => toast(`Testing ${c.name}… still timing out after 10 s`)}><PlugZap size={12} />Test connection</GuardBtn>
+                        <button className="link-btn small" onClick={() => open(c, true)}><ScrollText size={12} />View log</button>
+                        <GuardBtn cap="source.run" className="link-btn small" onClick={() => toast(`Retry queued: ${c.name}`)}><RotateCw size={12} />Retry</GuardBtn>
+                      </div>
+                    )}
+                  </td>
                   <td className="small muted">{c.schedule}</td>
                   <td><GuardBtn cap="source.run" className="btn sm" onClick={e => { e.stopPropagation(); toast(`Harvest started: ${c.name}`) }}><Play size={12} />Run</GuardBtn></td>
                 </tr>
@@ -73,12 +84,32 @@ export default function Sources() {
             <div className="divider" />
             <b className="small">Recent runs</b>
             <div className="col small" style={{ marginTop: 8, gap: 6 }}>
-              {(sel.isNew ? ['Queued · first full harvest will start within 5 min'] : ['22 min ago · incremental · +3 tables · 1 schema change', '1 h ago · incremental · no changes', '2 h ago · incremental · 1 table deprecated', 'Yesterday 23:00 · full · 18,420 assets · 14m 51s']).map(r => (
-                <div key={r} className="row"><CheckCircle2 size={13} color="var(--ok)" />{r}</div>
+              {(sel.isNew ? [['ok', 'Queued · first full harvest will start within 5 min']]
+                : sel.status === 'Failed' ? [['bad', 'Oct 8, 23:00 · failed · database unreachable'], ['bad', 'Oct 7, 23:00 · failed · database unreachable'], ['ok', `Oct 6, 23:00 · full · ${(sel.assets ?? 0).toLocaleString()} assets · 6m 02s`]]
+                : [['ok', '22 min ago · incremental · +3 tables · 1 schema change'], ['ok', '1 h ago · incremental · no changes'], ['ok', '2 h ago · incremental · 1 table deprecated'], ['ok', `Yesterday 23:00 · full · ${(sel.assets ?? 0).toLocaleString()} assets · 14m 51s`]]).map(([k, r]) => (
+                <div key={r} className="row">{k === 'bad' ? <XCircle size={13} color="var(--bad)" /> : <CheckCircle2 size={13} color="var(--ok)" />}{r}</div>
               ))}
-              {sel.status === 'Failed' && <div className="row" style={{ color: 'var(--bad)' }}><XCircle size={13} />ORA-12170: TNS connect timeout — check agent egress</div>}
             </div>
-            <div className="row" style={{ marginTop: 14 }}><GuardBtn cap="source.run" className="btn sm" onClick={() => toast('Configuration editor opens the same form as Add source')}><Settings2 size={13} />Configure</GuardBtn><GuardBtn cap="source.run" className="btn sm" onClick={() => toast(sel.status === 'Failed' ? 'Test failed: ORA-12170 connect timeout' : 'Connection OK · 64 ms · read-only account')}>Test connection</GuardBtn></div>
+            {sel.status === 'Failed' && (
+              <div className="fail-box">
+                <div className="row" style={{ alignItems: 'flex-start' }}><XCircle size={15} color="var(--bad)" style={{ flex: 'none', marginTop: 1 }} />
+                  <div><b>EDC can’t reach this database.</b>
+                    <div className="small muted" style={{ marginTop: 2 }}>The connection timed out after 10 s, 2 days in a row. The remote agent <b>agent-dc1</b> most likely can’t reach the database host on port 1521 (firewall or network change). Nothing was harvested, so the catalog still shows the last good snapshot.</div>
+                  </div>
+                </div>
+                <div className="row wrap" style={{ marginTop: 10, gap: 6 }}>
+                  <GuardBtn cap="source.run" className="btn sm" onClick={() => toast('Test failed again: timeout after 10 s from agent-dc1')}><PlugZap size={13} />Test connection</GuardBtn>
+                  <button className="btn sm" aria-expanded={logOpen} onClick={() => setLogOpen(o => !o)}><ScrollText size={13} />{logOpen ? 'Hide log' : 'View log'}</button>
+                  <GuardBtn cap="source.run" className="btn sm primary" onClick={() => toast(`Retry queued: ${sel.name}`)}><RotateCw size={13} />Retry harvest</GuardBtn>
+                </div>
+                {logOpen && <pre className="run-log">{`Oct 7 23:00:02  agent-dc1  connect erp-prd:1521/ERP
+Oct 7 23:00:12  agent-dc1  ORA-12170: TNS:Connect timeout occurred
+Oct 8 23:00:01  agent-dc1  connect erp-prd:1521/ERP
+Oct 8 23:00:11  agent-dc1  ORA-12170: TNS:Connect timeout occurred
+Oct 8 23:00:11  scheduler  harvest marked Failed · next try Oct 9 23:00`}</pre>}
+              </div>
+            )}
+            <div className="row" style={{ marginTop: 14 }}><GuardBtn cap="source.run" className="btn sm" onClick={() => toast('Configuration editor opens the same form as Add source')}><Settings2 size={13} />Configure</GuardBtn><GuardBtn cap="source.run" className="btn sm" onClick={() => toast(sel.status === 'Failed' ? 'Test failed: database unreachable (timeout after 10 s)' : 'Connection OK · 64 ms · read-only account')}>Test connection</GuardBtn></div>
           </Card>
         )}
       </div>

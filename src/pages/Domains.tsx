@@ -7,7 +7,7 @@ import { NewProductForm, type NewProduct } from '../forms/Forms'
 import { Package, Plus, ShieldCheck, Users, Boxes } from 'lucide-react'
 import { domains, dataProducts, people } from '../data/mock'
 import { SloBadges } from './Qbd'
-import { Avatar, Meter, Stars } from '../components/ui'
+import { Avatar, Meter } from '../components/ui'
 
 export default function Domains() {
   const { toast } = useShell()
@@ -20,7 +20,7 @@ export default function Domains() {
         <div className="actions"><GuardBtn cap="product.create" className="btn primary" onClick={() => setOpen(true)}><Plus size={14} />New data product</GuardBtn></div>
       </div>
 
-      <h3 className="row" style={{ marginBottom: 10 }}><Package size={16} />Data products</h3>
+      <h2 className="row" style={{ marginBottom: 10 }}><Package size={16} />Data products</h2>
       <div className="grid g4" style={{ marginBottom: 24 }}>
         {[...created, ...dataProducts].map(p => (
           <article key={p.id} className="card" style={{ padding: 16, display: 'flex', flexDirection: 'column', gap: 10, borderColor: 'isNew' in p ? 'var(--primary-100)' : undefined, background: 'isNew' in p ? '#f7fbfe' : undefined }}>
@@ -36,7 +36,6 @@ export default function Domains() {
             <div className="row small" style={{ justifyContent: 'space-between' }}>
               <span className="row"><Boxes size={13} />{p.assets} assets</span>
               <span className="row"><Users size={13} />{p.consumers} consumers</span>
-              <Stars value={p.rating} />
             </div>
             <div className="row" style={{ borderTop: '1px solid var(--border)', paddingTop: 10 }}>
               <Avatar id={p.owner} size="sm" /><span className="small grow">{people[p.owner].name}</span>
@@ -46,7 +45,7 @@ export default function Domains() {
         ))}
       </div>
 
-      <h3 className="row" style={{ marginBottom: 10 }}><Boxes size={16} />Domains</h3>
+      <h2 className="row" style={{ marginBottom: 10 }}><Boxes size={16} />Domains</h2>
       <div className="grid g3">
         {domains.map(d => (
           <Link key={d.id} to={`/search?domain=${d.name}`} className="card" style={{ padding: 16, color: 'inherit', textDecoration: 'none', borderTop: `3px solid ${d.color}` }}>

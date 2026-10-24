@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { Search as SearchIcon, Sparkles, Bookmark, LayoutList, LayoutGrid, Star, X, Download } from 'lucide-react'
 import { assets, people, type Asset } from '../data/mock'
-import { ClsBadge, LifecycleBadge, PiiBadge, Stars, typeIcon, AiTag, scoreColor } from '../components/ui'
+import { ClsBadge, LifecycleBadge, PiiBadge, Endorsements, typeIcon, AiTag, scoreColor, scoreText } from '../components/ui'
 import { useI18n } from '../i18n'
 import { useShell } from '../components/Layout'
 
@@ -49,7 +49,7 @@ export default function Search() {
     if (freshOnly) r = r.filter(a => a.freshnessOk)
     const rank = (a: Asset) => (a.lifecycle === 'Certified' ? 1e6 : 0) + (a.authoritative ? 5e5 : 0) + a.usage
     if (sort === 'relevance') r = [...r].sort((a, b) => rank(b) - rank(a))
-    if (sort === 'rating') r = [...r].sort((a, b) => b.rating - a.rating)
+    if (sort === 'rating') r = [...r].sort((a, b) => b.ratings - a.ratings)
     if (sort === 'dq') r = [...r].sort((a, b) => (b.dq ?? 0) - (a.dq ?? 0))
     return r
   }, [base, sel, sort, ownerless, freshOnly])
@@ -78,7 +78,7 @@ export default function Search() {
             {chips.length > 0 && <button className="link-btn small" onClick={() => setSel({})}>Clear all</button>}
           </div>
           <div className="facet">
-            <h4>Quick filters</h4>
+            <h3>Quick filters</h3>
             <label><input type="checkbox" checked={ownerless} onChange={e => setOwnerless(e.target.checked)} />Missing owner</label>
             <label><input type="checkbox" checked={freshOnly} onChange={e => setFreshOnly(e.target.checked)} />Fresh (within SLA)</label>
           </div>
@@ -87,7 +87,7 @@ export default function Search() {
             base.forEach(a => counts.set(String(a[f.key]), (counts.get(String(a[f.key])) ?? 0) + 1))
             return (
               <div className="facet" key={f.key}>
-                <h4>{f.label}</h4>
+                <h3>{f.label}</h3>
                 {[...counts.entries()].sort((a, b) => b[1] - a[1]).map(([v, n]) => (
                   <label key={v}>
                     <input type="checkbox" checked={sel[f.key]?.includes(v) ?? false} onChange={() => toggle(f.key, v)} />
@@ -110,7 +110,7 @@ export default function Search() {
             <button className="btn sm ghost" onClick={() => toast('Exporting results to Excel…')}><Download size={14} />Export</button>
             <select className="input" style={{ height: 30 }} value={sort} onChange={e => setSort(e.target.value)}>
               <option value="relevance">Sort: Relevance (certified &amp; popular first)</option>
-              <option value="rating">Sort: Rating</option>
+              <option value="rating">Sort: Most endorsed</option>
               <option value="dq">Sort: Data quality</option>
             </select>
             <div className="seg">
@@ -168,9 +168,9 @@ function ResultCard({ a, lang, onOpen }: { a: Asset; lang: 'en' | 'th'; onOpen: 
             <span className="faint">Domain <b style={{ color: 'var(--text)' }}>{a.domain}</b></span>
             <span className="faint">Owner <b style={{ color: a.owner ? 'var(--text)' : 'var(--bad)' }}>{a.owner ? people[a.owner].name : 'Unassigned'}</b></span>
             <ClsBadge value={a.classification} />
-            {a.dq !== undefined && <span className="faint">DQ <b style={{ color: scoreColor(a.dq) }}>{a.dq}%</b></span>}
-            <span className="faint" style={{ color: a.freshnessOk ? undefined : 'var(--bad)' }}>Updated {a.freshness}</span>
-            <Stars value={a.rating} count={a.ratings} />
+            {a.dq !== undefined && <span className="faint">DQ <b style={{ color: scoreText(a.dq) }}>{a.dq}%</b></span>}
+            <span className="faint" style={{ color: a.freshnessOk ? undefined : 'var(--bad-text)' }}>Updated {a.freshness}</span>
+            <Endorsements count={a.ratings} />
           </div>
         </div>
       </div>

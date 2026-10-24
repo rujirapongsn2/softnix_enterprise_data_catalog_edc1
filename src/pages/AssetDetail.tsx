@@ -8,7 +8,7 @@ import {
   assetById, assets, customer360Columns, dqRules, dqTrend, auditEvents, comments, accessGrants, people, type Asset, type Column,
 } from '../data/mock'
 import {
-  Card, ClsBadge, LifecycleBadge, PiiBadge, Stars, Tabs, typeIcon, AiTag, Avatar, PersonChip, Donut, Sparkline, Meter, scoreColor, TechLock,
+  Card, ClsBadge, LifecycleBadge, PiiBadge, Endorsements, Tabs, typeIcon, AiTag, Avatar, PersonChip, Donut, Sparkline, Meter, scoreColor, scoreText, TechLock,
 } from '../components/ui'
 import { ContractTab } from './Qbd'
 import LineageGraph from '../components/LineageGraph'
@@ -64,9 +64,9 @@ export default function AssetDetail() {
             </div>
           </div>
           <div className="asset-meta">
-            <div className="m">Rating<b><Stars value={a.rating} count={a.ratings} /></b></div>
-            <div className="m">Data quality<b style={{ color: a.dq ? scoreColor(a.dq) : undefined }}>{a.dq ? `${a.dq}%` : '—'}</b></div>
-            <div className="m">Freshness<b style={{ color: a.freshnessOk ? undefined : 'var(--bad)' }}>{a.freshness}</b></div>
+            <div className="m">Endorsed by<b><Endorsements count={a.ratings} /></b></div>
+            <div className="m">Data quality<b style={{ color: a.dq ? scoreText(a.dq) : undefined }}>{a.dq ? `${a.dq}%` : '—'}</b></div>
+            <div className="m">Freshness<b style={{ color: a.freshnessOk ? undefined : 'var(--bad-text)' }}>{a.freshness}</b></div>
             <div className="m">Rows<b>{a.rows ?? '—'}</b></div>
           </div>
         </div>
@@ -120,7 +120,7 @@ function Overview({ a, cols, goTab }: { a: Asset; cols: Column[]; goTab: (t: Tab
   return (
     <div className="grid g3">
       <div className="span2 col" style={{ gap: 16 }}>
-        <Card title={<h3 className="row">Description <span className="badge gray">Business</span></h3>} actions={
+        <Card title={<h2 className="row">Description <span className="badge gray">Business</span></h2>} actions={
           <>
             <GuardBtn cap="asset.editBusiness" className="btn sm ai"><Sparkles size={13} />Regenerate</GuardBtn>
             <GuardBtn cap="asset.editBusiness" className="btn sm" onClick={() => setEditing(e => !e)}><Pencil size={13} />{editing ? 'Done' : 'Edit'}</GuardBtn>
@@ -135,7 +135,7 @@ function Overview({ a, cols, goTab }: { a: Asset; cols: Column[]; goTab: (t: Tab
         </Card>
 
         <div className="grid g2">
-          <Card title={<h3 className="row">Business attributes <span className="faint small" style={{ fontWeight: 400 }}>DCAT v3 profile</span></h3>} actions={<GuardBtn cap="asset.editBusiness" hide className="btn sm ghost" aria-label="Edit attributes"><Pencil size={13} /></GuardBtn>}>
+          <Card title={<h2 className="row">Business attributes <span className="faint small" style={{ fontWeight: 400 }}>DCAT v3 profile</span></h2>} actions={<GuardBtn cap="asset.editBusiness" hide className="btn sm ghost" aria-label="Edit attributes"><Pencil size={13} /></GuardBtn>}>
             <dl className="kv">
               <dt>Business name (TH)</dt><dd>{a.businessName.th}</dd>
               <dt>Purpose</dt><dd>Customer analytics, churn modelling, regulatory reporting</dd>
@@ -147,7 +147,7 @@ function Overview({ a, cols, goTab }: { a: Asset; cols: Column[]; goTab: (t: Tab
               <dt>Data product</dt><dd><Link to="/domains" className="row"><Package size={13} />Customer 360</Link></dd>
             </dl>
           </Card>
-          <Card title={<h3 className="row">Technical metadata <TechLock /></h3>}>
+          <Card title={<h2 className="row">Technical metadata <TechLock /></h2>}>
             <dl className="kv">
               <dt>Format</dt><dd>Apache Iceberg v2</dd>
               <dt>Location</dt><dd className="mono ellipsis">s3a://lake/gold/customer_360</dd>
@@ -179,8 +179,8 @@ function Overview({ a, cols, goTab }: { a: Asset; cols: Column[]; goTab: (t: Tab
           <div className="row" style={{ gap: 16 }}>
             <Donut value={a.dq ?? 0} size={92} />
             <div className="col grow" style={{ gap: 6 }}>
-              <div className="small"><span style={{ color: 'var(--ok)' }}>●</span> Passing <b>5</b></div>
-              <div className="small"><span style={{ color: 'var(--bad)' }}>●</span> Below threshold <b>2</b></div>
+              <div className="small"><span style={{ color: 'var(--ok-text)' }}>●</span> Passing <b>5</b></div>
+              <div className="small"><span style={{ color: 'var(--bad-text)' }}>●</span> Below threshold <b>2</b></div>
               <Sparkline data={dqTrend} width={140} height={28} color="var(--ok)" />
               <div className="faint small">Last GX run: today 02:31</div>
             </div>
@@ -237,7 +237,7 @@ function ColumnTable({ cols, compact, onSelect, selected }: { cols: Column[]; co
         <thead>
           <tr>
             <th>Column</th>{!compact && <th>Business name</th>}<th>Type</th><th>Glossary term</th><th>Classification</th><th>PII</th>
-            <th style={{ minWidth: 140 }}><span style={{ color: 'var(--warn)' }}>Null</span> / <span style={{ color: 'var(--primary)' }}>Distinct</span></th>
+            <th style={{ minWidth: 140 }}><span style={{ color: 'var(--warn-text)' }}>Null</span> / <span style={{ color: 'var(--primary)' }}>Distinct</span></th>
             {!compact && <th>DQ</th>}
           </tr>
         </thead>
@@ -267,9 +267,9 @@ function ColumnTable({ cols, compact, onSelect, selected }: { cols: Column[]; co
                   <span style={{ width: `${Math.max(c.nulls, 1)}%`, background: 'var(--warn)' }} />
                   <span style={{ width: `${Math.min(c.distinct, 100 - c.nulls)}%`, background: 'var(--primary)' }} />
                 </div>
-                <div className="faint" style={{ fontSize: 10.5, marginTop: 2 }}>{c.nulls}% · {c.distinct}%</div>
+                <div className="faint" style={{ fontSize: 11.5, marginTop: 2 }}>{c.nulls}% · {c.distinct}%</div>
               </td>
-              {!compact && <td>{c.dq !== undefined ? <b style={{ color: scoreColor(c.dq) }}>{c.dq}%</b> : <span className="faint">—</span>}</td>}
+              {!compact && <td>{c.dq !== undefined ? <b style={{ color: scoreText(c.dq) }}>{c.dq}%</b> : <span className="faint">—</span>}</td>}
             </tr>
           ))}
         </tbody>
@@ -353,7 +353,7 @@ function Quality({ a }: { a: Asset }) {
           return (
             <div key={d} className="card" style={{ padding: 12 }}>
               <div className="faint small">{d}</div>
-              <b style={{ fontSize: 20, color: s !== undefined ? scoreColor(s) : 'var(--text-3)' }}>{s !== undefined ? `${s}%` : '—'}</b>
+              <b style={{ fontSize: 20, color: s !== undefined ? scoreText(s) : 'var(--text-3)' }}>{s !== undefined ? `${s}%` : '—'}</b>
               {s !== undefined && <Meter value={s} />}
             </div>
           )
@@ -363,7 +363,7 @@ function Quality({ a }: { a: Asset }) {
         <Card title="Score trend · last 12 runs" className="span2">
           <TrendChart data={dqTrend} />
         </Card>
-        <Card title={<h3 className="row"><Sparkles size={15} color="var(--ai)" />Suggested rules</h3>}>
+        <Card title={<h2 className="row"><Sparkles size={15} color="var(--ai)" />Suggested rules</h2>}>
           <div className="col" style={{ gap: 10 }}>
             {[
               ['province_code in Thai province code list', 'Validity · from glossary “Province”'],
@@ -395,7 +395,7 @@ function Quality({ a }: { a: Asset }) {
                   <td className="mono faint small">{r.gx}</td>
                   <td><span className={`badge ${r.severity === 'High' ? 'red' : r.severity === 'Medium' ? 'amber' : 'gray'}`}>{r.severity}</span></td>
                   <td>{r.threshold}%</td>
-                  <td><b style={{ color: r.score >= r.threshold ? 'var(--ok)' : 'var(--bad)' }}>{r.score}%</b>{r.score < r.threshold && <AlertTriangle size={13} color="var(--bad)" style={{ marginLeft: 4, verticalAlign: -2 }} />}</td>
+                  <td><b style={{ color: r.score >= r.threshold ? 'var(--ok-text)' : 'var(--bad-text)' }}>{r.score}%</b>{r.score < r.threshold && <AlertTriangle size={13} color="var(--bad)" style={{ marginLeft: 4, verticalAlign: -2 }} />}</td>
                   <td><Sparkline data={r.trend} width={90} height={22} color={r.score >= r.threshold ? 'var(--ok)' : 'var(--bad)'} /></td>
                 </tr>
               ))}
@@ -511,12 +511,12 @@ function Discussion({ onClose }: { onClose: () => void }) {
       <div className="sp-h"><b className="grow">Discussion &amp; Q&amp;A</b><button className="icon-btn" onClick={onClose} aria-label="Close"><X size={16} /></button></div>
       <div style={{ padding: 14, borderBottom: '1px solid var(--border)' }}>
         <textarea className="input" rows={3} style={{ width: '100%' }} placeholder="Ask a question or leave a review. Use @ to mention someone." value={text} onChange={e => setText(e.target.value)} />
-        <div className="row" style={{ marginTop: 8 }}><span className="faint small grow">Rate:</span><Stars value={0} /><GuardBtn cap="asset.comment" className="btn sm primary">Post</GuardBtn></div>
+        <div className="row" style={{ marginTop: 8 }}><label className="row small grow" style={{ gap: 6, cursor: 'pointer' }}><input type="checkbox" />Endorse this asset</label><GuardBtn cap="asset.comment" className="btn sm primary">Post</GuardBtn></div>
       </div>
       <div style={{ overflow: 'auto', padding: 14 }} className="col">
         {comments.map((c, i) => (
           <div key={i} className="card" style={{ padding: 12 }}>
-            <div className="row"><Avatar id={c.who} size="sm" /><b className="small">{people[c.who].name}</b><Stars value={c.rating} /><span className="faint small" style={{ marginLeft: 'auto' }}>{c.when}</span></div>
+            <div className="row"><Avatar id={c.who} size="sm" /><b className="small">{people[c.who].name}</b>{c.rating >= 4 && <span className="badge green">Endorses</span>}<span className="faint small" style={{ marginLeft: 'auto' }}>{c.when}</span></div>
             <p className="small" style={{ margin: '8px 0' }}>{c.text}</p>
             {c.replies.map((r, j) => (
               <div key={j} style={{ borderLeft: '2px solid var(--primary-100)', paddingLeft: 10, marginTop: 6 }}>

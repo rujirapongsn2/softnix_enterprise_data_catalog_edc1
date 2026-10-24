@@ -13,7 +13,7 @@ const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(
 const domainNames = domains.map(d => d.name)
 
 function Footer({ onClose, onSubmit, label, extra }: { onClose: () => void; onSubmit: () => void; label: string; extra?: React.ReactNode }) {
-  return <><span className="faint small grow">{extra ?? <><span style={{ color: 'var(--bad)' }}>*</span> required</>}</span><button className="btn" onClick={onClose}>Cancel</button><button className="btn primary" onClick={onSubmit}>{label}</button></>
+  return <><span className="faint small grow">{extra ?? <><span style={{ color: 'var(--bad-text)' }}>*</span> required</>}</span><button className="btn" onClick={onClose}>Cancel</button><button className="btn primary" onClick={onSubmit}>{label}</button></>
 }
 
 /* ======================= Glossary term (GLO-01..05) ======================= */
@@ -371,7 +371,7 @@ export function InviteUserForm({ onClose, onCreate }: Close & { onCreate: (u: Ne
         <Field label="Work email" required error={e('email')}><Input value={email} onChange={setEmail} placeholder="name@company.co.th" /></Field>
         <Field label="Department"><Input value={dept} onChange={setDept} /></Field>
       </FormGrid>
-      <Section title="Roles" desc="A person can hold several roles (PRD §3)">
+      <Section title="Roles" desc="A person can hold several roles">
         {e('roles') && <div className="field-error">{e('roles')}</div>}
         <div className="grid g2" style={{ gap: 8 }}>
           {ROLES.map(r => {

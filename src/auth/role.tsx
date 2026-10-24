@@ -51,7 +51,7 @@ export function PageGuard({ cap, children }: { cap: Cap; children: ReactNode }) 
         <div className="card no-access">
           <div className="na-icon"><ShieldOff size={26} /></div>
           <h2>This page isn’t available for {def.name}</h2>
-          <p className="muted">Your current role doesn’t include access to this function in the EDC permission design (PRD §3). Switch to a role that has it, or ask a Platform Admin to assign the role.</p>
+          <p className="muted">Your current role doesn’t include access to this function in the EDC permission design. Switch to a role that has it, or ask a Platform Admin to assign the role.</p>
           {allowed.length > 0 && (
             <>
               <div className="faint small" style={{ marginBottom: 8 }}>Roles with access</div>

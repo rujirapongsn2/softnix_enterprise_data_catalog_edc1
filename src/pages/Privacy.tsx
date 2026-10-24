@@ -31,8 +31,8 @@ export default function Privacy() {
       <div className="grid g4" style={{ marginBottom: 16 }}>
         <div className="card stat row" style={{ gap: 14 }}><Donut value={100} size={64} color="var(--primary)" /><div><div className="l">Columns scanned</div><b style={{ fontSize: 18 }}>1.02M</b></div></div>
         <div className="card stat row" style={{ gap: 14 }}><Donut value={86} size={64} /><div><div className="l">PII confirmed by steward</div><b style={{ fontSize: 18 }}>3,914 / 4,551</b></div></div>
-        <div className="card stat"><div className="l">Datasets with personal data</div><div className="v">612</div><div className="faint small">of which <b style={{ color: 'var(--bad)' }}>48 sensitive (s.26)</b></div></div>
-        <div className="card stat"><div className="l">Policy sync to Lakehouse</div><div className="v" style={{ color: 'var(--ok)' }}>99.2%</div><div className="faint small">5 tags out of sync · reconcile 02:00</div></div>
+        <div className="card stat"><div className="l">Datasets with personal data</div><div className="v">612</div><div className="faint small">of which <b style={{ color: 'var(--bad-text)' }}>48 sensitive (s.26)</b></div></div>
+        <div className="card stat"><div className="l">Policy sync to Lakehouse</div><div className="v" style={{ color: 'var(--ok-text)' }}>99.2%</div><div className="faint small">5 tags out of sync · reconcile 02:00</div></div>
       </div>
 
       <div className="card" style={{ marginBottom: 16 }}>
@@ -51,8 +51,8 @@ export default function Privacy() {
               </>}
             </div>
             <div className="tbl-wrap">
-              <table className="tbl">
-                <thead><tr><th style={{ width: 30 }}><input type="checkbox" disabled={!canPii} onChange={e => setPicked(e.target.checked ? new Set(pending.map(p => p.id)) : new Set())} /></th><th>Column</th><th>Detected as</th><th>Confidence</th><th>Method</th><th>Evidence</th><th>Masked sample</th><th>Proposed class</th><th /></tr></thead>
+              <table className="tbl sticky-last">
+                <thead><tr><th style={{ width: 30 }}><input type="checkbox" disabled={!canPii} onChange={e => setPicked(e.target.checked ? new Set(pending.map(p => p.id)) : new Set())} /></th><th>Column</th><th>Detected as</th><th>Confidence</th><th>Method</th><th>Evidence</th><th>Masked sample</th><th>Proposed class</th><th>Decide</th></tr></thead>
                 <tbody>
                   {piiSuggestions.map(p => <Row key={p.id} p={p} st={state[p.id]} locked={!canPii} picked={picked.has(p.id)} onPick={v => setPicked(s => { const n = new Set(s); v ? n.add(p.id) : n.delete(p.id); return n })} onDecide={v => decide([p.id], v)} />)}
                 </tbody>
@@ -95,12 +95,12 @@ export default function Privacy() {
         )}
       </div>
 
-      <Card title={<h3 className="row"><Sparkles size={15} color="var(--ai)" />Privacy guard for AI</h3>}>
+      <Card title={<h2 className="row"><Sparkles size={15} color="var(--ai)" />Privacy guard for AI</h2>}>
         <div className="row wrap small" style={{ gap: 24 }}>
           <span>Sample data to LLM: <b>Off</b> (Admin)</span>
-          <span>PII masked before LLM: <b style={{ color: 'var(--ok)' }}>On</b></span>
+          <span>PII masked before LLM: <b style={{ color: 'var(--ok-text)' }}>On</b></span>
           <span>Restricted assets: <b>on-prem model only</b></span>
-          <span>Tag propagation via lineage: <b style={{ color: 'var(--ok)' }}>Suggest</b></span>
+          <span>Tag propagation via lineage: <b style={{ color: 'var(--ok-text)' }}>Suggest</b></span>
         </div>
       </Card>
     </div>
@@ -116,7 +116,7 @@ function Row({ p, st, picked, onPick, onDecide, locked }: { p: PiiSuggestion; lo
       <td>{p.sensitive ? <span className="badge red">{p.detected}</span> : p.detected === 'Not PII' ? <span className="badge gray">Not PII</span> : <span className="badge amber">{p.detected}</span>}</td>
       <td><div className="row" style={{ gap: 6 }}><div className="bar" style={{ width: 50 }}><span style={{ width: `${p.confidence}%`, background: confColor }} /></div><b className="small">{p.confidence}%</b></div></td>
       <td>{p.method === 'LLM' ? <span className="badge violet"><Sparkles size={10} />LLM</span> : <span className="badge gray">{p.method}</span>}</td>
-      <td className="small muted" style={{ maxWidth: 280 }}>{p.evidence}</td>
+      <td className="small muted" style={{ minWidth: 200, maxWidth: 260 }}>{p.evidence}</td>
       <td className="mono small">{p.sample}</td>
       <td><ClsBadge value={p.cls} /></td>
       <td>

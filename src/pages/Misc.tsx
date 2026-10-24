@@ -7,7 +7,7 @@ import { Plus } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { AlertTriangle, Download, ShieldCheck, Sparkles, Plug, Languages, Layers, Hash } from 'lucide-react'
 import { assets, auditEvents, people, domains } from '../data/mock'
-import { Card, ClsBadge, Donut, Sparkline, Avatar, AiTag, scoreColor, typeIcon, Tabs, clsColor } from '../components/ui'
+import { Card, ClsBadge, Donut, Sparkline, Avatar, AiTag, scoreColor, scoreText, typeIcon, Tabs, clsColor } from '../components/ui'
 
 /* ---------- Data Quality overview ---------- */
 export function QualityOverview() {
@@ -24,8 +24,8 @@ export function QualityOverview() {
       <div className="grid g4" style={{ marginBottom: 16 }}>
         <div className="card stat row" style={{ gap: 14 }}><Donut value={92.8} size={68} /><div><div className="l">Avg score · Critical</div><b>412 datasets</b></div></div>
         <div className="card stat"><div className="l">Rules</div><div className="v">{(1930 + rules.length).toLocaleString()}</div><div className="faint small">68 suggested by AI awaiting review</div></div>
-        <div className="card stat"><div className="l">Failing rules</div><div className="v" style={{ color: 'var(--bad)' }}>37</div><div className="faint small">12 high severity</div></div>
-        <div className="card stat"><div className="l">Freshness SLA breaches</div><div className="v" style={{ color: 'var(--warn)' }}>4</div><div className="faint small">auto-created Data Issues</div></div>
+        <div className="card stat"><div className="l">Failing rules</div><div className="v" style={{ color: 'var(--bad-text)' }}>37</div><div className="faint small">12 high severity</div></div>
+        <div className="card stat"><div className="l">Freshness SLA breaches</div><div className="v" style={{ color: 'var(--warn-text)' }}>4</div><div className="faint small">auto-created Data Issues</div></div>
       </div>
       {rules.length > 0 && <NewRulesCard rules={rules} />}
       <div className="grid g3">
@@ -37,9 +37,9 @@ export function QualityOverview() {
                 <tr key={a.id}>
                   <td><Link to={`/asset/${a.id}?tab=quality`} className="row">{typeIcon(a.type, 14)}{a.path}</Link></td>
                   <td>{a.domain}</td>
-                  <td><b style={{ color: scoreColor(a.dq!) }}>{a.dq}%</b></td>
+                  <td><b style={{ color: scoreText(a.dq!) }}>{a.dq}%</b></td>
                   <td><Sparkline data={[a.dq! - 2, a.dq! + 1, a.dq! - 1, a.dq! + 0.5, a.dq!]} width={80} height={20} color={scoreColor(a.dq!)} /></td>
-                  <td style={{ color: a.freshnessOk ? undefined : 'var(--bad)' }}>{a.freshness}</td>
+                  <td style={{ color: a.freshnessOk ? undefined : 'var(--bad-text)' }}>{a.freshness}</td>
                   <td>{a.dq! < 85 ? <span className="badge red">2</span> : a.dq! < 95 ? <span className="badge amber">1</span> : '—'}</td>
                 </tr>
               ))}

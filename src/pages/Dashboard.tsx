@@ -20,7 +20,7 @@ export default function Dashboard() {
   return (
     <div className="page">
       <div className="page-h">
-        <div><h1>Governance Dashboard</h1><div className="sub">Success and quality metrics from PRD §2.3 · targets 6 months after go-live · as of Oct 9, 2026</div></div>
+        <div><h1>Governance Dashboard</h1><div className="sub">Success and quality metrics · targets 6 months after go-live · as of Oct 9, 2026</div></div>
         <div className="actions">
           <select className="input"><option>All domains</option>{domains.map(d => <option key={d.id}>{d.name}</option>)}</select>
           <GuardBtn cap="dashboard.export" className="btn"><Download size={14} />Export PDF (TH)</GuardBtn>
@@ -49,16 +49,16 @@ export default function Dashboard() {
         <Card title="Coverage by domain" className="span2">
           <div className="tbl-wrap">
             <table className="tbl">
-              <thead><tr><th>Domain</th><th>Owner</th><th>Assets</th><th>Certified</th><th style={{ width: '30%' }}>Critical-asset completeness</th><th>Data products</th></tr></thead>
+              <thead><tr><th>Domain</th><th>Owner</th><th className="num">Assets</th><th className="num">Certified</th><th style={{ width: '28%' }}>Critical-asset completeness</th><th className="num">Products</th></tr></thead>
               <tbody>
                 {domains.map(d => (
                   <tr key={d.id}>
-                    <td><span className="row"><span style={{ width: 10, height: 10, borderRadius: 3, background: d.color }} /><b>{d.name}</b><span className="faint" style={{ whiteSpace: 'nowrap' }}>· {d.th}</span></span></td>
+                    <td><span className="row"><span style={{ width: 10, height: 10, borderRadius: 3, background: d.color, flex: 'none' }} /><span><b>{d.name}</b><span className="faint small" style={{ display: 'block' }}>{d.th}</span></span></span></td>
                     <td><span className="row"><Avatar id={d.owner} size="sm" />{people[d.owner].name.split(' ')[0]}</span></td>
-                    <td>{d.assets.toLocaleString()}</td>
-                    <td>{d.certified}</td>
+                    <td className="num">{d.assets.toLocaleString()}</td>
+                    <td className="num">{d.certified}</td>
                     <td><div className="row"><Meter value={d.coverage} /><b className="small" style={{ width: 36 }}>{d.coverage}%</b></div></td>
-                    <td>{d.products}</td>
+                    <td className="num">{d.products}</td>
                   </tr>
                 ))}
               </tbody>
@@ -75,15 +75,15 @@ export default function Dashboard() {
               ['Workflow tasks past SLA', 9, 'var(--bad)'],
               ['Naming convention violations', 412, 'var(--text-3)'],
             ].map(([l, n, c]) => (
-              <div key={l as string} className="row"><span style={{ width: 4, height: 28, borderRadius: 2, background: c as string }} /><span className="grow">{l}</span><b style={{ fontSize: 16 }}>{(n as number).toLocaleString()}</b></div>
+              <div key={l as string} className="row"><span style={{ width: 8, height: 8, borderRadius: 4, flex: 'none', background: c as string }} /><span className="grow">{l}</span><b style={{ fontSize: 16 }}>{(n as number).toLocaleString()}</b></div>
             ))}
           </div>
         </Card>
-        <Card title={<h3 className="row"><Clock size={15} />Access request lead time</h3>}>
+        <Card title={<h2 className="row"><Clock size={15} />Access request lead time</h2>}>
           <div className="row" style={{ alignItems: 'baseline', gap: 6 }}><b style={{ fontSize: 28 }}>1.6</b><span className="muted">business days avg · target ≤ 2</span></div>
           <Sparkline data={[4.2, 3.8, 3.1, 2.6, 2.2, 1.9, 1.6]} width={300} height={40} color="var(--ok)" />
         </Card>
-        <Card title={<h3 className="row"><Users size={15} />Top stewards this month</h3>} className="span2">
+        <Card title={<h2 className="row"><Users size={15} />Top stewards this month</h2>} className="span2">
           <div className="grid g3">
             {[['nida', 412], ['mai', 288], ['arthit', 151]].map(([id, n]) => (
               <div key={id} className="row"><Avatar id={id as string} size="lg" /><div><b>{people[id as string].name}</b><div className="faint small">{n} curation actions</div></div></div>

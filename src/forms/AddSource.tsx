@@ -236,7 +236,7 @@ export default function AddSourceWizard({ onClose, onCreate }: { onClose: () => 
     2: secretMode === 'ref' ? { secretRef: /^vault:\/\/.+/.test(secretRef) ? '' : 'Use a vault:// reference' } : fieldErr(credFields),
     3: { include: req(include, 'At least one include pattern'), objects: req(objects, 'Pick at least one object type') },
     4: { cron: mode === 'cron' && cron.trim().split(/\s+/).length !== 5 ? 'Cron needs 5 fields' : '', every: mode === 'interval' && !(+every > 0) ? 'Enter hours' : '' },
-    5: { domain: req(domain), owner: req(owner, 'Owner is mandatory (PRD PB-2, CAT-06)'), steward: req(steward, 'Steward is mandatory (PRD CAT-06)') },
+    5: { domain: req(domain), owner: req(owner, 'Every source needs an owner'), steward: req(steward, 'Every source needs a steward') },
     6: {},
   }
   const show = (s: number, k: string) => (tried[s] ? errs[s][k] || undefined : undefined)
@@ -332,7 +332,7 @@ export default function AddSourceWizard({ onClose, onCreate }: { onClose: () => 
   )
 
   return (
-    <Modal size="xl" icon={<PlugZap size={18} />} title="Add source" sub={type ? `${type.name}${name ? ` · ${name}` : ''}` : 'Register a new metadata source (PRD HRV-08, HRV-10, HRV-12)'} onClose={onClose} footer={footer}
+    <Modal size="xl" icon={<PlugZap size={18} />} title="Add source" sub={type ? `${type.name}${name ? ` · ${name}` : ''}` : 'Register a new metadata source'} onClose={onClose} footer={footer}
       aside={<>
         <WizardSteps steps={STEPS} cur={step} onGo={setStep} done={stepOk} />
         {type && (

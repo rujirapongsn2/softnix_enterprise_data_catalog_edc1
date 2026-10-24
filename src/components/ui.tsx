@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
 import {
-  Table2, Eye, Columns3, BarChart3, Workflow, Package, BrainCircuit, FileText, ShieldCheck, Star, Sparkles, Lock,
+  Table2, Eye, Columns3, BarChart3, Workflow, Package, BrainCircuit, FileText, ShieldCheck, ThumbsUp, Sparkles, Lock,
 } from 'lucide-react'
 import { people, type AssetType, type Classification, type Lifecycle } from '../data/mock'
 
@@ -8,8 +8,13 @@ export const clsColor: Record<Classification, string> = {
   Public: 'var(--cls-public)', Internal: 'var(--cls-internal)', Confidential: 'var(--cls-confidential)', Restricted: 'var(--cls-restricted)',
 }
 
+/** AA-contrast text shades for each classification; the swatch keeps the brand colour. */
+export const clsText: Record<Classification, string> = {
+  Public: 'var(--cls-public-text)', Internal: 'var(--cls-internal-text)', Confidential: 'var(--cls-confidential-text)', Restricted: 'var(--cls-restricted-text)',
+}
+
 export function ClsBadge({ value }: { value: Classification }) {
-  return <span className="cls" style={{ color: clsColor[value] }}><i style={{ background: clsColor[value] }} />{value}</span>
+  return <span className="cls" style={{ color: clsText[value] }}><i style={{ background: clsColor[value] }} />{value}</span>
 }
 
 export function LifecycleBadge({ value }: { value: Lifecycle | string }) {
@@ -52,11 +57,18 @@ export const typeIcon = (t: AssetType, size = 16) => {
   }
 }
 
+/** Persona colours that are too light for white initials, mapped to an AA shade of the same hue. */
+const AVATAR_AA: Record<string, string> = {
+  '#f3903f': '#a85a16', '#fdc70c': '#8a6500', '#a9cb2e': '#5f7a12', '#7e9a1f': '#5f7a12', '#6f8a12': '#5f7a12',
+  '#778da9': '#5f7590', '#94a3b8': '#64748b', '#2786c2': '#3a6f9e',
+}
+export const avatarBg = (c: string) => AVATAR_AA[c.toLowerCase()] ?? c
+
 export function Avatar({ id, size }: { id?: string; size?: 'sm' | 'lg' }) {
   const p = id ? people[id] : undefined
-  if (!p) return <span className={`avatar ${size ?? ''}`} style={{ background: '#94a3b8' }}>{id === 'system' ? 'SYS' : '?'}</span>
+  if (!p) return <span className={`avatar ${size ?? ''}`} style={{ background: '#64748b' }}>{id === 'system' ? 'SYS' : '?'}</span>
   const ini = p.name.split(' ').map(s => s[0]).slice(0, 2).join('')
-  return <span className={`avatar ${size ?? ''}`} style={{ background: p.color }} title={p.name}>{ini}</span>
+  return <span className={`avatar ${size ?? ''}`} style={{ background: avatarBg(p.color) }} title={p.name}>{ini}</span>
 }
 
 export function PersonChip({ id, sub }: { id?: string; sub?: boolean }) {
@@ -73,16 +85,17 @@ export function PersonChip({ id, sub }: { id?: string; sub?: boolean }) {
   )
 }
 
-export function Stars({ value, count }: { value: number; count?: number }) {
+export function Endorsements({ count }: { count?: number }) {
   return (
-    <span className="row" style={{ gap: 1 }}>
-      {[1, 2, 3, 4, 5].map(i => <Star key={i} size={12} fill={i <= Math.round(value) ? '#fdc70c' : 'none'} color={i <= Math.round(value) ? '#fdc70c' : '#cbd5e1'} />)}
-      {count !== undefined && <span className="faint small" style={{ marginLeft: 4 }}>{value ? value.toFixed(1) : '–'} ({count})</span>}
+    <span className="endorse" title={count ? `${count} people endorse this asset` : 'No endorsements yet'}>
+      <ThumbsUp size={12} />{count || '—'}
     </span>
   )
 }
 
 export const scoreColor = (v: number) => (v >= 95 ? 'var(--ok)' : v >= 85 ? 'var(--warn)' : 'var(--bad)')
+/** Same thresholds as scoreColor, in shades that pass AA as text. */
+export const scoreText = (v: number) => (v >= 95 ? 'var(--ok-text)' : v >= 85 ? 'var(--warn-text)' : 'var(--bad-text)')
 
 export function Donut({ value, size = 84, stroke = 9, label, color }: { value: number; size?: number; stroke?: number; label?: ReactNode; color?: string }) {
   const r = (size - stroke) / 2
@@ -129,7 +142,7 @@ export function Card({ title, actions, children, className, bodyStyle }: { title
     <section className={`card ${className ?? ''}`}>
       {(title || actions) && (
         <div className="card-h">
-          {typeof title === 'string' ? <h3>{title}</h3> : title}
+          {typeof title === 'string' ? <h2>{title}</h2> : title}
           {actions && <div className="actions">{actions}</div>}
         </div>
       )}

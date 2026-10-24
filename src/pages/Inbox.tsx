@@ -44,7 +44,7 @@ export default function Inbox() {
                 <div style={{ fontWeight: 600, marginTop: 2 }} className="ellipsis">{t.title}</div>
                 <div className="row small" style={{ marginTop: 4 }}>
                   <Avatar id={t.requester} size="sm" /><span className="faint">{t.requester === 'system' ? 'System' : people[t.requester].name}</span>
-                  <span style={{ marginLeft: 'auto', color: t.overdue ? 'var(--bad)' : 'var(--text-3)' }} className="row"><Clock size={12} />{t.overdue ? 'Overdue' : `Due ${t.due.replace(', 2026', '')}`}</span>
+                  <span style={{ marginLeft: 'auto', color: t.overdue ? 'var(--bad-text)' : 'var(--text-3)' }} className="row"><Clock size={12} />{t.overdue ? 'Overdue' : `Due ${t.due.replace(', 2026', '')}`}</span>
                 </div>
               </div>
             </div>

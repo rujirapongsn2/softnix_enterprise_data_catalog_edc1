@@ -24,7 +24,7 @@ export function ContractTab() {
   const breaking = contractFields.filter(f => f.change === 'breaking').length
   return (
     <div className="grid g3">
-      <Card className="span2" title={<h3 className="row"><FileCheck2 size={15} />Data contract {contract.id} <span className="badge outline">v{contract.version}</span><span className="badge blue">{contract.standard}</span></h3>}
+      <Card className="span2" title={<h2 className="row"><FileCheck2 size={15} />Data contract {contract.id} <span className="badge outline">v{contract.version}</span><span className="badge blue">{contract.standard}</span></h2>}
         actions={<><button className="btn sm" onClick={() => toast('GX suite gx_customer_360_v2_3.json exported')}><Download size={13} />Export GX suite</button><GuardBtn cap="contract.propose" className="btn sm primary" onClick={() => toast('Draft v2.4.0 created · awaiting producer + consumer approval')}><Plus size={13} />Propose v2.4.0</GuardBtn></>}>
         <div className="row" style={{ gap: 12, padding: 12, borderRadius: 8, marginBottom: 14, background: ok ? 'var(--ok-50)' : 'var(--bad-50)' }}>
           {ok ? <CheckCircle2 size={20} color="var(--ok)" /> : <XCircle size={20} color="var(--bad)" />}
@@ -61,7 +61,7 @@ export function ContractTab() {
             <div key={s.k} className="row small" style={{ padding: '4px 0' }}><span className="grow">{s.k} <span className="faint">{s.target}</span></span><b>{s.actual}</b>{s.ok ? <CheckCircle2 size={14} color="var(--ok)" /> : <XCircle size={14} color="var(--bad)" />}</div>
           ))}
         </Card>
-        <Card title={<h3 className="row"><Users size={15} />Consumers · {consumers.length}</h3>}>
+        <Card title={<h2 className="row"><Users size={15} />Consumers · {consumers.length}</h2>}>
           {consumers.map(c => (
             <div key={c.name} className="row small" style={{ padding: '6px 0', borderBottom: '1px solid var(--border)' }}>
               <Avatar id={c.owner} size="sm" /><span className="grow"><b>{c.name}</b><div className="faint">{c.kind} · {c.subscribed ? 'subscribed' : 'not subscribed'}</div></span>
@@ -70,7 +70,7 @@ export function ContractTab() {
           ))}
         </Card>
       </div>
-      <Card className="span3" title={<h3 className="row"><GitCompare size={15} />Version history</h3>}>
+      <Card className="span3" title={<h2 className="row"><GitCompare size={15} />Version history</h2>}>
         <div className="grid g2">
           <table className="tbl">
             <thead><tr><th>Version</th><th>Date</th><th>By</th><th>Change</th><th>Approvals</th></tr></thead>
@@ -116,7 +116,7 @@ export function CertificationChecklist() {
   const failed = certChecks.filter(c => !c.pass).length
   return (
     <div className="card" style={{ padding: 14, marginTop: 14 }}>
-      <div className="row" style={{ marginBottom: 8 }}><ShieldCheck size={16} color="var(--primary)" /><b className="grow">Certification gate (PRD CERT-01)</b>
+      <div className="row" style={{ marginBottom: 8 }}><ShieldCheck size={16} color="var(--primary)" /><b className="grow">Certification gate</b>
         {failed ? <span className="badge red">{failed} of {certChecks.length} failed · cannot certify</span> : <span className="badge green">All passed</span>}</div>
       {certChecks.map(c => (
         <div key={c.k} className="row small" style={{ padding: '6px 0', borderTop: '1px solid var(--border)', alignItems: 'flex-start' }}>
@@ -142,13 +142,13 @@ export function Observability() {
         <div className="actions"><Link to="/alerts" className="btn"><BellRing size={14} />Alert settings</Link></div>
       </div>
       <div className="grid g4" style={{ marginBottom: 16 }}>
-        <div className="card stat"><div className="l">Open incidents</div><div className="v" style={{ color: 'var(--bad)' }}>3</div><div className="faint small">1 critical · 2 high</div></div>
+        <div className="card stat"><div className="l">Open incidents</div><div className="v" style={{ color: 'var(--bad-text)' }}>3</div><div className="faint small">1 critical · 2 high</div></div>
         <div className="card stat"><div className="l">MTTD · 30 d</div><div className="v">18 min</div><div className="faint small">target ≤ 30 min</div></div>
         <div className="card stat"><div className="l">Alerts deduplicated</div><div className="v">142 → 16</div><div className="faint small">89% noise removed</div></div>
-        <div className="card stat"><div className="l">Pipeline success · 24 h</div><div className="v" style={{ color: 'var(--ok)' }}>98.7%</div><div className="faint small">4 failed of 312 runs</div></div>
+        <div className="card stat"><div className="l">Pipeline success · 24 h</div><div className="v" style={{ color: 'var(--ok-text)' }}>98.7%</div><div className="faint small">4 failed of 312 runs</div></div>
       </div>
       <div className="grid g3">
-        <Card className="span2" title={<h3 className="row"><Activity size={15} />Incident timeline</h3>}
+        <Card className="span2" title={<h2 className="row"><Activity size={15} />Incident timeline</h2>}
           actions={<div className="row" style={{ gap: 4 }}>{['All', 'Schema', 'Volume', 'Distribution', 'Pipeline', 'Freshness'].map(k => <button key={k} className={`chip ${type === k ? 'on' : ''}`} onClick={() => setType(k)}>{k}</button>)}</div>}>
           <div style={{ position: 'relative', paddingLeft: 22 }}>
             <div style={{ position: 'absolute', left: 7, top: 6, bottom: 6, width: 2, background: 'var(--border)' }} />
@@ -173,7 +173,7 @@ export function Observability() {
           <Card title="Freshness · billing_monthly (hours late)">
             <Sparkline data={[0, 0, 1, 0, 0, 0, 2, 0, 0, 0, 0, 18, 30, 48]} width={300} height={50} color="var(--warn)" />
           </Card>
-          <Card title={<h3 className="row"><Workflow size={15} />Pipeline health (OpenLineage)</h3>}>
+          <Card title={<h2 className="row"><Workflow size={15} />Pipeline health (OpenLineage)</h2>}>
             {pipelineHealth.map(p => {
               const r = Math.round((p.success / p.runs) * 1000) / 10
               return (
@@ -227,7 +227,7 @@ export function AlertSettings() {
         </div>
       </Card>
       <div className="grid g2" style={{ marginTop: 16 }}>
-        <Card title={<h3 className="row"><BellOff size={15} />Maintenance windows (mute)</h3>} actions={<GuardBtn cap="alert.maintenance" className="btn sm" onClick={() => setWinOpen(true)}><Plus size={13} />Add</GuardBtn>}>
+        <Card title={<h2 className="row"><BellOff size={15} />Maintenance windows (mute)</h2>} actions={<GuardBtn cap="alert.maintenance" className="btn sm" onClick={() => setWinOpen(true)}><Plus size={13} />Add</GuardBtn>}>
           {[...wins, ...maintenanceWindows].map(m => (
             <div key={m.scope + m.when} className="row small" style={{ padding: '6px 0', borderBottom: '1px solid var(--border)', background: 'isNew' in m ? '#f3f9fd' : undefined }}><b className="grow mono">{m.scope}</b><span>{m.when}</span><span className="faint">{m.reason}</span></div>
           ))}

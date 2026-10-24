@@ -39,7 +39,7 @@ Custodian / Data Engineer และผู้ดูแลระบบเป็น
 ## ฟิลด์และตัวชี้วัดสำคัญ {#fields}
 
 - **Status**: Healthy, Warning, Failed, Running, Queued
-- **Last run**: การดึงครั้งล่าสุดเกิดเมื่อไรและผลเป็นอย่างไร เช่น "3 tables skipped (permission)" หรือ "ORA-12170 connect timeout"
+- **Last run**: การดึงครั้งล่าสุดเกิดเมื่อไรและผลเป็นอย่างไร เช่น "3 tables skipped (permission)" หรือ "Can’t reach database (timeout)" แหล่งที่ล้มเหลวจะอธิบายสาเหตุเป็นภาษาที่เข้าใจง่าย พร้อมปุ่ม **Test connection**, **View log** และ **Retry**
 - **Schedule**: เช่น ทุก 1 ชั่วโมงร่วมกับ DDL events, ทุกวัน 23:00 หรือแบบ push เรียลไทม์
 - ป้าย **lineage**: แหล่งนี้ส่ง lineage มาด้วย, ป้าย **remote agent**: ดึงผ่าน agent ที่ติดตั้งในองค์กร
 

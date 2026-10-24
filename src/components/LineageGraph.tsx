@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ZoomIn, ZoomOut, Maximize2, Sparkles, AlertTriangle, ShieldAlert, Workflow } from 'lucide-react'
 import { assetById, people, type Classification } from '../data/mock'
-import { ClsBadge, Seg, scoreColor, typeIcon, Avatar } from './ui'
+import { ClsBadge, Seg, scoreColor, scoreText, typeIcon, Avatar } from './ui'
 import { SourceLogo } from './SourceLogo'
 
 const LAYERS = ['Source', 'Bronze', 'Silver', 'Gold', 'Report'] as const
@@ -185,7 +185,7 @@ export default function LineageGraph({ focus = 'gld-360', height = 560 }: { focu
                     <div className="nh" style={{ height: n.cols ? HEAD : undefined }}>
                       <SourceLogo kind={n.sub} size={14} bare fallback={<span style={{ color: 'var(--primary)', display: 'grid' }}>{typeIcon(a?.type ?? (n.sub.includes('Manual') ? 'File' : 'Table'), 14)}</span>} />
                       <b className="ellipsis grow">{n.title}</b>
-                      {a?.lifecycle === 'Certified' && <span title="Certified" style={{ color: 'var(--ok)', fontSize: 11 }}>✔</span>}
+                      {a?.lifecycle === 'Certified' && <span title="Certified" style={{ color: 'var(--ok-text)', fontSize: 11 }}>✔</span>}
                     </div>
                     {n.cols ? (
                       <div style={{ padding: '4px 0' }}>
@@ -249,7 +249,7 @@ function OverlayLine({ overlay, a }: { overlay: Overlay; a?: ReturnType<typeof a
     return (
       <div className="row" style={{ gap: 6 }}>
         <div className="bar grow"><span style={{ width: `${a.dq}%`, background: scoreColor(a.dq) }} /></div>
-        <b style={{ fontSize: 11.5, color: scoreColor(a.dq) }}>{a.dq}%</b>
+        <b style={{ fontSize: 11.5, color: scoreText(a.dq) }}>{a.dq}%</b>
       </div>
     )
   }

@@ -132,7 +132,7 @@ export default function AskSoftnix({ seed, onClose }: { seed?: string; onClose: 
   return (
     <aside className="ask-panel" role="dialog" aria-label="Ask Softnix">
       <div className="ask-h">
-        <span className="ask-fab" style={{ position: 'static', height: 34, width: 34, padding: 0, justifyContent: 'center', boxShadow: 'none', background: 'rgba(255,255,255,.2)' }}><Sparkles size={17} /></span>
+        <span className="ask-mark"><Sparkles size={17} /></span>
         <div style={{ lineHeight: 1.2 }}>
           <b>Ask Softnix</b>
           <div className="small" style={{ opacity: .85 }}>Data catalog expert · on-prem</div>
@@ -186,7 +186,7 @@ export default function AskSoftnix({ seed, onClose }: { seed?: string; onClose: 
           title="Hold to talk (TH/EN)"
         ><Mic size={17} /></button>
         {rec ? (
-          <div className="grow row" style={{ height: 38, padding: '0 10px', border: '1px solid var(--bad)', borderRadius: 10, color: 'var(--bad)' }}>
+          <div className="grow row" style={{ height: 38, padding: '0 10px', border: '1px solid var(--bad)', borderRadius: 10, color: 'var(--bad-text)' }}>
             <div className="wave">{Array.from({ length: 14 }).map((_, i) => <i key={i} style={{ animationDelay: `${i * 0.06}s` }} />)}</div>
             <span className="small">Listening… release to send</span>
           </div>

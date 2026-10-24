@@ -39,7 +39,7 @@ Custodians / Data Engineers and Platform Admins add and run sources. Stewards an
 ## Key fields & metrics {#fields}
 
 - **Status**: Healthy, Warning, Failed, Running, Queued.
-- **Last run**: when the last harvest ran and what happened (for example "3 tables skipped (permission)" or "ORA-12170 connect timeout").
+- **Last run**: when the last harvest ran and what happened (for example "3 tables skipped (permission)" or "Can’t reach database (timeout)"). A failed source explains the cause in plain words and offers **Test connection**, **View log** and **Retry**.
 - **Schedule**: for example every 1 h plus DDL events, daily 23:00, or push in real time.
 - **lineage** badge: the source also sends lineage. **remote agent**: harvested through an on-prem agent.
 

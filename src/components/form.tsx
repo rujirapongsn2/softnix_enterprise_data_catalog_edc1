@@ -1,6 +1,7 @@
 import { Fragment, useEffect, useState, type ReactNode } from 'react'
 import { X, Eye, EyeOff, Lock, Check } from 'lucide-react'
 import { people } from '../data/mock'
+import { SHOW_SPEC_REFS } from '../demo'
 
 /* ---------- Modal shell used by every create form ---------- */
 export function Modal({ title, sub, icon, size = 'md', onClose, children, footer, aside }: {
@@ -33,7 +34,7 @@ export function Modal({ title, sub, icon, size = 'md', onClose, children, footer
 export function Field({ label, required, hint, error, children, span, prd }: { label: string; required?: boolean; hint?: ReactNode; error?: string; children: ReactNode; span?: 1 | 2 | 3; prd?: string }) {
   return (
     <div className={`field ${error ? 'has-error' : ''}`} style={span ? { gridColumn: `span ${span}` } : undefined}>
-      <div className="field-label">{label}{required && <span className="req">*</span>}{prd && <span className="prd-ref">{prd}</span>}</div>
+      <div className="field-label">{label}{required && <span className="req">*</span>}{prd && SHOW_SPEC_REFS && <span className="prd-ref">{prd}</span>}</div>
       {children}
       {error ? <div className="field-error">{error}</div> : hint ? <div className="field-hint">{hint}</div> : null}
     </div>

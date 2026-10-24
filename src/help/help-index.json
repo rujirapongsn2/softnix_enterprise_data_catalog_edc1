@@ -1,6 +1,6 @@
 {
  "schema_version": 1,
- "generated_at": "2026-10-24T00:46:20.494Z",
+ "generated_at": "2026-10-24T06:38:57.601Z",
  "langs": [
   "en",
   "th"
@@ -1402,7 +1402,7 @@
     {
      "anchor": "fields",
      "heading": "Key fields & metrics",
-     "markdown": "- **Status**: Healthy, Warning, Failed, Running, Queued.\n- **Last run**: when the last harvest ran and what happened (for example \"3 tables skipped (permission)\" or \"ORA-12170 connect timeout\").\n- **Schedule**: for example every 1 h plus DDL events, daily 23:00, or push in real time.\n- **lineage** badge: the source also sends lineage. **remote agent**: harvested through an on-prem agent."
+     "markdown": "- **Status**: Healthy, Warning, Failed, Running, Queued.\n- **Last run**: when the last harvest ran and what happened (for example \"3 tables skipped (permission)\" or \"Can’t reach database (timeout)\"). A failed source explains the cause in plain words and offers **Test connection**, **View log** and **Retry**.\n- **Schedule**: for example every 1 h plus DDL events, daily 23:00, or push in real time.\n- **lineage** badge: the source also sends lineage. **remote agent**: harvested through an on-prem agent."
     },
     {
      "anchor": "tasks",
@@ -2821,7 +2821,7 @@
     {
      "anchor": "fields",
      "heading": "ฟิลด์และตัวชี้วัดสำคัญ",
-     "markdown": "- **Status**: Healthy, Warning, Failed, Running, Queued\n- **Last run**: การดึงครั้งล่าสุดเกิดเมื่อไรและผลเป็นอย่างไร เช่น \"3 tables skipped (permission)\" หรือ \"ORA-12170 connect timeout\"\n- **Schedule**: เช่น ทุก 1 ชั่วโมงร่วมกับ DDL events, ทุกวัน 23:00 หรือแบบ push เรียลไทม์\n- ป้าย **lineage**: แหล่งนี้ส่ง lineage มาด้วย, ป้าย **remote agent**: ดึงผ่าน agent ที่ติดตั้งในองค์กร"
+     "markdown": "- **Status**: Healthy, Warning, Failed, Running, Queued\n- **Last run**: การดึงครั้งล่าสุดเกิดเมื่อไรและผลเป็นอย่างไร เช่น \"3 tables skipped (permission)\" หรือ \"Can’t reach database (timeout)\" แหล่งที่ล้มเหลวจะอธิบายสาเหตุเป็นภาษาที่เข้าใจง่าย พร้อมปุ่ม **Test connection**, **View log** และ **Retry**\n- **Schedule**: เช่น ทุก 1 ชั่วโมงร่วมกับ DDL events, ทุกวัน 23:00 หรือแบบ push เรียลไทม์\n- ป้าย **lineage**: แหล่งนี้ส่ง lineage มาด้วย, ป้าย **remote agent**: ดึงผ่าน agent ที่ติดตั้งในองค์กร"
     },
     {
      "anchor": "tasks",

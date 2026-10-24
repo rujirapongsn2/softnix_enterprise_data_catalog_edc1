@@ -110,7 +110,7 @@ export default function Glossary() {
           </div>
 
           <div className="grid g3">
-            <Card title={<h3 className="row"><Link2 size={15} />Linked assets ({term.linked})</h3>} className="span2" actions={<GuardBtn cap="asset.editBusiness" className="btn sm ai" onClick={() => toast('3 candidate columns found')}><Sparkles size={13} />Suggest columns</GuardBtn>}>
+            <Card title={<h2 className="row"><Link2 size={15} />Linked assets ({term.linked})</h2>} className="span2" actions={<GuardBtn cap="asset.editBusiness" className="btn sm ai" onClick={() => toast('3 candidate columns found')}><Sparkles size={13} />Suggest columns</GuardBtn>}>
               <table className="tbl">
                 <thead><tr><th>Asset</th><th>Column</th><th>Classification</th><th>Linked by</th></tr></thead>
                 <tbody>
