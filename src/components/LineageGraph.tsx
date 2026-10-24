@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { ZoomIn, ZoomOut, Maximize2, Sparkles, AlertTriangle, ShieldAlert, Workflow } from 'lucide-react'
 import { assetById, people, type Classification } from '../data/mock'
 import { ClsBadge, Seg, scoreColor, typeIcon, Avatar } from './ui'
+import { SourceLogo } from './SourceLogo'
 
 const LAYERS = ['Source', 'Bronze', 'Silver', 'Gold', 'Report'] as const
 const COL_W = 228
@@ -182,7 +183,7 @@ export default function LineageGraph({ focus = 'gld-360', height = 560 }: { focu
                     onClick={() => setSel(n.id)}
                   >
                     <div className="nh" style={{ height: n.cols ? HEAD : undefined }}>
-                      <span style={{ color: 'var(--primary)', display: 'grid' }}>{typeIcon(a?.type ?? (n.sub.includes('Manual') ? 'File' : 'Table'), 14)}</span>
+                      <SourceLogo kind={n.sub} size={14} bare fallback={<span style={{ color: 'var(--primary)', display: 'grid' }}>{typeIcon(a?.type ?? (n.sub.includes('Manual') ? 'File' : 'Table'), 14)}</span>} />
                       <b className="ellipsis grow">{n.title}</b>
                       {a?.lifecycle === 'Certified' && <span title="Certified" style={{ color: 'var(--ok)', fontSize: 11 }}>✔</span>}
                     </div>

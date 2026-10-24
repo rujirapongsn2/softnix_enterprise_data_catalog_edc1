@@ -4,6 +4,7 @@ import type { Connector } from '../data/mock'
 import { domains, people } from '../data/mock'
 import { Modal, Field, FormGrid, Input, Select, Secret, Toggle, Checks, Radio, TagInput, PersonSelect, WizardSteps, Section, ReviewList, req, anyErr, TextArea } from '../components/form'
 import { ClsBadge } from '../components/ui'
+import { SourceLogo } from '../components/SourceLogo'
 import { useRole } from '../auth/role'
 
 /* ---------- Source type catalogue (PRD HRV-01, HRV-07, HRV-10, HRV-12) ---------- */
@@ -336,7 +337,7 @@ export default function AddSourceWizard({ onClose, onCreate }: { onClose: () => 
         <WizardSteps steps={STEPS} cur={step} onGo={setStep} done={stepOk} />
         {type && (
           <div className="card" style={{ padding: 10, marginTop: 14 }}>
-            <div className="row"><span className="type-tile-ic" style={{ background: type.color }}>{type.badge}</span><b className="small">{type.name}</b></div>
+            <div className="row"><SourceLogo kind={type.id} size={24} fallback={<span className="type-tile-ic" style={{ background: type.color }}>{type.badge}</span>} /><b className="small">{type.name}</b></div>
             <div className="faint small" style={{ marginTop: 6 }}>{type.desc}</div>
           </div>
         )}
@@ -351,7 +352,7 @@ export default function AddSourceWizard({ onClose, onCreate }: { onClose: () => 
               <div className="type-grid">
                 {TYPES.filter(t => t.group === g).map(t => (
                   <button key={t.id} type="button" className={`type-tile ${typeId === t.id ? 'on' : ''}`} onClick={() => pickType(t)} onDoubleClick={() => { pickType(t); setStep(1) }}>
-                    <span className="row"><span className="ti" style={{ background: t.color }}>{t.badge}</span>{t.lineage && <span className="badge cyan" style={{ marginLeft: 'auto' }}>lineage</span>}</span>
+                    <span className="row"><SourceLogo kind={t.id} size={32} fallback={<span className="ti" style={{ background: t.color }}>{t.badge}</span>} />{t.lineage && <span className="badge cyan" style={{ marginLeft: 'auto' }}>lineage</span>}</span>
                     <b className="small">{t.name}</b>
                     <span className="faint" style={{ fontSize: 11 }}>{t.desc}</span>
                   </button>
@@ -492,7 +493,7 @@ export default function AddSourceWizard({ onClose, onCreate }: { onClose: () => 
           <div className="grid g2" style={{ gap: 12 }}>
             <Section title="Connection">
               <ReviewList rows={[
-                ['Type', <span className="row"><span className="type-tile-ic" style={{ background: type.color }}>{type.badge}</span>{type.name}</span>], ['Name', name], ['Environment', env],
+                ['Type', <span className="row"><SourceLogo kind={type.id} size={24} fallback={<span className="type-tile-ic" style={{ background: type.color }}>{type.badge}</span>} />{type.name}</span>], ['Name', name], ['Environment', env],
                 ['Network', network === 'agent' ? `Remote agent · ${agent}` : 'Direct'], ['Endpoint', <span className="mono small">{connString()}</span>],
                 ['Credentials', <span className="badge gray">{secretMode === 'ref' ? secretRef : `vault://edc/${slug(name)}`}</span>],
                 ['Test', test.state === 'ok' ? <span className="badge green">Passed</span> : <span className="badge amber">Not tested</span>],

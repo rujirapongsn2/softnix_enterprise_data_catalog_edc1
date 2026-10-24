@@ -725,3 +725,8 @@ textarea.input { height: auto; }
 .brand-logo { height: 28px; }
 .user-chip .meta span, .user-chip .meta b { white-space: nowrap; }
 .nav-item .label { overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+
+/* ── Source logos (official product marks, public/logos) ── */
+.src-logo { flex: none; display: inline-grid; place-items: center; background: #fff; border: 1px solid var(--border, #e2e5ea); border-radius: 8px; box-sizing: border-box; }
+.src-logo img { display: block; object-fit: contain; }
+.src-logo-bare { flex: none; display: block; object-fit: contain; }

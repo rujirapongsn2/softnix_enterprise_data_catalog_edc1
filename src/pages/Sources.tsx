@@ -6,6 +6,7 @@ import { useShell } from '../components/Layout'
 import { GuardBtn } from '../auth/role'
 import { useStored } from '../data/store'
 import AddSourceWizard from '../forms/AddSource'
+import { SourceLogo } from '../components/SourceLogo'
 import { people } from '../data/mock'
 
 const groupIcon: Record<Connector['group'], React.ReactNode> = { Lakehouse: <Waves size={18} />, Database: <Database size={18} />, Cloud: <Cloud size={18} />, Storage: <HardDrive size={18} />, BI: <BarChart3 size={18} />, Other: <FileCode2 size={18} /> }
@@ -46,7 +47,7 @@ export default function Sources() {
             <tbody>
               {list.map(c => (
                 <tr key={c.id} className={c.isNew ? 'new-row' : undefined} style={{ cursor: 'pointer', background: sel?.id === c.id ? 'var(--primary-50)' : undefined }} onClick={() => setSel(c)}>
-                  <td><div className="row"><span className="asset-icon" style={{ width: 32, height: 32 }}>{groupIcon[c.group]}</span><div><b>{c.name}</b><div className="row" style={{ gap: 4 }}>{c.isNew && <span className="badge blue">new</span>}{c.lineage && <span className="badge cyan">lineage</span>}{c.agent && <span className="badge gray">remote agent</span>}</div></div></div></td>
+                  <td><div className="row"><SourceLogo kind={c.kind} size={32} fallback={<span className="asset-icon" style={{ width: 32, height: 32 }}>{groupIcon[c.group]}</span>} /><div><b>{c.name}</b><div className="row" style={{ gap: 4 }}>{c.isNew && <span className="badge blue">new</span>}{c.lineage && <span className="badge cyan">lineage</span>}{c.agent && <span className="badge gray">remote agent</span>}</div></div></div></td>
                   <td>{c.kind}</td>
                   <td><span className={`badge ${statusUi[c.status][0]}`}>{statusUi[c.status][1]}{c.status}</span></td>
                   <td>{c.assets ? c.assets.toLocaleString() : '—'}</td>
@@ -60,7 +61,7 @@ export default function Sources() {
         </div>
 
         {sel && (
-          <Card title={sel.name} actions={<button className="icon-btn" onClick={() => setSel(null)}><X size={16} /></button>}>
+          <Card title={<span className="row"><SourceLogo kind={sel.kind} size={24} />{sel.name}</span>} actions={<button className="icon-btn" onClick={() => setSel(null)}><X size={16} /></button>}>
             <dl className="kv" style={{ gridTemplateColumns: '110px 1fr' }}>
               <dt>Connection</dt><dd className="mono small" style={{ wordBreak: 'break-all' }}>{sel.conn ?? (sel.kind === 'Iceberg' ? 'https://lakehouse/iceberg/v1' : sel.kind === 'Oracle' ? 'jdbc:oracle:thin:@crm-prd:1521/CRM' : '—')}</dd>
               <dt>Credential</dt><dd><span className="badge gray">{sel.secret ?? `vault://edc/${sel.id}`}</span></dd>
