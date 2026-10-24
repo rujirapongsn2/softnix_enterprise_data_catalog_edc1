@@ -8,7 +8,7 @@
 | ผู้อ่านหลัก | Product, Tech Lead, Backend/Frontend/Data Engineer, QA, DevOps |
 | เอกสารต้นทาง | [`PRD_Reference.md`](./PRD_Reference.md) (PRD v1.1 QbD, 13 ต.ค. 2026) และ GUI prototype ใน repo นี้ (`src/`, `help-content/`) |
 | สถานะเอกสาร | **ฉบับหลัก (source of truth) สำหรับ developer** — `PRD_Reference.md` (v1.1) ใช้อ้างอิงที่มาเท่านั้น หากขัดกันให้ยึดเอกสารนี้ |
-| สถานะ | รอพี่ทอมรีวิว · คำถามเปิดอยู่ในหัวข้อ 22 |
+| สถานะ | รอ Product Owner รีวิว · คำถามเปิดอยู่ในหัวข้อ 22 |
 
 ## 0. วิธีอ่านเอกสารนี้
 
@@ -748,7 +748,7 @@ sequenceDiagram
 | ASK-14 *(ใหม่)* | Guardrails: privacy guard (ACC-06), prompt-injection defense (metadata/คำอธิบายที่ harvest มาเป็น untrusted, ไม่ให้สั่ง tool), refusal เมื่อถามข้อมูลนอกสิทธิ์, token quota ต่อผู้ใช้ (200k/วัน ค่าเริ่มต้น) | M |
 | ASK-15 *(ใหม่)* | Evaluation set (≥ 100 คำถาม TH/EN จาก help + catalog) รันใน CI ของ AI: วัด groundedness, citation correctness, refusal ถูกต้อง | S |
 
-> ประเด็นที่พี่ทอม **พักไว้** และยังไม่ตัดสินใจ: จะเปิด LLM + RAG จริงเมื่อใด, citation ลิงก์ไป help section หรือไม่, panel push vs overlay, ผู้ดูแล help content และ per-role variation — ดูคำถามเปิด Q1–Q4 สเปกข้างบนเป็นแนวทางเมื่อได้ข้อสรุปแล้ว
+> ประเด็นที่ **พักไว้** และยังไม่ตัดสินใจ: จะเปิด LLM + RAG จริงเมื่อใด, citation ลิงก์ไป help section หรือไม่, panel push vs overlay, ผู้ดูแล help content และ per-role variation — ดูคำถามเปิด Q1–Q4 สเปกข้างบนเป็นแนวทางเมื่อได้ข้อสรุปแล้ว
 
 ---
 
@@ -1122,7 +1122,7 @@ BigQuery, Databricks Unity, Tableau, REST API connectors · Voice (STT/TTS) · A
 
 ## 22. คำถามเปิด
 
-### 22.1 ประเด็นที่พี่ทอมสั่ง **พักไว้** (ยังไม่ดำเนินการ — ห้ามตัดสินใจแทน)
+### 22.1 ประเด็นที่ **พักไว้** (ยังไม่ดำเนินการ — ห้ามตัดสินใจแทน)
 
 - [ ] **Q1** Ask Softnix ใช้ LLM + RAG จริงเมื่อใด และขอบเขตแรก (help อย่างเดียว / help + catalog tools / รวม action)
 - [ ] **Q2** Citation ในคำตอบควรลิงก์เปิด Help panel ไปที่ section นั้น (`url_anchor`) หรือไม่
