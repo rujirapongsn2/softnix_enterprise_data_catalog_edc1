@@ -1,0 +1,2839 @@
+{
+ "schema_version": 1,
+ "generated_at": "2026-10-24T00:01:05.670Z",
+ "langs": [
+  "en",
+  "th"
+ ],
+ "pages": [
+  {
+   "page_id": "access",
+   "lang": "en",
+   "title": "Policies & Access",
+   "nav_label": "Policies & Access",
+   "section": "Govern",
+   "routes": [
+    "/access"
+   ],
+   "roles_full": [
+    "steward",
+    "owner",
+    "dpo",
+    "council",
+    "admin"
+   ],
+   "roles_view": [
+    "consumer",
+    "custodian",
+    "auditor"
+   ],
+   "keywords": [
+    "policy",
+    "access",
+    "classification scheme",
+    "Public",
+    "Internal",
+    "Confidential",
+    "Restricted",
+    "access review",
+    "masking",
+    "retention",
+    "Lakehouse tag",
+    "grant"
+   ],
+   "related": [
+    "privacy",
+    "asset-detail",
+    "audit",
+    "roles"
+   ],
+   "prd": "ACC, CLS-01",
+   "summary": "The policy register, the data classification scheme and periodic access review campaigns.",
+   "last_updated": "2026-10-24",
+   "version": "1.0.0",
+   "source_file": "help-content/en/access.md",
+   "sections": [
+    {
+     "anchor": "what",
+     "heading": "What is this page",
+     "markdown": "**Policies & Access** holds the data policies, the four-level classification scheme and access review campaigns. EDC records the rules. The Lakehouse enforces them through tag and grant sync."
+    },
+    {
+     "anchor": "purpose",
+     "heading": "Purpose & goals",
+     "markdown": "- Keep one approved, versioned set of data policies.\n- Apply the same classification levels everywhere.\n- Review regularly who still needs access to sensitive data."
+    },
+    {
+     "anchor": "who",
+     "heading": "Who uses it",
+     "markdown": "- **DPO** and **Council**: draft policies. Only the **Council** approves policies and the classification scheme.\n- **Owner, DPO, Council**: start access review campaigns.\n- Other roles can view."
+    },
+    {
+     "anchor": "how",
+     "heading": "How to use",
+     "markdown": "1. **Policy register** tab: see each policy's Version, Status, Effective date, Applies to and Lakehouse enforcement. Candidate policies show an **Approve** button for the Council.\n2. **Classification scheme** tab: read the definition of each level and its Lakehouse tag. The Council can **Propose change**.\n3. **Access reviews** tab: track campaigns by Scope, Reviewer, Progress and Due date.\n4. Use **New policy** or **New access review** at the top right to create one."
+    },
+    {
+     "anchor": "fields",
+     "heading": "Key fields & metrics",
+     "markdown": "- **Public (Level 1)**: freely shareable outside the organisation.\n- **Internal (Level 2)**: default for business data, employees only.\n- **Confidential (Level 3)**: business-sensitive or personal data, need-to-know.\n- **Restricted (Level 4)**: national ID, financial accounts and PDPA s.26 data. Requires DPO approval.\n- **Lakehouse enforcement**: for example tags `cls_*`, masking policy by tag, time-bound roles."
+    },
+    {
+     "anchor": "tasks",
+     "heading": "Common tasks",
+     "markdown": "- Approve POL-09 Data Retention (Candidate) as the Council.\n- Start a quarterly review of Restricted data grants."
+    },
+    {
+     "anchor": "tips",
+     "heading": "Tips & FAQ",
+     "markdown": "- A new policy goes to the Data Governance Council for approval before it is enforced.\n- To see the policies applied to one dataset, open its **Access** tab."
+    }
+   ]
+  },
+  {
+   "page_id": "alerts",
+   "lang": "en",
+   "title": "Alert Settings",
+   "nav_label": "Alert Settings",
+   "section": "Govern",
+   "routes": [
+    "/alerts"
+   ],
+   "roles_full": [
+    "steward",
+    "owner",
+    "custodian",
+    "admin"
+   ],
+   "roles_view": [
+    "auditor"
+   ],
+   "keywords": [
+    "alert",
+    "routing rule",
+    "notification",
+    "channel",
+    "severity",
+    "dedup",
+    "grouping",
+    "maintenance window",
+    "mute",
+    "escalation",
+    "on-call"
+   ],
+   "related": [
+    "observability",
+    "quality",
+    "inbox"
+   ],
+   "prd": "OBS-04",
+   "summary": "Decide who is notified, on which channel, at what severity and with what dedup, and mute alerts during maintenance.",
+   "last_updated": "2026-10-24",
+   "version": "1.0.0",
+   "source_file": "help-content/en/alerts.md",
+   "sections": [
+    {
+     "anchor": "what",
+     "heading": "What is this page",
+     "markdown": "**Alert Settings** controls how observability and quality alerts reach people: routing rules, channels, severity, dedup / grouping, maintenance windows and escalation."
+    },
+    {
+     "anchor": "purpose",
+     "heading": "Purpose & goals",
+     "markdown": "- Send each alert to the right person on the right channel.\n- Avoid alert fatigue with dedup windows, digests and maintenance muting.\n- Make sure nothing is missed, with escalation and on-call cover."
+    },
+    {
+     "anchor": "who",
+     "heading": "Who uses it",
+     "markdown": "Stewards, Owners, Custodians and Admins manage rules. Only Custodians and Admins can add maintenance windows. Auditors can view."
+    },
+    {
+     "anchor": "how",
+     "heading": "How to use",
+     "markdown": "1. Review **Routing rules**: ID, Scope, Trigger, Severity, Route to, Channels, Dedup / grouping and Enabled.\n2. Turn a rule on or off with the **Enabled** checkbox.\n3. Click **New alert rule** to add one (scope, trigger, severity, route, channel, dedup).\n4. Under **Maintenance windows (mute)**, click **Add** to mute alerts for a scope during planned work.\n5. Check **Escalation & on-call** for the default route, this week's on-call person and the severity-to-channel map."
+    },
+    {
+     "anchor": "fields",
+     "heading": "Key fields & metrics",
+     "markdown": "- **Trigger**: for example contract violation (breaking), pipeline run FAIL, DQ score below threshold, volume anomaly (> 3σ), distribution drift (PSI > 0.25).\n- **Dedup / grouping**: for example \"1 per asset / 6 h\", or Digest.\n- **Severity map**: Critical → page · High → chat + email · Medium → email · Low → daily digest.\n- **Auto Data Issue**: High and Critical alerts create a Data Issue automatically (DQ-05)."
+    },
+    {
+     "anchor": "tasks",
+     "heading": "Common tasks",
+     "markdown": "- Route a new domain's contract violations to its Steward with escalation to the Owner.\n- Mute alerts during an ERP upgrade with a maintenance window."
+    },
+    {
+     "anchor": "tips",
+     "heading": "Tips & FAQ",
+     "markdown": "- Default route: Steward of the asset, then the Owner if not acknowledged within 4 hours.\n- Use digests for Medium and Low alerts to keep channels quiet."
+    }
+   ]
+  },
+  {
+   "page_id": "asset-detail",
+   "lang": "en",
+   "title": "Asset detail",
+   "nav_label": "Asset detail",
+   "section": "Discover",
+   "routes": [
+    "/asset/:id"
+   ],
+   "roles_full": [
+    "consumer",
+    "steward",
+    "owner",
+    "custodian",
+    "dpo",
+    "council",
+    "admin"
+   ],
+   "roles_view": [
+    "auditor"
+   ],
+   "keywords": [
+    "asset",
+    "table",
+    "dataset",
+    "columns",
+    "lineage",
+    "impact",
+    "contract",
+    "data quality",
+    "access",
+    "request access",
+    "report issue",
+    "follow",
+    "discussion",
+    "certification",
+    "profiling"
+   ],
+   "related": [
+    "search",
+    "glossary",
+    "quality",
+    "observability",
+    "inbox",
+    "privacy"
+   ],
+   "prd": "CAT, CLS, LIN, CTR, DQ, ACC, AUD",
+   "summary": "Everything about one dataset or report, including meaning, columns, lineage, contract, quality, access and history.",
+   "last_updated": "2026-10-24",
+   "version": "1.0.0",
+   "source_file": "help-content/en/asset-detail.md",
+   "sections": [
+    {
+     "anchor": "what",
+     "heading": "What is this page",
+     "markdown": "The **Asset detail** page shows everything EDC knows about one asset (for example `lakehouse.gold.customer_360`). The header shows the business name, badges (Certified, Authoritative source, Critical, PII), path, type, domain and classification, plus **Rating**, **Data quality**, **Freshness** and **Rows**. Tabs below the header show the detail."
+    },
+    {
+     "anchor": "purpose",
+     "heading": "Purpose & goals",
+     "markdown": "- Decide whether the data is right for your use and whether you can trust it.\n- Know who to ask (Owner, Steward, Custodian, DPO) and what you may do with the data.\n- See what is affected upstream and downstream before you change anything."
+    },
+    {
+     "anchor": "who",
+     "heading": "Who uses it",
+     "markdown": "Everyone who works with data. Consumers read it and request access. Stewards and Owners edit business metadata and certify assets. Custodians check lineage and contracts. Auditors have read-only access."
+    },
+    {
+     "anchor": "how",
+     "heading": "How to use",
+     "markdown": "1. **Overview**: read the description, linked glossary terms and tags, business attributes (purpose, update frequency, freshness SLA, retention, legal basis), technical metadata, stakeholders, the DQ summary and **Certification readiness**.\n2. **Columns**: filter by All, PII, CDE or Undocumented. Click a column to open its drawer with type, glossary term, classification, PII state and profile (null % / distinct %).\n3. **Lineage**: see upstream sources and downstream consumers. Use it for impact analysis.\n4. **Contract**: compare the expected schema in the data contract (ODCS) with the actual harvested schema. Breaking changes are highlighted in red, and you can see the SLA/SLO status and the consumers affected.\n5. **Data Quality**: see scores by dimension, the score trend, rules and AI-suggested rules.\n6. **Access**: see who has access, which columns are masked, your own access and the policies applied.\n7. **History**: see the audit trail and schema versions."
+    },
+    {
+     "anchor": "fields",
+     "heading": "Key fields & metrics",
+     "markdown": "- **Certification readiness**: Owner assigned, Steward assigned, Description, Classification, Glossary terms linked, PII confirmed. Critical assets must pass all of them before an Owner can certify (CDMC C2).\n- **CDE**: Critical Data Element, a column with stricter quality rules.\n- **PII badge with \"?\"**: suggested by auto-classification and waiting for steward confirmation.\n- **Contract status**: Compliant or **Violated**. Breaking changes quarantine Gold publishing.\n- **Freshness SLA**: how old the data may be (for example ≤ 26 hours)."
+    },
+    {
+     "anchor": "tasks",
+     "heading": "Common tasks",
+     "markdown": "- **Request access**: give the purpose (required), privilege, duration (30/90/180 days) and columns. Selecting PII columns adds a DPO step: Submit → Data Owner → DPO (PII) → Grant in Lakehouse.\n- **Report issue**: give a title, quality dimension, severity and details. The issue goes to the Steward automatically.\n- **Follow**: get notified of changes. **Discussion**: ask questions, rate the asset or reply.\n- **Explain with AI**: ask Ask Softnix to explain the table in business terms.\n- Stewards: **Edit** or **Regenerate** the description, accept or reject AI drafts, and confirm or reject suggested PII.\n- **Open in SQL editor**: open the table in the Lakehouse (Trino)."
+    },
+    {
+     "anchor": "tips",
+     "heading": "Tips & FAQ",
+     "markdown": "- **\"You can see metadata but not query data\"** means you need to request access first.\n- Unselected PII columns stay masked even after your request is approved.\n- Access is time-bound. The grant is revoked automatically when it expires.\n- AI-assisted changes are logged in the audit trail as AI-assisted."
+    }
+   ]
+  },
+  {
+   "page_id": "audit",
+   "lang": "en",
+   "title": "Audit Trail",
+   "nav_label": "Audit Trail",
+   "section": "Administration",
+   "routes": [
+    "/audit"
+   ],
+   "roles_full": [
+    "auditor",
+    "admin"
+   ],
+   "roles_view": [
+    "steward",
+    "owner",
+    "custodian",
+    "dpo",
+    "council"
+   ],
+   "keywords": [
+    "audit",
+    "audit trail",
+    "log",
+    "hash chain",
+    "approval history",
+    "AI-assisted",
+    "MCP",
+    "export",
+    "compliance",
+    "evidence"
+   ],
+   "related": [
+    "access",
+    "settings",
+    "roles",
+    "inbox"
+   ],
+   "prd": "AUD, ASK-12, MCP-05",
+   "summary": "An append-only, tamper-evident log of every metadata change, approval, AI action and MCP call.",
+   "last_updated": "2026-10-24",
+   "version": "1.0.0",
+   "source_file": "help-content/en/audit.md",
+   "sections": [
+    {
+     "anchor": "what",
+     "heading": "What is this page",
+     "markdown": "The **Audit Trail** is an append-only, hash-chained log of metadata changes, approvals, AI actions and MCP tool calls. Entries are kept for 5 years. The **Chain verified** badge confirms that no entry has been altered."
+    },
+    {
+     "anchor": "purpose",
+     "heading": "Purpose & goals",
+     "markdown": "- Show who changed what, when, from what value to what value, and through which channel.\n- Provide evidence for internal audit, PDPA and regulators."
+    },
+    {
+     "anchor": "who",
+     "heading": "Who uses it",
+     "markdown": "Auditors and Platform Admins (full access, including export). The DPO can export too. Stewards, Owners, Custodians and the Council can view."
+    },
+    {
+     "anchor": "how",
+     "heading": "How to use",
+     "markdown": "1. Filter by user, asset or action in the text box.\n2. Choose an action type: All actions, Approvals, Classification changes, AI-assisted, MCP calls. Choose a period: Last 7 or 30 days.\n3. Read each row: Time, Actor, Action, Target, Old → New, Channel and Hash.\n4. Click **Export for auditor** to get a signed export (CSV + hash manifest)."
+    },
+    {
+     "anchor": "fields",
+     "heading": "Key fields & metrics",
+     "markdown": "- **Channel**: UI (manual), **AI** (an AI-assisted change confirmed by a user) or **MCP** (a call from an external AI client such as claude-desktop).\n- **Hash**: the link in the chain. A broken chain would show that an entry was tampered with."
+    },
+    {
+     "anchor": "tasks",
+     "heading": "Common tasks",
+     "markdown": "- Prove who approved an access request, and when.\n- List all AI-assisted metadata changes for a period."
+    },
+    {
+     "anchor": "tips",
+     "heading": "Tips & FAQ",
+     "markdown": "- Each asset also has its own history on its **History** tab.\n- Nothing can be deleted from the trail. Corrections appear as new entries."
+    }
+   ]
+  },
+  {
+   "page_id": "dashboard",
+   "lang": "en",
+   "title": "Governance Dashboard",
+   "nav_label": "Governance Dashboard",
+   "section": "Govern",
+   "routes": [
+    "/dashboard"
+   ],
+   "roles_full": [
+    "council"
+   ],
+   "roles_view": [
+    "steward",
+    "owner",
+    "custodian",
+    "dpo",
+    "auditor",
+    "admin"
+   ],
+   "keywords": [
+    "governance dashboard",
+    "KPI",
+    "coverage",
+    "adoption",
+    "quality",
+    "MTTD",
+    "MTTR",
+    "SLO",
+    "backlog",
+    "target",
+    "domain",
+    "report",
+    "export"
+   ],
+   "related": [
+    "home",
+    "domains",
+    "quality",
+    "observability"
+   ],
+   "prd": "AUD-02, §2.3",
+   "summary": "Governance success and quality metrics against targets, by domain, for steering and reporting.",
+   "last_updated": "2026-10-24",
+   "version": "1.0.0",
+   "source_file": "help-content/en/dashboard.md",
+   "sections": [
+    {
+     "anchor": "what",
+     "heading": "What is this page",
+     "markdown": "The **Governance Dashboard** tracks the success and quality metrics from PRD §2.3 against their targets for six months after go-live. It has two tabs: **Coverage & adoption** and **Quality**."
+    },
+    {
+     "anchor": "purpose",
+     "heading": "Purpose & goals",
+     "markdown": "- Show the Governance Council and domain owners where the programme is on or off track.\n- Prioritise the backlog: owners, PII confirmation, terms, issues and SLAs."
+    },
+    {
+     "anchor": "who",
+     "heading": "Who uses it",
+     "markdown": "The Data Governance Council uses it most and can export reports. Owners, the DPO and Auditors can also export. Others can view."
+    },
+    {
+     "anchor": "how",
+     "heading": "How to use",
+     "markdown": "1. Pick a domain in the **All domains** selector to focus.\n2. **Coverage & adoption**: read the metric cards (Harvest coverage, Ownership · Critical, Documentation · Critical, PII confirmed, Lineage · Critical, Monthly active users), **Coverage by domain**, **Backlog**, **Access request lead time** and **Top stewards this month**.\n3. **Quality** tab: read DQ rule coverage · CDE, Data products meeting SLO, MTTD, MTTR, Issues with root cause and Contract violations (30 d), plus the **Monthly domain quality review (PDCA)** table.\n4. Click **Export PDF (TH)** to share the report."
+    },
+    {
+     "anchor": "fields",
+     "heading": "Key fields & metrics",
+     "markdown": "- **On track / pts to go**: whether the metric has reached its target.\n- **Critical-asset completeness**: share of critical assets with full metadata, by domain.\n- **MTTD / MTTR**: mean time to detect (minutes) and to resolve (days) data incidents. Lower is better.\n- **Access request lead time**: average business days to grant access (target ≤ 2).\n- **Backlog**: for example critical assets without an owner, PII suggestions to confirm, workflow tasks past SLA."
+    },
+    {
+     "anchor": "tasks",
+     "heading": "Common tasks",
+     "markdown": "- Prepare the monthly council meeting: export the PDF and review domains that are off target.\n- Assign owners to critical assets that have none."
+    },
+    {
+     "anchor": "tips",
+     "heading": "Tips & FAQ",
+     "markdown": "- Low consumer ratings (≤ 2★) and repeated issues feed proposals for new DQ rules or contract changes.\n- The Home page shows a short version of these KPIs."
+    }
+   ]
+  },
+  {
+   "page_id": "domains",
+   "lang": "en",
+   "title": "Domains & Data Products",
+   "nav_label": "Domains & Products",
+   "section": "Discover",
+   "routes": [
+    "/domains"
+   ],
+   "roles_full": [
+    "steward",
+    "owner",
+    "custodian",
+    "council"
+   ],
+   "roles_view": [
+    "consumer",
+    "dpo",
+    "auditor",
+    "admin"
+   ],
+   "keywords": [
+    "domain",
+    "data product",
+    "SLA",
+    "SLO",
+    "error budget",
+    "consumers",
+    "owner",
+    "critical completeness",
+    "data mesh"
+   ],
+   "related": [
+    "asset-detail",
+    "search",
+    "dashboard",
+    "quality"
+   ],
+   "prd": "CAT-09",
+   "summary": "Business domains and the data products they publish, each with an owner, SLA/SLO and usage.",
+   "last_updated": "2026-10-24",
+   "version": "1.0.0",
+   "source_file": "help-content/en/domains.md",
+   "sections": [
+    {
+     "anchor": "what",
+     "heading": "What is this page",
+     "markdown": "**Domains & Data Products** groups assets by business domain (Customer, Finance, Sales, HR, Marketing, Operations). It also lists **data products**: curated bundles of assets with an owner, an SLA, a usage guide and SLO tracking (for example Customer 360 or Monthly Revenue Mart)."
+    },
+    {
+     "anchor": "purpose",
+     "heading": "Purpose & goals",
+     "markdown": "- Show who is accountable for each area of data.\n- Let consumers pick ready-to-use, supported data products instead of raw tables.\n- Make service levels visible (SLA, SLO attainment, error budget)."
+    },
+    {
+     "anchor": "who",
+     "heading": "Who uses it",
+     "markdown": "Owners and Stewards publish and maintain products. Custodians run them. Consumers browse and choose products. Other roles can view."
+    },
+    {
+     "anchor": "how",
+     "heading": "How to use",
+     "markdown": "1. Browse the **Data products** cards. Each shows the domain, description, SLA, SLO badges, number of assets and consumers, rating and owner.\n2. Click **Open** to go to the product's main asset.\n3. Scroll to **Domains**. Click a domain card to search all of its assets.\n4. Owners and Stewards: click **New data product** to create one (it starts as Draft)."
+    },
+    {
+     "anchor": "fields",
+     "heading": "Key fields & metrics",
+     "markdown": "- **SLA**: the promised delivery (for example \"Daily by 06:00 · 99.5%\").\n- **SLO badges**: Freshness, Completeness, Volume, DQ and Availability, each with 30-day attainment. ✓ means met and ✕ means breached.\n- **Error budget**: how much of the allowed failure is left this period. 0% means the budget is used up.\n- **Shield icon**: the product is certified.\n- Domain card: **assets**, **certified**, **products**, **Critical completeness** % and the **Domain owner**."
+    },
+    {
+     "anchor": "tasks",
+     "heading": "Common tasks",
+     "markdown": "- Choose a product for analysis: prefer certified products with SLOs met and budget left.\n- Spot domains with low critical completeness and follow up with the domain owner."
+    },
+    {
+     "anchor": "tips",
+     "heading": "Tips & FAQ",
+     "markdown": "- A product whose error budget is used up (for example Digital Engagement at 0%) should be reviewed before new consumers rely on it.\n- Hover an SLO badge to see its target and 30-day attainment."
+    }
+   ]
+  },
+  {
+   "page_id": "getting-started",
+   "lang": "en",
+   "title": "Getting started with EDC1",
+   "nav_label": "Getting started",
+   "section": "General",
+   "routes": [],
+   "roles_full": [
+    "consumer",
+    "steward",
+    "owner",
+    "custodian",
+    "dpo",
+    "council",
+    "auditor",
+    "admin"
+   ],
+   "roles_view": [],
+   "keywords": [
+    "overview",
+    "navigation",
+    "menu",
+    "role",
+    "language",
+    "Thai",
+    "English",
+    "Ask Softnix",
+    "search",
+    "shortcut",
+    "help"
+   ],
+   "related": [
+    "home",
+    "search",
+    "roles"
+   ],
+   "prd": "§3",
+   "summary": "How the Enterprise Data Catalog is organised, how roles change what you see, and where to get help.",
+   "last_updated": "2026-10-24",
+   "version": "1.0.0",
+   "source_file": "help-content/en/getting-started.md",
+   "sections": [
+    {
+     "anchor": "what",
+     "heading": "What is this page",
+     "markdown": "Softnix Enterprise Data Catalog (EDC1) is the single place to **find, understand, trust and govern** the organisation's data. It holds metadata only (names, descriptions, owners, classification, lineage, quality results). The data itself stays in the Lakehouse and source systems."
+    },
+    {
+     "anchor": "purpose",
+     "heading": "Purpose & goals",
+     "markdown": "- Help anyone find the right, trusted dataset quickly, in Thai or English.\n- Make clear who owns and looks after each dataset, and how sensitive it is under PDPA.\n- Give stewards, owners, the DPO and the Governance Council one workflow for approvals, quality and policy."
+    },
+    {
+     "anchor": "who",
+     "heading": "Who uses it",
+     "markdown": "Every role in PRD §3: Data Consumer, Data Steward, Data Owner, Data Custodian / Engineer, DPO / Privacy Officer, Data Governance Council, Auditor and Platform Admin. Menus, pages and buttons follow your role. Locked buttons show which role can use them when you hover over them."
+    },
+    {
+     "anchor": "how",
+     "heading": "How to use",
+     "markdown": "1. Use the **left menu**. **Discover** covers finding data (Home, Search, Business Glossary, Domains & Products). **Govern** covers stewardship work (My Tasks, Privacy & PDPA, Data Quality, Observability, Alert Settings, Policies & Access, Governance Dashboard). **Administration** covers platform setup (Sources & Harvest, Audit Trail, Settings, Roles & Permissions).\n2. Use the **search box** in the top bar (`⌘/Ctrl + K`) to jump to a table, column, report or glossary term.\n3. Switch language with **EN / ไทย** in the top bar. Help text follows the same setting.\n4. Click the **? (Help)** icon on any page to open this guide for the page you are on.\n5. Click **Ask Softnix** (bottom right, `⌘/Ctrl + J`) to ask questions in plain language."
+    },
+    {
+     "anchor": "fields",
+     "heading": "Key fields & metrics",
+     "markdown": "- **Certified**: the Data Owner has approved the asset as fit for use. Certified assets rank first in search.\n- **Authoritative source**: the one asset to use for a subject (for example `gold.customer_360` for customers).\n- **Classification**: Public, Internal, Confidential or Restricted (see Policies & Access).\n- **PII / Sensitive (s.26)**: personal data under PDPA. Sensitive data needs DPO approval.\n- **DQ score**: data quality score from the Lakehouse DQ engine.\n- **Role badge** (top bar): the role you are currently using."
+    },
+    {
+     "anchor": "tasks",
+     "heading": "Common tasks",
+     "markdown": "- Find data → Search, then open the asset.\n- Get access → open the asset and click **Request access**.\n- Approve something → **My Tasks**.\n- See how sensitive a dataset is → the asset's Classification and PII badges, or **Privacy & PDPA**.\n- Try another role (demo) → avatar menu → **Switch role**."
+    },
+    {
+     "anchor": "tips",
+     "heading": "Tips & FAQ",
+     "markdown": "- **Why is a menu item missing?** Your role cannot see that page. See **Roles & Permissions**.\n- **What does the \"view\" tag in the menu mean?** You can read the page but not change anything.\n- **Is my data copied into EDC?** No. Connectors read metadata only, and profiling uses samples that are not stored."
+    }
+   ]
+  },
+  {
+   "page_id": "glossary",
+   "lang": "en",
+   "title": "Business Glossary",
+   "nav_label": "Business Glossary",
+   "section": "Discover",
+   "routes": [
+    "/glossary",
+    "/glossary/:id"
+   ],
+   "roles_full": [
+    "steward",
+    "owner",
+    "council"
+   ],
+   "roles_view": [
+    "consumer",
+    "custodian",
+    "dpo",
+    "auditor",
+    "admin"
+   ],
+   "keywords": [
+    "glossary",
+    "business term",
+    "definition",
+    "KPI",
+    "formula",
+    "synonym",
+    "steward",
+    "ISO 11179",
+    "draft",
+    "candidate",
+    "approved",
+    "retired",
+    "change request"
+   ],
+   "related": [
+    "asset-detail",
+    "inbox",
+    "search",
+    "domains"
+   ],
+   "prd": "GLO, WF-02",
+   "summary": "Agreed bilingual business definitions, KPI formulas and their links to data assets.",
+   "last_updated": "2026-10-24",
+   "version": "1.0.0",
+   "source_file": "help-content/en/glossary.md",
+   "sections": [
+    {
+     "anchor": "what",
+     "heading": "What is this page",
+     "markdown": "The **Business Glossary** holds the organisation's agreed business terms in Thai and English, for example \"Active Customer\" or \"Churn\". The left tree groups terms by domain. The right side shows the selected term's definition, calculation (for KPIs), properties, linked assets and relationships."
+    },
+    {
+     "anchor": "purpose",
+     "heading": "Purpose & goals",
+     "markdown": "- Give everyone one meaning for each business word, so reports and analyses agree.\n- Link terms to the actual columns and reports that implement them.\n- Control changes to definitions through an approval workflow (ISO/IEC 11179 registration status)."
+    },
+    {
+     "anchor": "who",
+     "heading": "Who uses it",
+     "markdown": "- **Data Steward / Owner / Governance Council**: create, maintain and approve terms.\n- **All other roles**: read terms and **Propose change**."
+    },
+    {
+     "anchor": "how",
+     "heading": "How to use",
+     "markdown": "1. Filter or browse the tree on the left. Click a term to open it.\n2. Read the **Definition** and, for KPIs, the **Calculation**.\n3. Check **Properties**: Domain, Steward, Synonyms, Abbreviation and Status.\n4. Check **Linked assets** to see which tables and columns use the term. AI-suggested links can be accepted with **Link**.\n5. Use **Relationships** (Broader, Narrower, Related) to explore similar terms. \"Impact if changed\" shows how many assets, reports and DQ rules depend on the term.\n6. Want a different definition? Click **Propose change**. It becomes a change request in **My Tasks** (Steward → Owner)."
+    },
+    {
+     "anchor": "fields",
+     "heading": "Key fields & metrics",
+     "markdown": "- **Status stepper**: Draft → Candidate → Approved → Retired. Only Approved terms are official.\n- **KPI badge**: the term is a measured indicator with a formula.\n- **Synonyms**: other words people use (for example \"Attrition\" for Churn). Search matches synonyms too.\n- A yellow banner shows an open change request (for example CR-0311 on \"Active Customer\")."
+    },
+    {
+     "anchor": "tasks",
+     "heading": "Common tasks",
+     "markdown": "- **New term** (Steward, Owner, Council): enter the definition, domain, steward and synonyms. Save it as Draft or submit it as Candidate.\n- **Approve** a Candidate term (Owner, Council).\n- **Import Excel** (Steward, Council): template columns are Term EN, Term TH, Definition, Domain, Steward and Synonyms.\n- **Find duplicates**: AI checks for duplicate or conflicting terms.\n- **Suggest columns**: AI suggests columns to link."
+    },
+    {
+     "anchor": "tips",
+     "heading": "Tips & FAQ",
+     "markdown": "- Check \"Impact if changed\" before you propose a definition change. Downstream KPIs may move.\n- Terms are bilingual. Searching in Thai finds English terms and the other way round.\n- Glossary links on an asset's Overview tab open the term here."
+    }
+   ]
+  },
+  {
+   "page_id": "home",
+   "lang": "en",
+   "title": "Home",
+   "nav_label": "Home",
+   "section": "Discover",
+   "routes": [
+    "/"
+   ],
+   "roles_full": [
+    "consumer",
+    "steward",
+    "owner",
+    "custodian",
+    "dpo",
+    "council",
+    "auditor",
+    "admin"
+   ],
+   "roles_view": [],
+   "keywords": [
+    "home",
+    "dashboard",
+    "my tasks",
+    "following",
+    "AI curation",
+    "popular certified data",
+    "harvest health",
+    "KPI",
+    "coverage"
+   ],
+   "related": [
+    "search",
+    "inbox",
+    "privacy",
+    "sources",
+    "glossary"
+   ],
+   "prd": "AUD-02, WF-04, SRC-05",
+   "summary": "Your personal start page with governance KPIs, your tasks, assets you follow, AI suggestions and harvest health.",
+   "last_updated": "2026-10-24",
+   "version": "1.0.0",
+   "source_file": "help-content/en/home.md",
+   "sections": [
+    {
+     "anchor": "what",
+     "heading": "What is this page",
+     "markdown": "**Home** is your starting point in EDC1. The banner greets you with your current role and shows your open and overdue tasks. Below it are the key governance KPIs and cards for the work and data that matter to you."
+    },
+    {
+     "anchor": "purpose",
+     "heading": "Purpose & goals",
+     "markdown": "- See what needs your attention today without opening several pages.\n- Track progress against governance targets (ownership, documentation, PII and lineage coverage).\n- Jump quickly to popular, certified data that others already trust."
+    },
+    {
+     "anchor": "who",
+     "heading": "Who uses it",
+     "markdown": "All roles. Each person's tasks and greeting depend on the role selected in the top bar."
+    },
+    {
+     "anchor": "how",
+     "heading": "How to use",
+     "markdown": "1. Read the banner: it shows your role and how many tasks are open or overdue.\n2. Click a **domain chip** (Customer, Finance, Sales, HR, Marketing, Operations) to search within that domain.\n3. Use **Ask a data question** to ask Ask Softnix in plain language, or **Browse catalog** to open Search.\n4. Check the four **KPI cards**. A green \"▲ on target\" means the target is met. Amber \"▼ target …%\" means there is still work to do.\n5. Open a task from **My tasks**, or a dataset from **Following** or **Popular certified data**."
+    },
+    {
+     "anchor": "fields",
+     "heading": "Key fields & metrics",
+     "markdown": "- **Ownership coverage · Critical**: share of critical assets with an assigned Owner (target 95%).\n- **Documentation coverage · Critical**: share of critical assets with a business description (target 80%).\n- **PII confirmed by steward**: share of detected PII that a steward has confirmed (target 90%).\n- **Lineage coverage · Critical**: share of critical assets with lineage (target 90%).\n- **Following**: changes on assets you follow, such as schema changes, freshness SLA breaches, new comments or certification requests.\n- **AI curation**: AI suggestions waiting for review (descriptions, PII / classification, glossary links, DQ rules) and the 30-day acceptance rate.\n- **Popular certified data**: certified assets ranked by queries in the last 30 days.\n- **Harvest health**: status of each source connector (green = healthy, amber = warning, red = failed)."
+    },
+    {
+     "anchor": "tasks",
+     "heading": "Common tasks",
+     "markdown": "- Clear overdue tasks first: click a red **Overdue** item in My tasks.\n- Review AI suggestions: click **Review** on the AI curation card.\n- Check a failed source: click **Sources** on Harvest health.\n- See new or candidate glossary terms: **New in glossary**."
+    },
+    {
+     "anchor": "tips",
+     "heading": "Tips & FAQ",
+     "markdown": "- Click **Follow** on any asset page to see its changes here.\n- KPI targets come from PRD §2.3. The full breakdown by domain is on the **Governance Dashboard**.\n- The task count in the banner matches the badge on **My Tasks** in the left menu."
+    }
+   ]
+  },
+  {
+   "page_id": "inbox",
+   "lang": "en",
+   "title": "My Tasks",
+   "nav_label": "My Tasks",
+   "section": "Govern",
+   "routes": [
+    "/inbox"
+   ],
+   "roles_full": [
+    "consumer",
+    "steward",
+    "owner",
+    "custodian",
+    "dpo",
+    "council"
+   ],
+   "roles_view": [
+    "auditor",
+    "admin"
+   ],
+   "keywords": [
+    "tasks",
+    "inbox",
+    "approval",
+    "workflow",
+    "access request",
+    "change request",
+    "certification",
+    "PII review",
+    "data issue",
+    "glossary approval",
+    "SLA",
+    "overdue",
+    "escalation",
+    "delegate"
+   ],
+   "related": [
+    "asset-detail",
+    "glossary",
+    "privacy",
+    "quality",
+    "home"
+   ],
+   "prd": "WF",
+   "summary": "One inbox for approvals, reviews and issues assigned to you or your role, tracked against SLA.",
+   "last_updated": "2026-10-24",
+   "version": "1.0.0",
+   "source_file": "help-content/en/inbox.md",
+   "sections": [
+    {
+     "anchor": "what",
+     "heading": "What is this page",
+     "markdown": "**My Tasks** is your workflow inbox. It lists access requests, change requests, certifications, PII reviews, data issues and glossary approvals assigned to you or to your role. The list is on the left and the selected task's detail is on the right."
+    },
+    {
+     "anchor": "purpose",
+     "heading": "Purpose & goals",
+     "markdown": "- Make decisions on time. Every task has a due date (SLA) and escalates automatically when overdue.\n- Give each decision context: requester, asset, workflow step and an AI summary.\n- Keep a complete approval trail for audit."
+    },
+    {
+     "anchor": "who",
+     "heading": "Who uses it",
+     "markdown": "Stewards, Owners, Custodians, the DPO and the Council approve or reject tasks. Consumers see their own requests. Auditors and Admins see requests and history only."
+    },
+    {
+     "anchor": "how",
+     "heading": "How to use",
+     "markdown": "1. Switch the view at the top: **Assigned to me**, **My requests** or **Completed**.\n2. Filter by type with the chips: Access Request, Change Request, Certification, PII Review, Data Issue, Glossary Approval.\n3. Click a task. The detail shows the workflow stepper, Requested by, Created, Due, Asset, Details and the **AI summary**.\n4. Decide: **Approve**, **Reject** (a comment is required), **Request info** or **Delegate**."
+    },
+    {
+     "anchor": "fields",
+     "heading": "Key fields & metrics",
+     "markdown": "- **Priority**: High, Medium or Low.\n- **Overdue / SLA breached · escalated to Owner**: the due date has passed.\n- **Stepper**: where the task is in its workflow. For example, an access request goes Submitted → Owner → DPO → Granted in Lakehouse, and a data issue goes Reported → Assigned → Root cause → Corrective action → Closed.\n- **Change request diff**: the old definition (red) and the proposed one (green).\n- **Certification gate**: checklist (Owner/Steward, completeness, naming, DQ ≥ threshold, CDE coverage, contract compliant, SLO, PII confirmed). Approval is disabled until every check passes."
+    },
+    {
+     "anchor": "tasks",
+     "heading": "Common tasks",
+     "markdown": "- Approve an access request for a set duration (for example AR-1042 for 90 days).\n- Review a change request to a glossary definition (for example CR-0311 \"Active Customer\").\n- Follow up a data issue such as DI-0207 (billing_monthly late).\n- Confirm PII suggestions from a scan (for example PII-552)."
+    },
+    {
+     "anchor": "tips",
+     "heading": "Tips & FAQ",
+     "markdown": "- **Why is Approve disabled for a certification?** The certification gate has failed checks, or certification needs the Data Owner (CAT-07).\n- Read the AI summary first. It highlights risk, such as sensitive columns or downstream impact.\n- Ask Softnix can summarise your pending approvals (\"Which tasks are overdue?\")."
+    }
+   ]
+  },
+  {
+   "page_id": "observability",
+   "lang": "en",
+   "title": "Data Observability",
+   "nav_label": "Observability",
+   "section": "Govern",
+   "routes": [
+    "/observability"
+   ],
+   "roles_full": [
+    "steward",
+    "owner",
+    "custodian",
+    "admin"
+   ],
+   "roles_view": [
+    "consumer",
+    "council",
+    "auditor"
+   ],
+   "keywords": [
+    "observability",
+    "incident",
+    "anomaly",
+    "MTTD",
+    "schema change",
+    "volume",
+    "distribution",
+    "freshness",
+    "pipeline",
+    "OpenLineage",
+    "dedup",
+    "acknowledge",
+    "alert",
+    "contract violation"
+   ],
+   "related": [
+    "alerts",
+    "quality",
+    "asset-detail",
+    "inbox"
+   ],
+   "prd": "OBS",
+   "summary": "Detect and triage data incidents such as schema, volume, distribution, freshness and pipeline failures, with alert dedup.",
+   "last_updated": "2026-10-24",
+   "version": "1.0.0",
+   "source_file": "help-content/en/observability.md",
+   "sections": [
+    {
+     "anchor": "what",
+     "heading": "What is this page",
+     "markdown": "**Data Observability** shows incidents detected on your data: volume, schema and distribution anomalies, contract checks and pipeline health from OpenLineage RunEvents. Alerts are routed to the Owner or Steward, with duplicates grouped together."
+    },
+    {
+     "anchor": "purpose",
+     "heading": "Purpose & goals",
+     "markdown": "- Detect data problems before consumers notice them (low MTTD).\n- Cut alert noise by grouping duplicate alerts into one incident.\n- Make sure each incident has an owner and becomes a tracked data issue."
+    },
+    {
+     "anchor": "who",
+     "heading": "Who uses it",
+     "markdown": "Stewards, Owners, Custodians (data engineers) and Platform Admins acknowledge incidents. Consumers, the Council and Auditors can view."
+    },
+    {
+     "anchor": "how",
+     "heading": "How to use",
+     "markdown": "1. Read the cards: **Open incidents**, **MTTD · 30 d**, **Alerts deduplicated** and **Pipeline success · 24 h**.\n2. In the **Incident timeline**, filter by type: All, Schema, Volume, Distribution, Pipeline, Freshness.\n3. For each incident, check the time and ID, severity, type, state, title, affected asset, **Routed to**, **Grouped** (how many alerts were merged) and **Detected**.\n4. Click **Acknowledge** on an Open incident to take ownership. EDC creates a Data Issue.\n5. Use the side charts (Volume · WEB_EVENTS, Freshness · billing_monthly, Pipeline health) to confirm the pattern.\n6. Click **Alert settings** to change who gets notified."
+    },
+    {
+     "anchor": "fields",
+     "heading": "Key fields & metrics",
+     "markdown": "- **MTTD**: mean time to detect over 30 days (target ≤ 30 min).\n- **Alerts deduplicated**: for example 142 → 16 means 89% of the noise was removed.\n- **Pipeline success · 24 h**: successful runs out of all runs.\n- **Severity**: Critical, High, Medium, Low. **State**: Open, Acknowledged, Resolved, Muted (inside a maintenance window).\n- **3σ band**: the volume chart warns when a point falls outside the expected range.\n- **PSI**: a distribution-drift measure. Above 0.25 means a significant shift."
+    },
+    {
+     "anchor": "tasks",
+     "heading": "Common tasks",
+     "markdown": "- Triage the Critical and High Open incidents first (for example a pipeline FAIL or a breaking schema change against a contract).\n- Check the contract on the asset's **Contract** tab when a Schema incident appears.\n- Check pipeline p95 duration and the last run in **Pipeline health**."
+    },
+    {
+     "anchor": "tips",
+     "heading": "Tips & FAQ",
+     "markdown": "- Muted incidents happened during a maintenance window. Manage the windows in **Alert Settings**.\n- If an incident has not been acknowledged within 4 hours, it escalates from the Steward to the Owner."
+    }
+   ]
+  },
+  {
+   "page_id": "privacy",
+   "lang": "en",
+   "title": "Privacy & PDPA",
+   "nav_label": "Privacy & PDPA",
+   "section": "Govern",
+   "routes": [
+    "/privacy"
+   ],
+   "roles_full": [
+    "steward",
+    "dpo"
+   ],
+   "roles_view": [
+    "owner",
+    "custodian",
+    "council",
+    "auditor"
+   ],
+   "keywords": [
+    "privacy",
+    "PDPA",
+    "PII",
+    "personal data",
+    "sensitive data",
+    "s.26",
+    "RoPA",
+    "classification",
+    "scan",
+    "review queue",
+    "inventory",
+    "masking",
+    "DPO"
+   ],
+   "related": [
+    "asset-detail",
+    "access",
+    "inbox",
+    "settings"
+   ],
+   "prd": "CLS-02–06, AI-03",
+   "summary": "Discover personal data, confirm it as a steward, and prepare RoPA evidence for PDPA.",
+   "last_updated": "2026-10-24",
+   "version": "1.0.0",
+   "source_file": "help-content/en/privacy.md",
+   "sections": [
+    {
+     "anchor": "what",
+     "heading": "What is this page",
+     "markdown": "**Privacy & PDPA** is where personal data found in the Lakehouse and source systems is reviewed and tracked. Auto-classification (rules, regex, ML and LLM) suggests which columns hold personal data. A steward confirms each suggestion, and the confirmed tags are synced to the Lakehouse for masking and access control."
+    },
+    {
+     "anchor": "purpose",
+     "heading": "Purpose & goals",
+     "markdown": "- Know where personal and sensitive data (PDPA s.26) lives.\n- Make sure nothing is tagged or masked until a human steward confirms it.\n- Produce the Record of Processing Activities (RoPA) input for PDPA s.39."
+    },
+    {
+     "anchor": "who",
+     "heading": "Who uses it",
+     "markdown": "- **Data Steward** and **DPO**: confirm or reject suggestions. The DPO exports RoPA input.\n- **Owner, Custodian, Council, Auditor**: view only."
+    },
+    {
+     "anchor": "how",
+     "heading": "How to use",
+     "markdown": "1. Check the four cards: Columns scanned, PII confirmed by steward, Datasets with personal data (and how many are sensitive under s.26), and Policy sync to Lakehouse.\n2. Open the **Review queue** tab. Use **Confidence ≥ 90%** or **Sensitive only** to focus.\n3. For each row, read the Column, Detected as, Confidence, Method, Evidence, Masked sample and Proposed class. Then click ✓ (accept) or ✕ (reject).\n4. To decide in bulk, tick several rows and click **Accept** or **Reject**.\n5. Open **PII inventory** to see column counts by PII type, and **Processing records** for the RoPA table."
+    },
+    {
+     "anchor": "fields",
+     "heading": "Key fields & metrics",
+     "markdown": "- **Confidence**: green ≥ 90%, amber ≥ 75%.\n- **Method**: Rule, Regex, ML or **LLM**.\n- **Masked sample**: example values, masked, so you can judge without seeing real data.\n- **Proposed class**: the classification the column will receive (for example Restricted).\n- **Policy sync to Lakehouse**: share of tags already applied in the Lakehouse. Tags out of sync are reconciled at 02:00.\n- **Processing records**: Dataset, Purpose, Legal basis, Data subjects, Categories, Retention and Complete %."
+    },
+    {
+     "anchor": "tasks",
+     "heading": "Common tasks",
+     "markdown": "- **Run scan** (Steward, Custodian, DPO, Admin): queue a new auto-classification run.\n- **Export RoPA input** (DPO, Auditor): download the RoPA table as xlsx in Thai.\n- Confirm sensitive columns such as `blood_group` (health data, s.26). These need DPO sign-off."
+    },
+    {
+     "anchor": "tips",
+     "heading": "Tips & FAQ",
+     "markdown": "- Accepted tags are queued for Lakehouse sync. Rejected suggestions will not be suggested again.\n- **Privacy guard for AI**: sample data is not sent to the LLM, PII is masked first, and Restricted assets use the on-prem model only.\n- Fill RoPA rows below 100% (for example WEB_EVENTS at 40%) before an audit."
+    }
+   ]
+  },
+  {
+   "page_id": "quality",
+   "lang": "en",
+   "title": "Data Quality",
+   "nav_label": "Data Quality",
+   "section": "Govern",
+   "routes": [
+    "/quality"
+   ],
+   "roles_full": [
+    "steward",
+    "owner",
+    "custodian"
+   ],
+   "roles_view": [
+    "consumer",
+    "dpo",
+    "council",
+    "auditor",
+    "admin"
+   ],
+   "keywords": [
+    "data quality",
+    "DQ",
+    "rule",
+    "score",
+    "Great Expectations",
+    "GX",
+    "dimension",
+    "threshold",
+    "freshness",
+    "data issue",
+    "CDE"
+   ],
+   "related": [
+    "asset-detail",
+    "observability",
+    "inbox",
+    "dashboard"
+   ],
+   "prd": "DQ",
+   "summary": "Overview of data quality rules, scores and open data issues across datasets.",
+   "last_updated": "2026-10-24",
+   "version": "1.0.0",
+   "source_file": "help-content/en/quality.md",
+   "sections": [
+    {
+     "anchor": "what",
+     "heading": "What is this page",
+     "markdown": "**Data Quality** gives an overview of quality across the catalog. Rules are defined here and run by the Lakehouse DQ engine (Great Expectations + PySpark). Results flow back to EDC through the API or OpenLineage."
+    },
+    {
+     "anchor": "purpose",
+     "heading": "Purpose & goals",
+     "markdown": "- Find the datasets with the lowest scores and fix them first.\n- Make sure critical data has rules and that rule failures become tracked data issues."
+    },
+    {
+     "anchor": "who",
+     "heading": "Who uses it",
+     "markdown": "Stewards, Owners and Custodians create and import rules. Other roles can view."
+    },
+    {
+     "anchor": "how",
+     "heading": "How to use",
+     "markdown": "1. Read the summary cards: **Avg score · Critical**, **Rules** (including AI-suggested rules awaiting review), **Failing rules** and **Freshness SLA breaches**.\n2. In **Datasets by score (lowest first)**, check Score, Trend, Freshness and Open issues.\n3. Click a dataset to open its **Data Quality** tab, which shows rule-level detail.\n4. Follow up items in **Open data issues** (status: Assigned, Root cause, Corrective action, Closed)."
+    },
+    {
+     "anchor": "fields",
+     "heading": "Key fields & metrics",
+     "markdown": "- **Score colours**: green ≥ 95%, amber ≥ 85%, red below 85%.\n- **Dimensions**: Accuracy, Completeness, Validity, Consistency, Uniqueness, Timeliness.\n- **Rule**: column, dimension, GX expectation, severity, threshold and score. A score below its threshold is a failure.\n- **Freshness SLA breach**: data later than allowed. EDC creates a Data Issue automatically."
+    },
+    {
+     "anchor": "tasks",
+     "heading": "Common tasks",
+     "markdown": "- **New rule**: choose the dataset, column, dimension, expectation, severity, threshold and what happens on fail. New rules wait for their first GX run.\n- **Import GX suites**: upload a Great Expectations suite (.json).\n- Review AI-suggested rules on an asset's Data Quality tab and click **Add to suite**."
+    },
+    {
+     "anchor": "tips",
+     "heading": "Tips & FAQ",
+     "markdown": "- Rules on CDE columns count double in the DQ score.\n- A certified asset is decertified automatically after 3 consecutive runs below threshold.\n- For live anomalies (volume, schema, pipeline failures) use **Observability**."
+    }
+   ]
+  },
+  {
+   "page_id": "roles",
+   "lang": "en",
+   "title": "Roles & Permissions",
+   "nav_label": "Roles & Permissions",
+   "section": "Administration",
+   "routes": [
+    "/roles"
+   ],
+   "roles_full": [
+    "admin"
+   ],
+   "roles_view": [
+    "consumer",
+    "steward",
+    "owner",
+    "custodian",
+    "dpo",
+    "council",
+    "auditor"
+   ],
+   "keywords": [
+    "roles",
+    "permissions",
+    "RBAC",
+    "ABAC",
+    "matrix",
+    "switch role",
+    "users",
+    "invite",
+    "IdP group",
+    "Keycloak",
+    "DAMA",
+    "reset demo data"
+   ],
+   "related": [
+    "getting-started",
+    "settings",
+    "audit",
+    "access"
+   ],
+   "prd": "§3, NFR-01",
+   "summary": "Which role can see and do what in EDC, plus users and identity-provider group mapping.",
+   "last_updated": "2026-10-24",
+   "version": "1.0.0",
+   "source_file": "help-content/en/roles.md",
+   "sections": [
+    {
+     "anchor": "what",
+     "heading": "What is this page",
+     "markdown": "**Roles & Permissions** shows the access design from PRD v1.1 §3 (DAMA-DMBOK2 roles): RBAC with domain scope. A single matrix drives every menu, page and button in EDC1. It has three tabs: **Permission matrix**, **Roles** and **Users & groups**."
+    },
+    {
+     "anchor": "purpose",
+     "heading": "Purpose & goals",
+     "markdown": "- Make clear what each role can see and do.\n- Manage users and map identity-provider groups to roles."
+    },
+    {
+     "anchor": "who",
+     "heading": "Who uses it",
+     "markdown": "All roles can view it. Only the **Platform Admin** can invite users and map groups."
+    },
+    {
+     "anchor": "how",
+     "heading": "How to use",
+     "markdown": "1. **Permission matrix**: show All, Pages or Actions. Each cell is full (use & change), view (read only) or none (hidden / locked). Your current role's column is highlighted. Click a role header to switch to that role.\n2. **Roles**: one card per role with its duty, EDC rights, counts of full and view functions, and a demo persona. Use **Switch to this role**.\n3. **Users & groups**: see users with their roles, domain scope, how they were assigned and their status. Use **Invite user**, and add **IdP group → role mapping**.\n4. **Reset demo data** clears records created through the demo forms."
+    },
+    {
+     "anchor": "fields",
+     "heading": "Key fields & metrics",
+     "markdown": "- **Roles**: Data Consumer, Data Steward, Data Owner, Data Custodian / Engineer, DPO / Privacy Officer, Data Governance Council, Auditor, Platform Admin.\n- **Domain scope**: Owner and Steward rights apply only within their assigned domains.\n- **ABAC**: Restricted or PII data adds rules based on classification."
+    },
+    {
+     "anchor": "tasks",
+     "heading": "Common tasks",
+     "markdown": "- Check why someone cannot see a page: find the page row and the person's role column.\n- Onboard a new steward: invite the user, or map their IdP group to Data Steward for a domain."
+    },
+    {
+     "anchor": "tips",
+     "heading": "Tips & FAQ",
+     "markdown": "- Sign-in uses OIDC via Keycloak. EDC stores no passwords.\n- Your demo role choice is saved in this browser (`edc1.role`)."
+    }
+   ]
+  },
+  {
+   "page_id": "search",
+   "lang": "en",
+   "title": "Search",
+   "nav_label": "Search",
+   "section": "Discover",
+   "routes": [
+    "/search"
+   ],
+   "roles_full": [
+    "consumer",
+    "steward",
+    "owner",
+    "custodian",
+    "dpo",
+    "council",
+    "auditor",
+    "admin"
+   ],
+   "roles_view": [],
+   "keywords": [
+    "search",
+    "find data",
+    "filter",
+    "facet",
+    "certified",
+    "classification",
+    "PII",
+    "domain",
+    "layer",
+    "saved search",
+    "export",
+    "Thai search"
+   ],
+   "related": [
+    "asset-detail",
+    "glossary",
+    "domains",
+    "home"
+   ],
+   "prd": "SRC-01–04, AI-01",
+   "summary": "Find tables, columns, reports and glossary terms in Thai or English, then narrow the results with filters.",
+   "last_updated": "2026-10-24",
+   "version": "1.0.0",
+   "source_file": "help-content/en/search.md",
+   "sections": [
+    {
+     "anchor": "what",
+     "heading": "What is this page",
+     "markdown": "**Search** lists every catalogued asset (tables, views, reports, models and more) that matches your words. You can search by name, description, column, glossary term or tag, in Thai or English. Filters on the left narrow the results."
+    },
+    {
+     "anchor": "purpose",
+     "heading": "Purpose & goals",
+     "markdown": "- Find the right dataset quickly and pick the trusted version.\n- Compare candidates by certification, owner, classification, data quality and freshness before you use them."
+    },
+    {
+     "anchor": "who",
+     "heading": "Who uses it",
+     "markdown": "All roles. Data Consumers and analysts use it most. Stewards use it to find gaps, such as assets missing an owner."
+    },
+    {
+     "anchor": "how",
+     "heading": "How to use",
+     "markdown": "1. Type in the search box and press **Enter**. Thai words are segmented automatically.\n2. Narrow results with **Filters**: Asset type, Domain, Certification, Classification, Personal data (PDPA), Layer and Source system. The number next to each value shows how many results it has.\n3. Use **Quick filters**: **Missing owner** or **Fresh (within SLA)**.\n4. Change **Sort**: Relevance (certified and popular first), Rating or Data quality. Switch between list and grid view.\n5. Click a result card to open the asset page.\n6. Not sure what to type? Click **Ask in natural language** to ask Ask Softnix."
+    },
+    {
+     "anchor": "fields",
+     "heading": "Key fields & metrics",
+     "markdown": "Each result card shows:\n\n- **Business name** and technical name, with the full path (for example `lakehouse.gold.customer_360`).\n- Badges: **Certified**, **Authoritative**, **Critical**, **PII / Sensitive** and **AI draft metadata**.\n- **Domain**, **Owner** (red \"Unassigned\" if missing), **Classification**, **DQ %**, **Updated** (red if outside the freshness SLA) and **rating**.\n- The AI hint above the results suggests a matching glossary term and the authoritative source. It also tells you how many restricted assets are hidden by your permissions."
+    },
+    {
+     "anchor": "tasks",
+     "heading": "Common tasks",
+     "markdown": "- **Save search**: keep a query and its filters in \"My saved searches\".\n- **Export**: download the result list to Excel.\n- Remove a filter by clicking × on its chip, or click **Clear all**."
+    },
+    {
+     "anchor": "tips",
+     "heading": "Tips & FAQ",
+     "markdown": "- **Why don't I see a table I know exists?** It may be Restricted and hidden by your permissions. Ask the Owner or request access.\n- Prefer assets that are **Certified** and **Authoritative**. They have an owner, a description and confirmed classification.\n- \"No description yet — Steward action needed\" means the asset is not yet documented."
+    }
+   ]
+  },
+  {
+   "page_id": "settings",
+   "lang": "en",
+   "title": "Settings",
+   "nav_label": "Settings",
+   "section": "Administration",
+   "routes": [
+    "/settings"
+   ],
+   "roles_full": [
+    "admin"
+   ],
+   "roles_view": [
+    "custodian",
+    "auditor"
+   ],
+   "keywords": [
+    "settings",
+    "AI provider",
+    "model",
+    "guardrails",
+    "Ask Softnix",
+    "MCP server",
+    "metamodel",
+    "custom attribute",
+    "language",
+    "calendar",
+    "identity provider",
+    "Keycloak"
+   ],
+   "related": [
+    "roles",
+    "audit",
+    "sources",
+    "privacy"
+   ],
+   "prd": "AI-09/10, MCP, CAT-03",
+   "summary": "Platform configuration for AI models and guardrails, the MCP server, the metamodel and general options, without redeploying.",
+   "last_updated": "2026-10-24",
+   "version": "1.0.0",
+   "source_file": "help-content/en/settings.md",
+   "sections": [
+    {
+     "anchor": "what",
+     "heading": "What is this page",
+     "markdown": "**Settings** configures EDC without redeploying it. It has four tabs: **AI & Ask Softnix**, **MCP server**, **Metamodel** and **General**."
+    },
+    {
+     "anchor": "purpose",
+     "heading": "Purpose & goals",
+     "markdown": "- Control which AI models are used and how data is protected when AI is used.\n- Let external AI tools use the catalog safely through MCP.\n- Extend the metadata captured for each asset type."
+    },
+    {
+     "anchor": "who",
+     "heading": "Who uses it",
+     "markdown": "Only the **Platform Admin** can change settings. Custodians and Auditors can view."
+    },
+    {
+     "anchor": "how",
+     "heading": "How to use",
+     "markdown": "1. **AI & Ask Softnix**: see the **Model providers** for each feature (all hosted on-prem) and set the **Guardrails**: sending sample data to the LLM, masking PII before sending, on-prem only for Restricted assets, action mode (save with confirmation), voice, chat history. The token quota is shown below.\n2. **MCP server**: see the endpoint, transport, auth (OAuth 2.1 via Keycloak), write tools (proposals only), rate limit, allowed clients and available tools.\n3. **Metamodel**: list the custom attributes by asset type. Click **New attribute** to add one.\n4. **General**: default language, calendar (ค.ศ. / พ.ศ.), identity provider and tenants."
+    },
+    {
+     "anchor": "fields",
+     "heading": "Key fields & metrics",
+     "markdown": "- **Guardrails** decide what AI can see and do. Defaults: no sample data sent, PII masked, Restricted on-prem only.\n- **Write tools: Proposals only → workflow**: MCP clients cannot change metadata directly. Their changes become tasks.\n- **Required** on an attribute: for example Critical, Yes, or \"If PII\"."
+    },
+    {
+     "anchor": "tasks",
+     "heading": "Common tasks",
+     "markdown": "- Add a \"Cost center\" style attribute for data products.\n- Allow a new MCP client after a security review."
+    },
+    {
+     "anchor": "tips",
+     "heading": "Tips & FAQ",
+     "markdown": "- Every settings change is recorded in the **Audit Trail**.\n- Locked checkboxes mean your role can only view settings."
+    }
+   ]
+  },
+  {
+   "page_id": "sources",
+   "lang": "en",
+   "title": "Sources & Harvest",
+   "nav_label": "Sources & Harvest",
+   "section": "Administration",
+   "routes": [
+    "/sources"
+   ],
+   "roles_full": [
+    "custodian",
+    "admin"
+   ],
+   "roles_view": [
+    "steward",
+    "auditor"
+   ],
+   "keywords": [
+    "source",
+    "connector",
+    "harvest",
+    "metadata",
+    "Iceberg",
+    "Oracle",
+    "Snowflake",
+    "Power BI",
+    "OpenLineage",
+    "Trino",
+    "profiling",
+    "remote agent",
+    "schedule",
+    "test connection"
+   ],
+   "related": [
+    "home",
+    "privacy",
+    "asset-detail",
+    "settings"
+   ],
+   "prd": "HRV",
+   "summary": "Connect source systems and run metadata harvests on a schedule. No data is copied.",
+   "last_updated": "2026-10-24",
+   "version": "1.0.0",
+   "source_file": "help-content/en/sources.md",
+   "sections": [
+    {
+     "anchor": "what",
+     "heading": "What is this page",
+     "markdown": "**Sources & Harvest** lists the connectors that read metadata from the Lakehouse, databases, cloud platforms, storage, BI tools, and APIs and files. Connectors read **metadata only**. Credentials are kept in the secret store, and the Lakehouse remains the system of record."
+    },
+    {
+     "anchor": "purpose",
+     "heading": "Purpose & goals",
+     "markdown": "- Keep the catalog complete and up to date automatically.\n- Spot failed or partial harvests quickly so catalog information is not stale."
+    },
+    {
+     "anchor": "who",
+     "heading": "Who uses it",
+     "markdown": "Custodians / Data Engineers and Platform Admins add and run sources. Stewards and Auditors can view."
+    },
+    {
+     "anchor": "how",
+     "heading": "How to use",
+     "markdown": "1. Read the cards: Sources, Assets harvested, Schema changes (24h) and Failed sources.\n2. Filter by group: All, Lakehouse, Databases, Cloud platforms, Storage, BI, API & files.\n3. Click a row to open its detail: Connection, Credential (vault reference), Include / Exclude patterns, Profiling and Recent runs.\n4. Click **Run** to harvest now, **Test connection** to check access, or **Configure** to edit.\n5. Click **Add source** to start the 7-step wizard: Source type → Connection → Credentials & test → Scope → Schedule → Governance & PII → Review & create."
+    },
+    {
+     "anchor": "fields",
+     "heading": "Key fields & metrics",
+     "markdown": "- **Status**: Healthy, Warning, Failed, Running, Queued.\n- **Last run**: when the last harvest ran and what happened (for example \"3 tables skipped (permission)\" or \"ORA-12170 connect timeout\").\n- **Schedule**: for example every 1 h plus DDL events, daily 23:00, or push in real time.\n- **lineage** badge: the source also sends lineage. **remote agent**: harvested through an on-prem agent."
+    },
+    {
+     "anchor": "tasks",
+     "heading": "Common tasks",
+     "markdown": "- Fix a failed source: read the error in Recent runs, run **Test connection**, and check the agent's egress.\n- Add a new database and assign its domain, Owner and Steward, plus a PII scan, in the wizard."
+    },
+    {
+     "anchor": "tips",
+     "heading": "Tips & FAQ",
+     "markdown": "- Profiling samples rows (for example 100k) on a low-priority resource group and stores no values.\n- **Remote agents** (top right) show which on-prem agents are online."
+    }
+   ]
+  },
+  {
+   "page_id": "access",
+   "lang": "th",
+   "title": "นโยบายและสิทธิ์",
+   "nav_label": "นโยบายและสิทธิ์",
+   "section": "ธรรมาภิบาล",
+   "routes": [
+    "/access"
+   ],
+   "roles_full": [
+    "steward",
+    "owner",
+    "dpo",
+    "council",
+    "admin"
+   ],
+   "roles_view": [
+    "consumer",
+    "custodian",
+    "auditor"
+   ],
+   "keywords": [
+    "นโยบาย",
+    "สิทธิ์",
+    "ชั้นความลับ",
+    "classification scheme",
+    "Public",
+    "Internal",
+    "Confidential",
+    "Restricted",
+    "ทบทวนสิทธิ์",
+    "access review",
+    "mask",
+    "ระยะเวลาเก็บ",
+    "Lakehouse tag",
+    "grant"
+   ],
+   "related": [
+    "privacy",
+    "asset-detail",
+    "audit",
+    "roles"
+   ],
+   "prd": "ACC, CLS-01",
+   "summary": "ทะเบียนนโยบายข้อมูล โครงสร้างชั้นความลับ และรอบการทบทวนสิทธิ์การเข้าถึง",
+   "last_updated": "2026-10-24",
+   "version": "1.0.0",
+   "source_file": "help-content/th/access.md",
+   "sections": [
+    {
+     "anchor": "what",
+     "heading": "หน้านี้คืออะไร",
+     "markdown": "หน้า **นโยบายและสิทธิ์ (Policies & Access)** รวบรวมนโยบายข้อมูล ชั้นความลับ 4 ระดับ และรอบการทบทวนสิทธิ์ EDC เป็นที่บันทึกกติกา ส่วนการบังคับใช้จริงเกิดที่ Lakehouse ผ่านการ sync แท็กและสิทธิ์ (grant)"
+    },
+    {
+     "anchor": "purpose",
+     "heading": "วัตถุประสงค์และเป้าหมาย",
+     "markdown": "- มีชุดนโยบายข้อมูลชุดเดียวที่อนุมัติแล้วและมีเวอร์ชันชัดเจน\n- ใช้ชั้นความลับมาตรฐานเดียวกันทั้งองค์กร\n- ทบทวนอย่างสม่ำเสมอว่าใครยังจำเป็นต้องเข้าถึงข้อมูลอ่อนไหวอยู่"
+    },
+    {
+     "anchor": "who",
+     "heading": "ใครใช้หน้านี้",
+     "markdown": "- **DPO** และ **คณะกรรมการ**: ร่างนโยบาย โดยมีเพียง **คณะกรรมการ** ที่อนุมัตินโยบายและโครงสร้างชั้นความลับได้\n- **Owner, DPO, คณะกรรมการ**: เปิดรอบทบทวนสิทธิ์\n- บทบาทอื่นดูได้อย่างเดียว"
+    },
+    {
+     "anchor": "how",
+     "heading": "วิธีใช้งาน",
+     "markdown": "1. แท็บ **Policy register**: ดูเวอร์ชัน สถานะ วันที่มีผล ขอบเขตที่ใช้ และวิธีบังคับใช้ใน Lakehouse ของแต่ละนโยบาย นโยบายที่เป็น Candidate จะมีปุ่ม **Approve** ให้คณะกรรมการ\n2. แท็บ **Classification scheme**: อ่านความหมายของแต่ละชั้นความลับและแท็กใน Lakehouse คณะกรรมการกด **Propose change** เพื่อเสนอแก้ไขได้\n3. แท็บ **Access reviews**: ติดตามรอบทบทวนตามขอบเขต ผู้ทบทวน ความคืบหน้า และกำหนดส่ง\n4. กด **New policy** หรือ **New access review** ที่มุมขวาบนเพื่อสร้างรายการใหม่"
+    },
+    {
+     "anchor": "fields",
+     "heading": "ฟิลด์และตัวชี้วัดสำคัญ",
+     "markdown": "- **Public (ระดับ 1)**: เผยแพร่นอกองค์กรได้\n- **Internal (ระดับ 2)**: ค่าเริ่มต้นของข้อมูลธุรกิจ ใช้ได้เฉพาะพนักงาน\n- **Confidential (ระดับ 3)**: ข้อมูลธุรกิจที่อ่อนไหวหรือข้อมูลส่วนบุคคล ให้เข้าถึงเท่าที่จำเป็น\n- **Restricted (ระดับ 4)**: เลขประจำตัวประชาชน บัญชีการเงิน และข้อมูลตาม PDPA มาตรา 26 ต้องให้ DPO อนุมัติ\n- **Lakehouse enforcement**: เช่น แท็ก `cls_*`, นโยบาย mask ตามแท็ก, สิทธิ์แบบมีวันหมดอายุ"
+    },
+    {
+     "anchor": "tasks",
+     "heading": "งานที่ทำบ่อย",
+     "markdown": "- คณะกรรมการอนุมัติ POL-09 Data Retention ที่อยู่ในสถานะ Candidate\n- เปิดรอบทบทวนสิทธิ์ข้อมูล Restricted รายไตรมาส"
+    },
+    {
+     "anchor": "tips",
+     "heading": "เคล็ดลับและคำถามที่พบบ่อย",
+     "markdown": "- นโยบายใหม่ต้องผ่านการอนุมัติของคณะกรรมการธรรมาภิบาลข้อมูลก่อนจึงจะบังคับใช้\n- ถ้าต้องการดูนโยบายที่ใช้กับชุดข้อมูลใดชุดหนึ่ง ให้เปิดแท็บ **สิทธิ์การเข้าถึง** ของชุดข้อมูลนั้น"
+    }
+   ]
+  },
+  {
+   "page_id": "alerts",
+   "lang": "th",
+   "title": "ตั้งค่าการแจ้งเตือน",
+   "nav_label": "ตั้งค่าการแจ้งเตือน",
+   "section": "ธรรมาภิบาล",
+   "routes": [
+    "/alerts"
+   ],
+   "roles_full": [
+    "steward",
+    "owner",
+    "custodian",
+    "admin"
+   ],
+   "roles_view": [
+    "auditor"
+   ],
+   "keywords": [
+    "แจ้งเตือน",
+    "alert",
+    "กฎการส่งต่อ",
+    "routing",
+    "ช่องทาง",
+    "ความรุนแรง",
+    "dedup",
+    "รวมการแจ้งเตือน",
+    "maintenance window",
+    "ปิดเสียง",
+    "escalation",
+    "on-call"
+   ],
+   "related": [
+    "observability",
+    "quality",
+    "inbox"
+   ],
+   "prd": "OBS-04",
+   "summary": "กำหนดว่าใครได้รับการแจ้งเตือน ผ่านช่องทางไหน ที่ความรุนแรงระดับใด รวมรายการซ้ำอย่างไร และปิดเสียงช่วงปิดปรับปรุง",
+   "last_updated": "2026-10-24",
+   "version": "1.0.0",
+   "source_file": "help-content/th/alerts.md",
+   "sections": [
+    {
+     "anchor": "what",
+     "heading": "หน้านี้คืออะไร",
+     "markdown": "หน้า **ตั้งค่าการแจ้งเตือน (Alert Settings)** ใช้กำหนดว่าการแจ้งเตือนจาก observability และคุณภาพข้อมูลจะไปถึงใคร ได้แก่ กฎการส่งต่อ ช่องทาง ระดับความรุนแรง การรวมรายการซ้ำ ช่วงปิดปรับปรุง และการส่งต่อขั้นถัดไป (escalation)"
+    },
+    {
+     "anchor": "purpose",
+     "heading": "วัตถุประสงค์และเป้าหมาย",
+     "markdown": "- ส่งการแจ้งเตือนถึงคนที่ใช่ ผ่านช่องทางที่เหมาะสม\n- ลดการแจ้งเตือนที่มากเกินไป ด้วยการรวมรายการซ้ำ ส่งเป็นสรุป และปิดเสียงช่วงปิดปรับปรุง\n- ไม่ให้มีเรื่องหลุด ด้วยการส่งต่อขั้นถัดไปและเวร on-call"
+    },
+    {
+     "anchor": "who",
+     "heading": "ใครใช้หน้านี้",
+     "markdown": "Steward, Owner, Custodian และผู้ดูแลระบบจัดการกฎได้ แต่เฉพาะ Custodian และผู้ดูแลระบบเท่านั้นที่เพิ่มช่วงปิดปรับปรุงได้ ส่วนผู้ตรวจสอบดูได้อย่างเดียว"
+    },
+    {
+     "anchor": "how",
+     "heading": "วิธีใช้งาน",
+     "markdown": "1. ดูตาราง **Routing rules**: ID, Scope, Trigger, Severity, Route to, Channels, Dedup / grouping และ Enabled\n2. เปิดหรือปิดกฎด้วยช่องติ๊ก **Enabled**\n3. กด **New alert rule** เพื่อเพิ่มกฎ (ขอบเขต เงื่อนไข ความรุนแรง ผู้รับ ช่องทาง และการรวมรายการซ้ำ)\n4. ที่ **Maintenance windows (mute)** กด **Add** เพื่อปิดการแจ้งเตือนของขอบเขตที่กำหนดในช่วงที่มีงานตามแผน\n5. ดู **Escalation & on-call** เพื่อดูเส้นทางเริ่มต้น ผู้เข้าเวรสัปดาห์นี้ และการจับคู่ความรุนแรงกับช่องทาง"
+    },
+    {
+     "anchor": "fields",
+     "heading": "ฟิลด์และตัวชี้วัดสำคัญ",
+     "markdown": "- **Trigger (เงื่อนไข)**: เช่น contract ถูกละเมิดแบบ breaking, pipeline รัน FAIL, คะแนน DQ ต่ำกว่าเกณฑ์, ปริมาณผิดปกติ (> 3σ), การกระจายตัวเปลี่ยน (PSI > 0.25)\n- **Dedup / grouping**: เช่น \"1 per asset / 6 h\" (1 ครั้งต่อชุดข้อมูลทุก 6 ชั่วโมง) หรือส่งเป็น Digest\n- **Severity map**: Critical → page · High → แชต + อีเมล · Medium → อีเมล · Low → สรุปรายวัน\n- **Auto Data Issue**: การแจ้งเตือนระดับ High และ Critical จะสร้าง Data Issue ให้อัตโนมัติ (DQ-05)"
+    },
+    {
+     "anchor": "tasks",
+     "heading": "งานที่ทำบ่อย",
+     "markdown": "- ตั้งให้การละเมิด contract ของโดเมนใหม่ส่งถึง Steward ของโดเมน และส่งต่อให้ Owner ถ้าไม่มีคนรับเรื่อง\n- เพิ่มช่วงปิดปรับปรุงเพื่อปิดการแจ้งเตือนระหว่างอัปเกรด ERP"
+    },
+    {
+     "anchor": "tips",
+     "heading": "เคล็ดลับและคำถามที่พบบ่อย",
+     "markdown": "- เส้นทางเริ่มต้นคือ Steward ของชุดข้อมูล แล้วส่งต่อให้ Owner ถ้าไม่มีคนรับเรื่องภายใน 4 ชั่วโมง\n- ใช้แบบสรุป (digest) กับการแจ้งเตือนระดับ Medium และ Low เพื่อไม่ให้ช่องทางแจ้งเตือนรกเกินไป"
+    }
+   ]
+  },
+  {
+   "page_id": "asset-detail",
+   "lang": "th",
+   "title": "รายละเอียดชุดข้อมูล",
+   "nav_label": "รายละเอียดชุดข้อมูล",
+   "section": "ค้นหาข้อมูล",
+   "routes": [
+    "/asset/:id"
+   ],
+   "roles_full": [
+    "consumer",
+    "steward",
+    "owner",
+    "custodian",
+    "dpo",
+    "council",
+    "admin"
+   ],
+   "roles_view": [
+    "auditor"
+   ],
+   "keywords": [
+    "ชุดข้อมูล",
+    "ตาราง",
+    "asset",
+    "คอลัมน์",
+    "lineage",
+    "ผลกระทบ",
+    "contract",
+    "สัญญาข้อมูล",
+    "คุณภาพข้อมูล",
+    "สิทธิ์",
+    "ขอสิทธิ์",
+    "แจ้งปัญหา",
+    "ติดตาม",
+    "พูดคุย",
+    "การรับรอง",
+    "profiling"
+   ],
+   "related": [
+    "search",
+    "glossary",
+    "quality",
+    "observability",
+    "inbox",
+    "privacy"
+   ],
+   "prd": "CAT, CLS, LIN, CTR, DQ, ACC, AUD",
+   "summary": "ข้อมูลครบทุกด้านของชุดข้อมูลหรือรายงานหนึ่งชุด ตั้งแต่ความหมาย คอลัมน์ lineage contract คุณภาพ สิทธิ์ ไปจนถึงประวัติ",
+   "last_updated": "2026-10-24",
+   "version": "1.0.0",
+   "source_file": "help-content/th/asset-detail.md",
+   "sections": [
+    {
+     "anchor": "what",
+     "heading": "หน้านี้คืออะไร",
+     "markdown": "หน้า **รายละเอียดชุดข้อมูล** รวมทุกอย่างที่ EDC รู้เกี่ยวกับชุดข้อมูลหนึ่งชุด เช่น `lakehouse.gold.customer_360` ส่วนหัวแสดงชื่อเชิงธุรกิจ ป้ายสถานะ (Certified, Authoritative source, Critical, PII) path ประเภท โดเมน และชั้นความลับ พร้อม **Rating**, **Data quality**, **Freshness** และ **Rows** ส่วนรายละเอียดอยู่ในแท็บด้านล่าง"
+    },
+    {
+     "anchor": "purpose",
+     "heading": "วัตถุประสงค์และเป้าหมาย",
+     "markdown": "- ช่วยตัดสินใจว่าข้อมูลชุดนี้เหมาะกับงานของคุณและเชื่อถือได้หรือไม่\n- รู้ว่าควรติดต่อใคร (Owner, Steward, Custodian, DPO) และนำข้อมูลไปใช้ทำอะไรได้บ้าง\n- เห็นผลกระทบทั้งต้นทางและปลายทางก่อนเปลี่ยนแปลงอะไร"
+    },
+    {
+     "anchor": "who",
+     "heading": "ใครใช้หน้านี้",
+     "markdown": "ทุกคนที่ทำงานกับข้อมูล ผู้ใช้ข้อมูลเปิดอ่านและขอสิทธิ์ Steward และ Owner แก้ไข metadata เชิงธุรกิจและรับรองข้อมูล Custodian ตรวจ lineage และ contract ส่วนผู้ตรวจสอบดูได้อย่างเดียว"
+    },
+    {
+     "anchor": "how",
+     "heading": "วิธีใช้งาน",
+     "markdown": "1. **ภาพรวม (Overview)**: อ่านคำอธิบาย คำศัพท์และแท็กที่ผูกไว้ คุณลักษณะเชิงธุรกิจ (วัตถุประสงค์, ความถี่อัปเดต, SLA ความสดใหม่, ระยะเวลาเก็บ, ฐานทางกฎหมาย) metadata เชิงเทคนิค ผู้เกี่ยวข้อง สรุป DQ และ **Certification readiness**\n2. **คอลัมน์ (Columns)**: กรองแบบ All, PII, CDE หรือ Undocumented แล้วคลิกคอลัมน์เพื่อเปิดแผงรายละเอียด ซึ่งแสดงชนิดข้อมูล คำศัพท์ ชั้นความลับ สถานะ PII และ profile (null % / distinct %)\n3. **สายข้อมูล (Lineage)**: ดูแหล่งต้นทางและผู้ใช้ปลายทาง ใช้วิเคราะห์ผลกระทบ (impact analysis)\n4. **สัญญาข้อมูล (Contract)**: เทียบ schema ที่ตกลงไว้ใน data contract (ODCS) กับ schema จริงที่ดึงมา การเปลี่ยนแปลงแบบ breaking จะขึ้นสีแดง และดูสถานะ SLA/SLO กับผู้ใช้ที่ได้รับผลกระทบได้\n5. **คุณภาพข้อมูล (Data Quality)**: ดูคะแนนแยกตามมิติ แนวโน้มคะแนน กฎ และกฎที่ AI แนะนำ\n6. **สิทธิ์การเข้าถึง (Access)**: ดูว่าใครมีสิทธิ์ คอลัมน์ไหนถูก mask สิทธิ์ของคุณเอง และนโยบายที่ใช้กับชุดข้อมูลนี้\n7. **ประวัติ (History)**: ดู audit trail และเวอร์ชันของ schema"
+    },
+    {
+     "anchor": "fields",
+     "heading": "ฟิลด์และตัวชี้วัดสำคัญ",
+     "markdown": "- **Certification readiness**: มี Owner, มี Steward, มีคำอธิบาย, มีชั้นความลับ, ผูกคำศัพท์แล้ว และยืนยัน PII แล้ว ชุดข้อมูลสำคัญต้องผ่านครบทุกข้อก่อน Owner จะรับรองได้ (CDMC C2)\n- **CDE**: Critical Data Element คือคอลัมน์สำคัญที่ใช้กฎคุณภาพเข้มกว่าปกติ\n- **ป้าย PII ที่มี \"?\"**: ระบบจัดประเภทอัตโนมัติเสนอไว้ และยังรอ Steward ยืนยัน\n- **สถานะ Contract**: Compliant หรือ **Violated** ถ้ามี breaking change ระบบจะกักการเผยแพร่ไปชั้น Gold ไว้ก่อน (quarantine)\n- **Freshness SLA**: อายุข้อมูลสูงสุดที่ยอมรับได้ เช่น ไม่เกิน 26 ชั่วโมง"
+    },
+    {
+     "anchor": "tasks",
+     "heading": "งานที่ทำบ่อย",
+     "markdown": "- **ขอสิทธิ์ (Request access)**: ระบุวัตถุประสงค์ (บังคับ) สิทธิ์ ระยะเวลา (30/90/180 วัน) และคอลัมน์ ถ้าเลือกคอลัมน์ PII จะมีขั้นตอน DPO เพิ่ม: ส่งคำขอ → Data Owner → DPO (PII) → ให้สิทธิ์ใน Lakehouse\n- **แจ้งปัญหา (Report issue)**: ระบุหัวข้อ มิติคุณภาพ ความรุนแรง และรายละเอียด ระบบจะส่งเรื่องให้ Steward อัตโนมัติ\n- **ติดตาม (Follow)** เพื่อรับแจ้งเตือนเมื่อมีการเปลี่ยนแปลง และใช้ **พูดคุย (Discussion)** เพื่อถาม ให้คะแนน หรือตอบกลับ\n- **Explain with AI**: ให้ Softnix อธิบายตารางนี้ในภาษาธุรกิจ\n- สำหรับ Steward: **Edit** หรือ **Regenerate** คำอธิบาย, ยอมรับหรือปฏิเสธร่างจาก AI, ยืนยันหรือปฏิเสธ PII ที่ระบบเสนอ\n- **เปิดใน SQL editor**: เปิดตารางใน Lakehouse (Trino)"
+    },
+    {
+     "anchor": "tips",
+     "heading": "เคล็ดลับและคำถามที่พบบ่อย",
+     "markdown": "- ข้อความ **\"You can see metadata but not query data\"** แปลว่าคุณดู metadata ได้ แต่ต้องขอสิทธิ์ก่อนจึงจะ query ข้อมูลได้\n- คอลัมน์ PII ที่ไม่ได้เลือกตอนขอสิทธิ์จะยังถูก mask อยู่ แม้คำขอจะได้รับอนุมัติแล้ว\n- สิทธิ์มีวันหมดอายุ และระบบจะเพิกถอนให้อัตโนมัติเมื่อครบกำหนด\n- การแก้ไขที่ใช้ AI ช่วยจะถูกบันทึกใน audit trail ว่าเป็น AI-assisted"
+    }
+   ]
+  },
+  {
+   "page_id": "audit",
+   "lang": "th",
+   "title": "ประวัติการตรวจสอบ",
+   "nav_label": "ประวัติการตรวจสอบ",
+   "section": "ผู้ดูแลระบบ",
+   "routes": [
+    "/audit"
+   ],
+   "roles_full": [
+    "auditor",
+    "admin"
+   ],
+   "roles_view": [
+    "steward",
+    "owner",
+    "custodian",
+    "dpo",
+    "council"
+   ],
+   "keywords": [
+    "ประวัติการตรวจสอบ",
+    "audit trail",
+    "log",
+    "hash chain",
+    "ประวัติการอนุมัติ",
+    "AI-assisted",
+    "MCP",
+    "export",
+    "compliance",
+    "หลักฐาน"
+   ],
+   "related": [
+    "access",
+    "settings",
+    "roles",
+    "inbox"
+   ],
+   "prd": "AUD, ASK-12, MCP-05",
+   "summary": "บันทึกแบบเพิ่มต่ออย่างเดียวและตรวจจับการแก้ไขได้ ของทุกการเปลี่ยน metadata การอนุมัติ การกระทำของ AI และการเรียก MCP",
+   "last_updated": "2026-10-24",
+   "version": "1.0.0",
+   "source_file": "help-content/th/audit.md",
+   "sections": [
+    {
+     "anchor": "what",
+     "heading": "หน้านี้คืออะไร",
+     "markdown": "**ประวัติการตรวจสอบ (Audit Trail)** เป็นบันทึกแบบเพิ่มต่ออย่างเดียว (append-only) ที่ร้อยต่อกันด้วย hash ครอบคลุมการเปลี่ยน metadata การอนุมัติ การกระทำของ AI และการเรียก MCP tool เก็บไว้ 5 ปี ป้าย **Chain verified** ยืนยันว่าไม่มีรายการใดถูกแก้ไข"
+    },
+    {
+     "anchor": "purpose",
+     "heading": "วัตถุประสงค์และเป้าหมาย",
+     "markdown": "- ตอบได้ว่าใครเปลี่ยนอะไร เมื่อไร จากค่าอะไรเป็นค่าอะไร และผ่านช่องทางไหน\n- เป็นหลักฐานสำหรับผู้ตรวจสอบภายใน PDPA และหน่วยงานกำกับ"
+    },
+    {
+     "anchor": "who",
+     "heading": "ใครใช้หน้านี้",
+     "markdown": "ผู้ตรวจสอบและผู้ดูแลระบบ (ใช้ได้เต็มที่ รวมถึง export) DPO ก็ export ได้ ส่วน Steward, Owner, Custodian และคณะกรรมการดูได้อย่างเดียว"
+    },
+    {
+     "anchor": "how",
+     "heading": "วิธีใช้งาน",
+     "markdown": "1. พิมพ์กรองตามผู้ใช้ ชุดข้อมูล หรือการกระทำในช่องค้นหา\n2. เลือกประเภท: All actions, Approvals, Classification changes, AI-assisted, MCP calls และเลือกช่วงเวลา: Last 7 days หรือ Last 30 days\n3. อ่านแต่ละแถว: Time, Actor, Action, Target, Old → New, Channel และ Hash\n4. กด **Export for auditor** เพื่อรับไฟล์ที่ลงนามแล้ว (CSV + hash manifest)"
+    },
+    {
+     "anchor": "fields",
+     "heading": "ฟิลด์และตัวชี้วัดสำคัญ",
+     "markdown": "- **Channel**: UI (ทำเองผ่านหน้าจอ), **AI** (ใช้ AI ช่วยและผู้ใช้กดยืนยัน) หรือ **MCP** (เรียกจากเครื่องมือ AI ภายนอก เช่น claude-desktop)\n- **Hash**: ตัวเชื่อมของแต่ละรายการในห่วงโซ่ ถ้าห่วงโซ่ขาด แปลว่ามีรายการถูกแก้ไข"
+    },
+    {
+     "anchor": "tasks",
+     "heading": "งานที่ทำบ่อย",
+     "markdown": "- พิสูจน์ว่าใครอนุมัติคำขอสิทธิ์และอนุมัติเมื่อไร\n- ดึงรายการการแก้ไข metadata ที่ใช้ AI ช่วยทั้งหมดในช่วงเวลาที่กำหนด"
+    },
+    {
+     "anchor": "tips",
+     "heading": "เคล็ดลับและคำถามที่พบบ่อย",
+     "markdown": "- ชุดข้อมูลแต่ละชุดมีประวัติของตัวเองที่แท็บ **ประวัติ (History)**\n- ลบรายการออกจากบันทึกไม่ได้ การแก้ไขจะบันทึกเป็นรายการใหม่เสมอ"
+    }
+   ]
+  },
+  {
+   "page_id": "dashboard",
+   "lang": "th",
+   "title": "แดชบอร์ดธรรมาภิบาล",
+   "nav_label": "แดชบอร์ดธรรมาภิบาล",
+   "section": "ธรรมาภิบาล",
+   "routes": [
+    "/dashboard"
+   ],
+   "roles_full": [
+    "council"
+   ],
+   "roles_view": [
+    "steward",
+    "owner",
+    "custodian",
+    "dpo",
+    "auditor",
+    "admin"
+   ],
+   "keywords": [
+    "แดชบอร์ด",
+    "ธรรมาภิบาล",
+    "KPI",
+    "ความครอบคลุม",
+    "การใช้งาน",
+    "คุณภาพ",
+    "MTTD",
+    "MTTR",
+    "SLO",
+    "งานค้าง",
+    "เป้าหมาย",
+    "โดเมน",
+    "รายงาน",
+    "export"
+   ],
+   "related": [
+    "home",
+    "domains",
+    "quality",
+    "observability"
+   ],
+   "prd": "AUD-02, §2.3",
+   "summary": "ตัวชี้วัดความสำเร็จและคุณภาพของงานธรรมาภิบาลเทียบกับเป้าหมาย แยกตามโดเมน สำหรับติดตามและรายงานผล",
+   "last_updated": "2026-10-24",
+   "version": "1.0.0",
+   "source_file": "help-content/th/dashboard.md",
+   "sections": [
+    {
+     "anchor": "what",
+     "heading": "หน้านี้คืออะไร",
+     "markdown": "**แดชบอร์ดธรรมาภิบาล** ติดตามตัวชี้วัดความสำเร็จและคุณภาพตาม PRD §2.3 เทียบกับเป้าหมายในช่วง 6 เดือนหลังเริ่มใช้งานจริง มี 2 แท็บ คือ **Coverage & adoption** (ความครอบคลุมและการใช้งาน) และ **Quality** (คุณภาพ)"
+    },
+    {
+     "anchor": "purpose",
+     "heading": "วัตถุประสงค์และเป้าหมาย",
+     "markdown": "- ให้คณะกรรมการธรรมาภิบาลข้อมูลและเจ้าของโดเมนเห็นว่าส่วนไหนถึงเป้าแล้วและส่วนไหนยังไม่ถึง\n- จัดลำดับงานค้าง เช่น การกำหนดเจ้าของ การยืนยัน PII คำศัพท์ ปัญหาข้อมูล และงานที่เกิน SLA"
+    },
+    {
+     "anchor": "who",
+     "heading": "ใครใช้หน้านี้",
+     "markdown": "คณะกรรมการธรรมาภิบาลข้อมูลใช้มากที่สุดและ export รายงานได้ Owner, DPO และผู้ตรวจสอบก็ export ได้เช่นกัน ส่วนบทบาทอื่นดูได้อย่างเดียว"
+    },
+    {
+     "anchor": "how",
+     "heading": "วิธีใช้งาน",
+     "markdown": "1. เลือกโดเมนจากตัวเลือก **All domains** เพื่อดูเฉพาะโดเมนนั้น\n2. แท็บ **Coverage & adoption**: ดูการ์ดตัวชี้วัด (Harvest coverage, Ownership · Critical, Documentation · Critical, PII confirmed, Lineage · Critical, Monthly active users) ตาราง **Coverage by domain** การ์ด **Backlog** **Access request lead time** และ **Top stewards this month**\n3. แท็บ **Quality**: ดู DQ rule coverage · CDE, Data products meeting SLO, MTTD, MTTR, Issues with root cause และ Contract violations (30 d) พร้อมตาราง **Monthly domain quality review (PDCA)**\n4. กด **Export PDF (TH)** เพื่อส่งรายงานต่อ"
+    },
+    {
+     "anchor": "fields",
+     "heading": "ฟิลด์และตัวชี้วัดสำคัญ",
+     "markdown": "- **On track / pts to go**: ถึงเป้าแล้ว หรือยังขาดอีกกี่คะแนน\n- **Critical-asset completeness**: สัดส่วนชุดข้อมูลสำคัญที่มี metadata ครบ แยกตามโดเมน\n- **MTTD / MTTR**: เวลาเฉลี่ยในการตรวจพบปัญหา (นาที) และแก้ไขปัญหา (วัน) ยิ่งต่ำยิ่งดี\n- **Access request lead time**: จำนวนวันทำการเฉลี่ยตั้งแต่ขอสิทธิ์จนได้สิทธิ์ (เป้าหมายไม่เกิน 2 วัน)\n- **Backlog**: งานค้าง เช่น ชุดข้อมูลสำคัญที่ยังไม่มีเจ้าของ PII ที่รอยืนยัน และงาน workflow ที่เกิน SLA"
+    },
+    {
+     "anchor": "tasks",
+     "heading": "งานที่ทำบ่อย",
+     "markdown": "- เตรียมประชุมคณะกรรมการประจำเดือน โดย export PDF แล้วทบทวนโดเมนที่ยังไม่ถึงเป้า\n- กำหนดเจ้าของให้ชุดข้อมูลสำคัญที่ยังไม่มีเจ้าของ"
+    },
+    {
+     "anchor": "tips",
+     "heading": "เคล็ดลับและคำถามที่พบบ่อย",
+     "markdown": "- คะแนนรีวิวจากผู้ใช้ที่ต่ำ (≤ 2 ดาว) และปัญหาที่เกิดซ้ำ จะถูกนำไปเสนอเป็นกฎ DQ ใหม่หรือการปรับ contract\n- หน้าแรกแสดง KPI เหล่านี้ในแบบย่อ"
+    }
+   ]
+  },
+  {
+   "page_id": "domains",
+   "lang": "th",
+   "title": "โดเมนและ Data Product",
+   "nav_label": "โดเมนและ Data Product",
+   "section": "ค้นหาข้อมูล",
+   "routes": [
+    "/domains"
+   ],
+   "roles_full": [
+    "steward",
+    "owner",
+    "custodian",
+    "council"
+   ],
+   "roles_view": [
+    "consumer",
+    "dpo",
+    "auditor",
+    "admin"
+   ],
+   "keywords": [
+    "โดเมน",
+    "data product",
+    "ผลิตภัณฑ์ข้อมูล",
+    "SLA",
+    "SLO",
+    "error budget",
+    "ผู้ใช้ข้อมูล",
+    "เจ้าของโดเมน",
+    "critical completeness",
+    "data mesh"
+   ],
+   "related": [
+    "asset-detail",
+    "search",
+    "dashboard",
+    "quality"
+   ],
+   "prd": "CAT-09",
+   "summary": "โดเมนธุรกิจและ Data Product ที่แต่ละโดเมนเผยแพร่ พร้อมเจ้าของ SLA/SLO และข้อมูลการใช้งาน",
+   "last_updated": "2026-10-24",
+   "version": "1.0.0",
+   "source_file": "help-content/th/domains.md",
+   "sections": [
+    {
+     "anchor": "what",
+     "heading": "หน้านี้คืออะไร",
+     "markdown": "หน้า **โดเมนและ Data Product** จัดกลุ่มชุดข้อมูลตามโดเมนธุรกิจ (Customer, Finance, Sales, HR, Marketing, Operations) และแสดง **Data Product** ซึ่งเป็นชุดข้อมูลที่คัดมาแล้ว มีเจ้าของ มี SLA มีคู่มือการใช้ และติดตาม SLO เช่น Customer 360 หรือ Monthly Revenue Mart"
+    },
+    {
+     "anchor": "purpose",
+     "heading": "วัตถุประสงค์และเป้าหมาย",
+     "markdown": "- ระบุให้ชัดว่าใครรับผิดชอบข้อมูลแต่ละด้าน\n- ให้ผู้ใช้เลือก Data Product ที่พร้อมใช้และมีคนดูแล แทนการไปใช้ตารางดิบ\n- แสดงระดับบริการให้เห็นชัด ทั้ง SLA, การบรรลุ SLO และ error budget"
+    },
+    {
+     "anchor": "who",
+     "heading": "ใครใช้หน้านี้",
+     "markdown": "Owner และ Steward สร้างและดูแล Data Product, Custodian ดูแลการทำงานเชิงเทคนิค, ผู้ใช้ข้อมูลเข้ามาเลือกใช้ ส่วนบทบาทอื่นดูได้อย่างเดียว"
+    },
+    {
+     "anchor": "how",
+     "heading": "วิธีใช้งาน",
+     "markdown": "1. ดูการ์ด **Data products** แต่ละใบแสดงโดเมน คำอธิบาย SLA ป้าย SLO จำนวนชุดข้อมูลและผู้ใช้ คะแนน และเจ้าของ\n2. กด **Open** เพื่อไปที่ชุดข้อมูลหลักของ product นั้น\n3. เลื่อนลงไปที่ **Domains** แล้วคลิกการ์ดโดเมนเพื่อค้นหาชุดข้อมูลทั้งหมดในโดเมนนั้น\n4. สำหรับ Owner และ Steward: กด **New data product** เพื่อสร้างใหม่ (เริ่มต้นเป็น Draft)"
+    },
+    {
+     "anchor": "fields",
+     "heading": "ฟิลด์และตัวชี้วัดสำคัญ",
+     "markdown": "- **SLA**: ระดับบริการที่สัญญาไว้ เช่น \"Daily by 06:00 · 99.5%\" (พร้อมใช้ทุกวันก่อน 06:00)\n- **ป้าย SLO**: Freshness, Completeness, Volume, DQ, Availability พร้อมอัตราที่ทำได้ใน 30 วัน ✓ คือผ่าน ✕ คือไม่ผ่าน\n- **Error budget**: โควตาความผิดพลาดที่ยังเหลือในรอบนี้ ถ้าเหลือ 0% แปลว่าใช้หมดแล้ว\n- **ไอคอนโล่**: Data Product นี้ได้รับการรับรองแล้ว\n- การ์ดโดเมนแสดง **assets**, **certified**, **products**, **Critical completeness** % และ **Domain owner**"
+    },
+    {
+     "anchor": "tasks",
+     "heading": "งานที่ทำบ่อย",
+     "markdown": "- เลือก Data Product มาใช้วิเคราะห์ โดยเลือกตัวที่รับรองแล้ว SLO ผ่าน และยังมี error budget เหลือ\n- หาโดเมนที่ Critical completeness ต่ำ แล้วประสานกับเจ้าของโดเมน"
+    },
+    {
+     "anchor": "tips",
+     "heading": "เคล็ดลับและคำถามที่พบบ่อย",
+     "markdown": "- Product ที่ใช้ error budget หมดแล้ว (เช่น Digital Engagement ที่ 0%) ควรได้รับการทบทวนก่อนให้ผู้ใช้ใหม่นำไปใช้\n- วางเมาส์บนป้าย SLO เพื่อดูเป้าหมายและอัตราที่ทำได้ใน 30 วัน"
+    }
+   ]
+  },
+  {
+   "page_id": "getting-started",
+   "lang": "th",
+   "title": "เริ่มต้นใช้งาน EDC1",
+   "nav_label": "เริ่มต้นใช้งาน",
+   "section": "ทั่วไป",
+   "routes": [],
+   "roles_full": [
+    "consumer",
+    "steward",
+    "owner",
+    "custodian",
+    "dpo",
+    "council",
+    "auditor",
+    "admin"
+   ],
+   "roles_view": [],
+   "keywords": [
+    "ภาพรวม",
+    "เมนู",
+    "บทบาท",
+    "สลับบทบาท",
+    "ภาษา",
+    "ภาษาไทย",
+    "Ask Softnix",
+    "ค้นหา",
+    "คีย์ลัด",
+    "ความช่วยเหลือ",
+    "help"
+   ],
+   "related": [
+    "home",
+    "search",
+    "roles"
+   ],
+   "prd": "§3",
+   "summary": "โครงสร้างของ Enterprise Data Catalog, บทบาทมีผลต่อสิ่งที่เห็นอย่างไร และหาความช่วยเหลือได้จากที่ไหน",
+   "last_updated": "2026-10-24",
+   "version": "1.0.0",
+   "source_file": "help-content/th/getting-started.md",
+   "sections": [
+    {
+     "anchor": "what",
+     "heading": "หน้านี้คืออะไร",
+     "markdown": "Softnix Enterprise Data Catalog (EDC1) คือศูนย์กลางสำหรับ **ค้นหา ทำความเข้าใจ ตรวจสอบความน่าเชื่อถือ และกำกับดูแล** ข้อมูลขององค์กร ระบบเก็บเฉพาะ metadata เช่น ชื่อ คำอธิบาย เจ้าของ ชั้นความลับ lineage และผลคุณภาพข้อมูล ส่วนตัวข้อมูลจริงยังอยู่ใน Lakehouse และระบบต้นทางเหมือนเดิม"
+    },
+    {
+     "anchor": "purpose",
+     "heading": "วัตถุประสงค์และเป้าหมาย",
+     "markdown": "- ให้ทุกคนหาชุดข้อมูลที่ถูกต้องและเชื่อถือได้ได้เร็ว จะค้นเป็นภาษาไทยหรืออังกฤษก็ได้\n- ระบุให้ชัดว่าข้อมูลแต่ละชุดใครเป็นเจ้าของ ใครดูแล และมีความอ่อนไหวตาม PDPA ระดับไหน\n- ให้ Steward, Owner, DPO และคณะกรรมการธรรมาภิบาลข้อมูลทำงานอนุมัติ ดูแลคุณภาพ และออกนโยบายในที่เดียว"
+    },
+    {
+     "anchor": "who",
+     "heading": "ใครใช้หน้านี้",
+     "markdown": "ทุกบทบาทตาม PRD §3 ได้แก่ ผู้ใช้ข้อมูล (Data Consumer), ผู้ดูแลข้อมูล (Data Steward), เจ้าของข้อมูล (Data Owner), ผู้ดูแลเชิงเทคนิค (Custodian / Engineer), DPO, คณะกรรมการธรรมาภิบาลข้อมูล, ผู้ตรวจสอบ และผู้ดูแลระบบ เมนู หน้า และปุ่มต่าง ๆ จะแสดงตามบทบาทของคุณ ถ้าปุ่มไหนถูกล็อก ให้วางเมาส์ไว้บนปุ่มเพื่อดูว่าบทบาทใดใช้ได้"
+    },
+    {
+     "anchor": "how",
+     "heading": "วิธีใช้งาน",
+     "markdown": "1. ใช้ **เมนูซ้าย** ซึ่งแบ่งเป็น 3 กลุ่ม **ค้นหาข้อมูล** คือการหาข้อมูล (หน้าแรก, ค้นหา, อภิธานศัพท์ธุรกิจ, โดเมนและ Data Product) **ธรรมาภิบาล** คืองานดูแลข้อมูล (งานของฉัน, ความเป็นส่วนตัวและ PDPA, คุณภาพข้อมูล, การเฝ้าระวังข้อมูล, ตั้งค่าการแจ้งเตือน, นโยบายและสิทธิ์, แดชบอร์ดธรรมาภิบาล) และ **ผู้ดูแลระบบ** คือการตั้งค่าแพลตฟอร์ม (แหล่งข้อมูล, ประวัติการตรวจสอบ, ตั้งค่า, Roles & Permissions)\n2. ใช้ **ช่องค้นหา** บนแถบด้านบน (`⌘/Ctrl + K`) เพื่อไปที่ตาราง คอลัมน์ รายงาน หรือคำศัพท์ได้ทันที\n3. สลับภาษาด้วยปุ่ม **EN / ไทย** บนแถบด้านบน ข้อความช่วยเหลือจะเปลี่ยนภาษาตามไปด้วย\n4. คลิกไอคอน **? (Help)** ได้ทุกหน้า เพื่อเปิดคู่มือของหน้าที่คุณกำลังใช้อยู่\n5. คลิก **ถาม Softnix** ที่มุมขวาล่าง (`⌘/Ctrl + J`) เพื่อพิมพ์คำถามเป็นภาษาธรรมดา"
+    },
+    {
+     "anchor": "fields",
+     "heading": "ฟิลด์และตัวชี้วัดสำคัญ",
+     "markdown": "- **Certified**: เจ้าของข้อมูลรับรองแล้วว่าพร้อมใช้งาน ผลค้นหาจะแสดงข้อมูลที่รับรองแล้วก่อน\n- **Authoritative source**: ชุดข้อมูลหลักที่ควรใช้สำหรับเรื่องนั้น เช่น `gold.customer_360` สำหรับข้อมูลลูกค้า\n- **ชั้นความลับ (Classification)**: Public, Internal, Confidential, Restricted (ดูรายละเอียดที่หน้านโยบายและสิทธิ์)\n- **PII / ข้อมูลอ่อนไหว (มาตรา 26)**: ข้อมูลส่วนบุคคลตาม PDPA ถ้าเป็นข้อมูลอ่อนไหวต้องให้ DPO อนุมัติ\n- **DQ score**: คะแนนคุณภาพข้อมูลจาก DQ engine ของ Lakehouse\n- **ป้าย Role** บนแถบด้านบน: บทบาทที่คุณใช้อยู่ตอนนี้"
+    },
+    {
+     "anchor": "tasks",
+     "heading": "งานที่ทำบ่อย",
+     "markdown": "- หาข้อมูล → ไปที่หน้าค้นหา แล้วเปิดหน้ารายละเอียดของชุดข้อมูล\n- ขอสิทธิ์ใช้ข้อมูล → เปิดหน้าชุดข้อมูล แล้วกด **ขอสิทธิ์**\n- อนุมัติงาน → ไปที่ **งานของฉัน**\n- ดูว่าข้อมูลอ่อนไหวแค่ไหน → ดูป้ายชั้นความลับและ PII ที่หน้าชุดข้อมูล หรือไปที่ **ความเป็นส่วนตัวและ PDPA**\n- ทดลองใช้เป็นบทบาทอื่น (เดโม) → คลิกเมนูรูปโปรไฟล์ → **Switch role**"
+    },
+    {
+     "anchor": "tips",
+     "heading": "เคล็ดลับและคำถามที่พบบ่อย",
+     "markdown": "- **ทำไมบางเมนูหายไป?** เพราะบทบาทของคุณไม่มีสิทธิ์เห็นหน้านั้น ตรวจสอบได้ที่ **Roles & Permissions**\n- **ป้าย \"view\" ในเมนูหมายถึงอะไร?** คุณเปิดดูหน้านั้นได้ แต่แก้ไขไม่ได้\n- **ข้อมูลจริงถูกคัดลอกเข้ามาใน EDC ไหม?** ไม่ Connector อ่านเฉพาะ metadata ส่วนการทำ profiling ใช้ข้อมูลตัวอย่างและไม่เก็บค่าจริงไว้"
+    }
+   ]
+  },
+  {
+   "page_id": "glossary",
+   "lang": "th",
+   "title": "อภิธานศัพท์ธุรกิจ",
+   "nav_label": "อภิธานศัพท์ธุรกิจ",
+   "section": "ค้นหาข้อมูล",
+   "routes": [
+    "/glossary",
+    "/glossary/:id"
+   ],
+   "roles_full": [
+    "steward",
+    "owner",
+    "council"
+   ],
+   "roles_view": [
+    "consumer",
+    "custodian",
+    "dpo",
+    "auditor",
+    "admin"
+   ],
+   "keywords": [
+    "อภิธานศัพท์",
+    "คำศัพท์ธุรกิจ",
+    "นิยาม",
+    "KPI",
+    "สูตรคำนวณ",
+    "คำพ้อง",
+    "synonym",
+    "steward",
+    "ISO 11179",
+    "draft",
+    "candidate",
+    "approved",
+    "retired",
+    "ขอแก้ไข"
+   ],
+   "related": [
+    "asset-detail",
+    "inbox",
+    "search",
+    "domains"
+   ],
+   "prd": "GLO, WF-02",
+   "summary": "นิยามศัพท์ธุรกิจที่องค์กรตกลงร่วมกันทั้งไทยและอังกฤษ สูตร KPI และการเชื่อมโยงไปยังชุดข้อมูล",
+   "last_updated": "2026-10-24",
+   "version": "1.0.0",
+   "source_file": "help-content/th/glossary.md",
+   "sections": [
+    {
+     "anchor": "what",
+     "heading": "หน้านี้คืออะไร",
+     "markdown": "**อภิธานศัพท์ธุรกิจ (Business Glossary)** รวบรวมคำศัพท์ธุรกิจที่องค์กรตกลงความหมายร่วมกัน ทั้งภาษาไทยและอังกฤษ เช่น \"Active Customer\" (ลูกค้าที่ยังใช้งานอยู่) หรือ \"Churn\" ด้านซ้ายเป็นโครงสร้างคำศัพท์แยกตามโดเมน ด้านขวาแสดงนิยาม สูตรคำนวณ (สำหรับ KPI) คุณสมบัติ ชุดข้อมูลที่เชื่อมโยง และความสัมพันธ์กับคำอื่น"
+    },
+    {
+     "anchor": "purpose",
+     "heading": "วัตถุประสงค์และเป้าหมาย",
+     "markdown": "- ให้ทุกคนใช้คำศัพท์ธุรกิจในความหมายเดียวกัน รายงานและผลวิเคราะห์จะได้ตรงกัน\n- เชื่อมคำศัพท์เข้ากับคอลัมน์และรายงานที่ใช้คำนั้นจริง\n- ควบคุมการแก้ไขนิยามผ่านขั้นตอนอนุมัติ (สถานะการลงทะเบียนตาม ISO/IEC 11179)"
+    },
+    {
+     "anchor": "who",
+     "heading": "ใครใช้หน้านี้",
+     "markdown": "- **Data Steward / Owner / คณะกรรมการธรรมาภิบาลข้อมูล**: สร้าง ดูแล และอนุมัติคำศัพท์\n- **บทบาทอื่น ๆ**: อ่านคำศัพท์ และกด **Propose change** เพื่อเสนอแก้ไขได้"
+    },
+    {
+     "anchor": "how",
+     "heading": "วิธีใช้งาน",
+     "markdown": "1. พิมพ์กรองหรือไล่ดูโครงสร้างด้านซ้าย แล้วคลิกคำศัพท์ที่ต้องการ\n2. อ่าน **Definition** (นิยาม) และ **Calculation** (สูตร) ถ้าเป็น KPI\n3. ดู **Properties**: โดเมน, Steward, คำพ้อง, ตัวย่อ และสถานะ\n4. ดู **Linked assets** ว่าตารางและคอลัมน์ไหนใช้คำนี้ ถ้ามีรายการที่ AI แนะนำ กด **Link** เพื่อยืนยันได้\n5. ใช้ **Relationships** (Broader, Narrower, Related) เพื่อดูคำที่เกี่ยวข้อง ส่วน \"Impact if changed\" บอกว่ามีชุดข้อมูล รายงาน และกฎ DQ กี่รายการที่ขึ้นกับคำนี้\n6. ต้องการแก้นิยาม? กด **Propose change** ระบบจะสร้างคำขอเปลี่ยนแปลงไว้ใน **งานของฉัน** (Steward → Owner)"
+    },
+    {
+     "anchor": "fields",
+     "heading": "ฟิลด์และตัวชี้วัดสำคัญ",
+     "markdown": "- **ขั้นสถานะ**: Draft → Candidate → Approved → Retired คำที่เป็นทางการคือคำที่ Approved แล้วเท่านั้น\n- **ป้าย KPI**: คำนี้เป็นตัวชี้วัดที่มีสูตรคำนวณ\n- **Synonyms (คำพ้อง)**: คำอื่นที่คนใช้เรียกสิ่งเดียวกัน เช่น \"Attrition\" สำหรับ Churn การค้นหาจะเจอคำพ้องด้วย\n- แถบสีเหลืองแสดงว่ามีคำขอเปลี่ยนแปลงค้างอยู่ เช่น CR-0311 ของ \"Active Customer\""
+    },
+    {
+     "anchor": "tasks",
+     "heading": "งานที่ทำบ่อย",
+     "markdown": "- **New term** (Steward, Owner, คณะกรรมการ): กรอกนิยาม โดเมน Steward และคำพ้อง แล้วบันทึกเป็น Draft หรือส่งเป็น Candidate\n- **Approve** คำศัพท์ที่อยู่ในสถานะ Candidate (Owner, คณะกรรมการ)\n- **Import Excel** (Steward, คณะกรรมการ): เทมเพลตมีคอลัมน์ Term EN, Term TH, Definition, Domain, Steward, Synonyms\n- **Find duplicates**: ให้ AI ตรวจหาคำซ้ำหรือคำที่นิยามขัดกัน\n- **Suggest columns**: ให้ AI แนะนำคอลัมน์ที่ควรผูกกับคำนี้"
+    },
+    {
+     "anchor": "tips",
+     "heading": "เคล็ดลับและคำถามที่พบบ่อย",
+     "markdown": "- ดู \"Impact if changed\" ก่อนเสนอแก้นิยาม เพราะ KPI ที่ใช้คำนี้อาจเปลี่ยนตาม\n- คำศัพท์มีทั้งสองภาษา ค้นเป็นภาษาไทยก็เจอคำภาษาอังกฤษ และค้นภาษาอังกฤษก็เจอคำภาษาไทย\n- ลิงก์คำศัพท์ในแท็บภาพรวมของชุดข้อมูลจะพามาที่หน้านี้"
+    }
+   ]
+  },
+  {
+   "page_id": "home",
+   "lang": "th",
+   "title": "หน้าแรก",
+   "nav_label": "หน้าแรก",
+   "section": "ค้นหาข้อมูล",
+   "routes": [
+    "/"
+   ],
+   "roles_full": [
+    "consumer",
+    "steward",
+    "owner",
+    "custodian",
+    "dpo",
+    "council",
+    "auditor",
+    "admin"
+   ],
+   "roles_view": [],
+   "keywords": [
+    "หน้าแรก",
+    "ภาพรวม",
+    "งานของฉัน",
+    "ติดตาม",
+    "AI curation",
+    "ข้อมูลยอดนิยม",
+    "harvest health",
+    "KPI",
+    "ความครอบคลุม"
+   ],
+   "related": [
+    "search",
+    "inbox",
+    "privacy",
+    "sources",
+    "glossary"
+   ],
+   "prd": "AUD-02, WF-04, SRC-05",
+   "summary": "หน้าเริ่มต้นส่วนตัวที่รวม KPI ธรรมาภิบาล งานของคุณ ชุดข้อมูลที่ติดตาม คำแนะนำจาก AI และสถานะการดึง metadata",
+   "last_updated": "2026-10-24",
+   "version": "1.0.0",
+   "source_file": "help-content/th/home.md",
+   "sections": [
+    {
+     "anchor": "what",
+     "heading": "หน้านี้คืออะไร",
+     "markdown": "**หน้าแรก** คือจุดเริ่มต้นของการใช้งาน EDC1 แบนเนอร์ด้านบนทักทายคุณพร้อมบอกบทบาทปัจจุบัน และจำนวนงานที่ค้างอยู่หรือเกินกำหนด ด้านล่างเป็น KPI ธรรมาภิบาลหลัก และการ์ดรวมงานและข้อมูลที่เกี่ยวข้องกับคุณ"
+    },
+    {
+     "anchor": "purpose",
+     "heading": "วัตถุประสงค์และเป้าหมาย",
+     "markdown": "- รู้ได้ในหน้าเดียวว่าวันนี้มีอะไรต้องจัดการ ไม่ต้องเปิดหลายหน้า\n- ติดตามความคืบหน้าเทียบกับเป้าหมายธรรมาภิบาล ทั้งการมีเจ้าของ การจัดทำคำอธิบาย การยืนยัน PII และ lineage\n- ไปที่ข้อมูลยอดนิยมที่ผ่านการรับรองและคนอื่นใช้อยู่แล้วได้ทันที"
+    },
+    {
+     "anchor": "who",
+     "heading": "ใครใช้หน้านี้",
+     "markdown": "ทุกบทบาท ข้อความทักทายและงานที่แสดงจะเปลี่ยนตามบทบาทที่เลือกไว้บนแถบด้านบน"
+    },
+    {
+     "anchor": "how",
+     "heading": "วิธีใช้งาน",
+     "markdown": "1. ดูแบนเนอร์ ซึ่งบอกบทบาทของคุณและจำนวนงานที่ค้างหรือเกินกำหนด\n2. คลิก **ชิปโดเมน** (Customer, Finance, Sales, HR, Marketing, Operations) เพื่อค้นหาเฉพาะในโดเมนนั้น\n3. กด **Ask a data question** เพื่อถาม Softnix เป็นภาษาธรรมดา หรือกด **Browse catalog** เพื่อไปหน้าค้นหา\n4. ดู **การ์ด KPI** ทั้ง 4 ใบ ถ้าขึ้น \"▲ on target\" สีเขียวแปลว่าถึงเป้าแล้ว ถ้าขึ้น \"▼ target …%\" สีส้มแปลว่ายังต้องทำเพิ่ม\n5. เปิดงานจากการ์ด **My tasks** หรือเปิดชุดข้อมูลจากการ์ด **Following** หรือ **Popular certified data**"
+    },
+    {
+     "anchor": "fields",
+     "heading": "ฟิลด์และตัวชี้วัดสำคัญ",
+     "markdown": "- **Ownership coverage · Critical**: สัดส่วนชุดข้อมูลสำคัญ (Critical) ที่มีเจ้าของแล้ว (เป้าหมาย 95%)\n- **Documentation coverage · Critical**: สัดส่วนชุดข้อมูลสำคัญที่มีคำอธิบายเชิงธุรกิจ (เป้าหมาย 80%)\n- **PII confirmed by steward**: สัดส่วน PII ที่ระบบตรวจพบและ Steward ยืนยันแล้ว (เป้าหมาย 90%)\n- **Lineage coverage · Critical**: สัดส่วนชุดข้อมูลสำคัญที่มี lineage (เป้าหมาย 90%)\n- **Following**: ความเปลี่ยนแปลงของชุดข้อมูลที่คุณติดตาม เช่น schema เปลี่ยน ส่งข้อมูลช้ากว่า SLA มีความคิดเห็นใหม่ หรือมีการขอรับรอง\n- **AI curation**: คำแนะนำจาก AI ที่รอคุณตรวจ (คำอธิบาย, PII / ชั้นความลับ, การผูกคำศัพท์, กฎ DQ) พร้อมอัตราการยอมรับย้อนหลัง 30 วัน\n- **Popular certified data**: ชุดข้อมูลที่รับรองแล้ว เรียงตามจำนวน query ใน 30 วัน\n- **Harvest health**: สถานะของ connector แต่ละตัว (เขียว = ปกติ, ส้ม = มีคำเตือน, แดง = ล้มเหลว)"
+    },
+    {
+     "anchor": "tasks",
+     "heading": "งานที่ทำบ่อย",
+     "markdown": "- จัดการงานที่เกินกำหนดก่อน โดยคลิกรายการที่มีป้าย **Overdue** สีแดงใน My tasks\n- ตรวจคำแนะนำจาก AI โดยกด **Review** ที่การ์ด AI curation\n- ตรวจสอบแหล่งข้อมูลที่ดึงไม่สำเร็จ โดยกด **Sources** ที่การ์ด Harvest health\n- ดูคำศัพท์ใหม่หรือคำศัพท์ที่รออนุมัติได้ที่การ์ด **New in glossary**"
+    },
+    {
+     "anchor": "tips",
+     "heading": "เคล็ดลับและคำถามที่พบบ่อย",
+     "markdown": "- กด **ติดตาม (Follow)** ที่หน้าชุดข้อมูลใดก็ได้ แล้วความเปลี่ยนแปลงของชุดนั้นจะมาแสดงที่หน้านี้\n- เป้าหมาย KPI มาจาก PRD §2.3 ถ้าต้องการดูแยกตามโดเมน ให้ไปที่ **แดชบอร์ดธรรมาภิบาล**\n- จำนวนงานในแบนเนอร์ตรงกับตัวเลขบนเมนู **งานของฉัน** ทางซ้าย"
+    }
+   ]
+  },
+  {
+   "page_id": "inbox",
+   "lang": "th",
+   "title": "งานของฉัน",
+   "nav_label": "งานของฉัน",
+   "section": "ธรรมาภิบาล",
+   "routes": [
+    "/inbox"
+   ],
+   "roles_full": [
+    "consumer",
+    "steward",
+    "owner",
+    "custodian",
+    "dpo",
+    "council"
+   ],
+   "roles_view": [
+    "auditor",
+    "admin"
+   ],
+   "keywords": [
+    "งานของฉัน",
+    "inbox",
+    "อนุมัติ",
+    "workflow",
+    "ขอสิทธิ์",
+    "คำขอเปลี่ยนแปลง",
+    "การรับรอง",
+    "ตรวจ PII",
+    "ปัญหาข้อมูล",
+    "อนุมัติคำศัพท์",
+    "SLA",
+    "เกินกำหนด",
+    "escalation",
+    "มอบหมาย"
+   ],
+   "related": [
+    "asset-detail",
+    "glossary",
+    "privacy",
+    "quality",
+    "home"
+   ],
+   "prd": "WF",
+   "summary": "กล่องงานเดียวสำหรับงานอนุมัติ งานตรวจสอบ และปัญหาข้อมูลที่มอบหมายให้คุณหรือบทบาทของคุณ พร้อมติดตาม SLA",
+   "last_updated": "2026-10-24",
+   "version": "1.0.0",
+   "source_file": "help-content/th/inbox.md",
+   "sections": [
+    {
+     "anchor": "what",
+     "heading": "หน้านี้คืออะไร",
+     "markdown": "**งานของฉัน (My Tasks)** คือกล่องงาน workflow ของคุณ รวมคำขอสิทธิ์ คำขอเปลี่ยนแปลง การรับรองข้อมูล การตรวจ PII ปัญหาข้อมูล และการอนุมัติคำศัพท์ ที่มอบหมายให้คุณหรือบทบาทของคุณ ด้านซ้ายเป็นรายการงาน ด้านขวาเป็นรายละเอียดของงานที่เลือก"
+    },
+    {
+     "anchor": "purpose",
+     "heading": "วัตถุประสงค์และเป้าหมาย",
+     "markdown": "- ตัดสินใจได้ทันเวลา ทุกงานมีกำหนดส่ง (SLA) และจะถูกส่งต่อขึ้นไปอัตโนมัติเมื่อเกินกำหนด\n- มีข้อมูลประกอบการตัดสินใจครบ ทั้งผู้ขอ ชุดข้อมูล ขั้นตอน workflow และสรุปจาก AI\n- เก็บประวัติการอนุมัติไว้ครบสำหรับการตรวจสอบ"
+    },
+    {
+     "anchor": "who",
+     "heading": "ใครใช้หน้านี้",
+     "markdown": "Steward, Owner, Custodian, DPO และคณะกรรมการเป็นผู้อนุมัติหรือปฏิเสธ ผู้ใช้ข้อมูลเห็นคำขอของตัวเอง ส่วนผู้ตรวจสอบและผู้ดูแลระบบเห็นได้เฉพาะคำขอและประวัติ"
+    },
+    {
+     "anchor": "how",
+     "heading": "วิธีใช้งาน",
+     "markdown": "1. เลือกมุมมองด้านบน: **Assigned to me** (มอบหมายให้ฉัน), **My requests** (คำขอของฉัน) หรือ **Completed** (เสร็จแล้ว)\n2. กรองตามประเภทด้วยชิป: Access Request, Change Request, Certification, PII Review, Data Issue, Glossary Approval\n3. คลิกงานที่ต้องการ รายละเอียดจะแสดงขั้นตอน workflow, ผู้ขอ, วันที่สร้าง, กำหนดส่ง, ชุดข้อมูล, รายละเอียด และ **AI summary**\n4. ตัดสินใจโดยกด **Approve** (อนุมัติ), **Reject** (ปฏิเสธ ต้องใส่ความเห็น), **Request info** (ขอข้อมูลเพิ่ม) หรือ **Delegate** (มอบหมายต่อ)"
+    },
+    {
+     "anchor": "fields",
+     "heading": "ฟิลด์และตัวชี้วัดสำคัญ",
+     "markdown": "- **Priority**: High, Medium, Low\n- **Overdue / SLA breached · escalated to Owner**: งานเกินกำหนดแล้วและถูกส่งต่อให้ Owner\n- **ขั้นตอน (stepper)**: บอกว่างานอยู่ขั้นไหนของ workflow เช่น คำขอสิทธิ์: Submitted → Owner → DPO → Granted in Lakehouse หรือปัญหาข้อมูล: Reported → Assigned → Root cause → Corrective action → Closed\n- **ส่วนเปรียบเทียบของคำขอเปลี่ยนแปลง**: นิยามเดิม (สีแดง) เทียบกับนิยามที่เสนอ (สีเขียว)\n- **Certification gate**: รายการตรวจ (มี Owner/Steward, metadata ครบ, ตั้งชื่อตามมาตรฐาน, DQ ถึงเกณฑ์, กฎครอบคลุม CDE, contract ผ่าน, SLO ผ่าน, ยืนยัน PII แล้ว) ปุ่มอนุมัติจะกดไม่ได้จนกว่าจะผ่านครบทุกข้อ"
+    },
+    {
+     "anchor": "tasks",
+     "heading": "งานที่ทำบ่อย",
+     "markdown": "- อนุมัติคำขอสิทธิ์พร้อมกำหนดระยะเวลา เช่น AR-1042 เป็นเวลา 90 วัน\n- พิจารณาคำขอแก้นิยามคำศัพท์ เช่น CR-0311 \"Active Customer\"\n- ติดตามปัญหาข้อมูล เช่น DI-0207 (billing_monthly ส่งช้า)\n- ยืนยัน PII ที่ได้จากการสแกน เช่น PII-552"
+    },
+    {
+     "anchor": "tips",
+     "heading": "เคล็ดลับและคำถามที่พบบ่อย",
+     "markdown": "- **ทำไมกดอนุมัติการรับรองไม่ได้?** อาจมีข้อใน certification gate ที่ยังไม่ผ่าน หรือการรับรองต้องให้ Data Owner เป็นผู้อนุมัติ (CAT-07)\n- อ่าน AI summary ก่อนตัดสินใจ เพราะจะชี้ความเสี่ยง เช่น คอลัมน์อ่อนไหว หรือผลกระทบต่อปลายทาง\n- ถาม Softnix ให้สรุปงานที่รออนุมัติได้ เช่น \"งานไหนเกินกำหนดบ้าง\""
+    }
+   ]
+  },
+  {
+   "page_id": "observability",
+   "lang": "th",
+   "title": "การเฝ้าระวังข้อมูล (Data Observability)",
+   "nav_label": "การเฝ้าระวังข้อมูล",
+   "section": "ธรรมาภิบาล",
+   "routes": [
+    "/observability"
+   ],
+   "roles_full": [
+    "steward",
+    "owner",
+    "custodian",
+    "admin"
+   ],
+   "roles_view": [
+    "consumer",
+    "council",
+    "auditor"
+   ],
+   "keywords": [
+    "การเฝ้าระวังข้อมูล",
+    "observability",
+    "incident",
+    "เหตุผิดปกติ",
+    "ความผิดปกติ",
+    "MTTD",
+    "schema เปลี่ยน",
+    "ปริมาณข้อมูล",
+    "distribution",
+    "ความสดใหม่",
+    "pipeline",
+    "OpenLineage",
+    "dedup",
+    "acknowledge",
+    "แจ้งเตือน",
+    "contract"
+   ],
+   "related": [
+    "alerts",
+    "quality",
+    "asset-detail",
+    "inbox"
+   ],
+   "prd": "OBS",
+   "summary": "ตรวจจับและจัดการเหตุผิดปกติของข้อมูล ทั้ง schema ปริมาณ การกระจายตัว ความสดใหม่ และ pipeline พร้อมรวมการแจ้งเตือนที่ซ้ำกัน",
+   "last_updated": "2026-10-24",
+   "version": "1.0.0",
+   "source_file": "help-content/th/observability.md",
+   "sections": [
+    {
+     "anchor": "what",
+     "heading": "หน้านี้คืออะไร",
+     "markdown": "หน้า **Data Observability** แสดงเหตุผิดปกติ (incident) ที่ตรวจพบในข้อมูล ทั้งปริมาณผิดปกติ schema เปลี่ยน การกระจายตัวของค่าเปลี่ยน ผลตรวจ contract และสุขภาพของ pipeline จาก OpenLineage RunEvents การแจ้งเตือนจะถูกส่งไปที่ Owner หรือ Steward และรวมรายการที่ซ้ำกันให้อัตโนมัติ"
+    },
+    {
+     "anchor": "purpose",
+     "heading": "วัตถุประสงค์และเป้าหมาย",
+     "markdown": "- พบปัญหาข้อมูลก่อนผู้ใช้จะรู้ตัว (MTTD ต่ำ)\n- ลดการแจ้งเตือนรบกวน โดยรวมการแจ้งเตือนที่ซ้ำกันเป็น incident เดียว\n- ทำให้ทุก incident มีผู้รับผิดชอบ และกลายเป็นปัญหาข้อมูลที่มีคนติดตาม"
+    },
+    {
+     "anchor": "who",
+     "heading": "ใครใช้หน้านี้",
+     "markdown": "Steward, Owner, Custodian (Data Engineer) และผู้ดูแลระบบเป็นผู้รับเรื่อง (Acknowledge) ส่วนผู้ใช้ข้อมูล คณะกรรมการ และผู้ตรวจสอบดูได้อย่างเดียว"
+    },
+    {
+     "anchor": "how",
+     "heading": "วิธีใช้งาน",
+     "markdown": "1. ดูการ์ดสรุป: **Open incidents**, **MTTD · 30 d**, **Alerts deduplicated** และ **Pipeline success · 24 h**\n2. ใน **Incident timeline** กรองตามประเภท: All, Schema, Volume, Distribution, Pipeline, Freshness\n3. ดูแต่ละ incident: เวลาและรหัส ความรุนแรง ประเภท สถานะ หัวข้อ ชุดข้อมูลที่กระทบ **Routed to** (ส่งให้ใคร) **Grouped** (รวมกี่การแจ้งเตือน) และ **Detected** (ตรวจพบหลังรันนานเท่าไร)\n4. กด **Acknowledge** ที่ incident ที่ยัง Open เพื่อรับเรื่อง ระบบจะสร้าง Data Issue ให้\n5. ใช้กราฟด้านขวา (Volume · WEB_EVENTS, Freshness · billing_monthly, Pipeline health) ยืนยันรูปแบบของปัญหา\n6. กด **Alert settings** เพื่อกำหนดว่าใครจะได้รับการแจ้งเตือน"
+    },
+    {
+     "anchor": "fields",
+     "heading": "ฟิลด์และตัวชี้วัดสำคัญ",
+     "markdown": "- **MTTD**: เวลาเฉลี่ยตั้งแต่เกิดปัญหาจนตรวจพบ ในรอบ 30 วัน (เป้าหมายไม่เกิน 30 นาที)\n- **Alerts deduplicated**: เช่น 142 → 16 แปลว่าตัดการแจ้งเตือนรบกวนออกไปได้ 89%\n- **Pipeline success · 24 h**: สัดส่วนการรันที่สำเร็จจากทั้งหมด\n- **ความรุนแรง**: Critical, High, Medium, Low และ **สถานะ**: Open, Acknowledged, Resolved, Muted (อยู่ในช่วงปิดปรับปรุง)\n- **3σ band**: กราฟปริมาณข้อมูลจะเตือนเมื่อค่าล่าสุดอยู่นอกช่วงที่คาดไว้\n- **PSI**: ค่าวัดการเปลี่ยนแปลงของการกระจายตัว ถ้าเกิน 0.25 ถือว่าเปลี่ยนอย่างมีนัยสำคัญ"
+    },
+    {
+     "anchor": "tasks",
+     "heading": "งานที่ทำบ่อย",
+     "markdown": "- จัดการ incident ระดับ Critical และ High ที่ยัง Open ก่อน เช่น pipeline FAIL หรือ schema เปลี่ยนแบบ breaking ขัดกับ contract\n- เมื่อเจอ incident ประเภท Schema ให้ไปดูแท็บ **Contract** ของชุดข้อมูลนั้น\n- ดูระยะเวลา p95 และผลรันล่าสุดของ pipeline ใน **Pipeline health**"
+    },
+    {
+     "anchor": "tips",
+     "heading": "เคล็ดลับและคำถามที่พบบ่อย",
+     "markdown": "- incident ที่ขึ้น Muted คือเหตุที่เกิดในช่วงปิดปรับปรุง (maintenance window) ซึ่งตั้งได้ที่หน้า **ตั้งค่าการแจ้งเตือน**\n- ถ้าไม่มีใครรับเรื่องภายใน 4 ชั่วโมง ระบบจะส่งต่อจาก Steward ไปให้ Owner อัตโนมัติ"
+    }
+   ]
+  },
+  {
+   "page_id": "privacy",
+   "lang": "th",
+   "title": "ความเป็นส่วนตัวและ PDPA",
+   "nav_label": "ความเป็นส่วนตัวและ PDPA",
+   "section": "ธรรมาภิบาล",
+   "routes": [
+    "/privacy"
+   ],
+   "roles_full": [
+    "steward",
+    "dpo"
+   ],
+   "roles_view": [
+    "owner",
+    "custodian",
+    "council",
+    "auditor"
+   ],
+   "keywords": [
+    "ความเป็นส่วนตัว",
+    "PDPA",
+    "PII",
+    "ข้อมูลส่วนบุคคล",
+    "ข้อมูลอ่อนไหว",
+    "มาตรา 26",
+    "RoPA",
+    "ชั้นความลับ",
+    "สแกน",
+    "คิวตรวจ",
+    "inventory",
+    "mask",
+    "DPO"
+   ],
+   "related": [
+    "asset-detail",
+    "access",
+    "inbox",
+    "settings"
+   ],
+   "prd": "CLS-02–06, AI-03",
+   "summary": "ค้นหาข้อมูลส่วนบุคคล ให้ Steward ยืนยัน และเตรียมหลักฐาน RoPA ตาม PDPA",
+   "last_updated": "2026-10-24",
+   "version": "1.0.0",
+   "source_file": "help-content/th/privacy.md",
+   "sections": [
+    {
+     "anchor": "what",
+     "heading": "หน้านี้คืออะไร",
+     "markdown": "หน้า **ความเป็นส่วนตัวและ PDPA** ใช้ตรวจสอบและติดตามข้อมูลส่วนบุคคลที่พบใน Lakehouse และระบบต้นทาง ระบบจัดประเภทอัตโนมัติ (rule, regex, ML และ LLM) จะเสนอว่าคอลัมน์ไหนน่าจะเป็นข้อมูลส่วนบุคคล จากนั้น Steward ยืนยันทีละรายการ แท็กที่ยืนยันแล้วจะถูก sync ไปที่ Lakehouse เพื่อใช้ mask และควบคุมสิทธิ์"
+    },
+    {
+     "anchor": "purpose",
+     "heading": "วัตถุประสงค์และเป้าหมาย",
+     "markdown": "- รู้ว่าข้อมูลส่วนบุคคลและข้อมูลอ่อนไหว (PDPA มาตรา 26) อยู่ที่ไหนบ้าง\n- ไม่มีการติดแท็กหรือ mask ใด ๆ จนกว่า Steward จะยืนยัน\n- จัดทำข้อมูลสำหรับบันทึกรายการกิจกรรมการประมวลผล (RoPA) ตาม PDPA มาตรา 39"
+    },
+    {
+     "anchor": "who",
+     "heading": "ใครใช้หน้านี้",
+     "markdown": "- **Data Steward** และ **DPO**: ยืนยันหรือปฏิเสธรายการที่ระบบเสนอ โดย DPO เป็นผู้ export ข้อมูล RoPA\n- **Owner, Custodian, คณะกรรมการ, ผู้ตรวจสอบ**: ดูได้อย่างเดียว"
+    },
+    {
+     "anchor": "how",
+     "heading": "วิธีใช้งาน",
+     "markdown": "1. ดูการ์ดสรุป 4 ใบ: Columns scanned, PII confirmed by steward, Datasets with personal data (และจำนวนที่เป็นข้อมูลอ่อนไหวตามมาตรา 26) และ Policy sync to Lakehouse\n2. เปิดแท็บ **Review queue** แล้วใช้ปุ่ม **Confidence ≥ 90%** หรือ **Sensitive only** เพื่อโฟกัสรายการสำคัญ\n3. อ่านแต่ละแถว ได้แก่ Column, Detected as, Confidence, Method, Evidence, Masked sample และ Proposed class แล้วกด ✓ (ยอมรับ) หรือ ✕ (ปฏิเสธ)\n4. ถ้าจะตัดสินใจหลายรายการพร้อมกัน ให้ติ๊กเลือกหลายแถว แล้วกด **Accept** หรือ **Reject**\n5. เปิดแท็บ **PII inventory** เพื่อดูจำนวนคอลัมน์แยกตามประเภท PII และแท็บ **Processing records** เพื่อดูตาราง RoPA"
+    },
+    {
+     "anchor": "fields",
+     "heading": "ฟิลด์และตัวชี้วัดสำคัญ",
+     "markdown": "- **Confidence (ความมั่นใจ)**: สีเขียว ≥ 90%, สีส้ม ≥ 75%\n- **Method**: Rule, Regex, ML หรือ **LLM**\n- **Masked sample**: ค่าตัวอย่างที่ถูก mask แล้ว ใช้ประกอบการพิจารณาได้โดยไม่เห็นข้อมูลจริง\n- **Proposed class**: ชั้นความลับที่คอลัมน์จะได้รับ เช่น Restricted\n- **Policy sync to Lakehouse**: สัดส่วนแท็กที่ใช้งานจริงใน Lakehouse แล้ว แท็กที่ยังไม่ตรงกันจะถูกปรับให้ตรงตอน 02:00\n- **Processing records**: Dataset, Purpose, Legal basis, Data subjects, Categories, Retention และ Complete %"
+    },
+    {
+     "anchor": "tasks",
+     "heading": "งานที่ทำบ่อย",
+     "markdown": "- **Run scan** (Steward, Custodian, DPO, ผู้ดูแลระบบ): สั่งสแกนจัดประเภทอัตโนมัติรอบใหม่\n- **Export RoPA input** (DPO, ผู้ตรวจสอบ): ดาวน์โหลดตาราง RoPA เป็นไฟล์ xlsx ภาษาไทย\n- ยืนยันคอลัมน์อ่อนไหว เช่น `blood_group` (ข้อมูลสุขภาพ มาตรา 26) ซึ่งต้องให้ DPO ลงนามรับรอง"
+    },
+    {
+     "anchor": "tips",
+     "heading": "เคล็ดลับและคำถามที่พบบ่อย",
+     "markdown": "- แท็กที่ยอมรับแล้วจะเข้าคิว sync ไป Lakehouse ส่วนรายการที่ปฏิเสธแล้วจะไม่ถูกเสนอซ้ำ\n- **Privacy guard for AI**: ระบบไม่ส่งข้อมูลตัวอย่างให้ LLM, mask PII ก่อนส่ง และชุดข้อมูล Restricted ใช้ได้เฉพาะโมเดล on-prem\n- ควรกรอก RoPA ที่ยังไม่ถึง 100% ให้ครบก่อนรับการตรวจ (เช่น WEB_EVENTS ที่ 40%)"
+    }
+   ]
+  },
+  {
+   "page_id": "quality",
+   "lang": "th",
+   "title": "คุณภาพข้อมูล",
+   "nav_label": "คุณภาพข้อมูล",
+   "section": "ธรรมาภิบาล",
+   "routes": [
+    "/quality"
+   ],
+   "roles_full": [
+    "steward",
+    "owner",
+    "custodian"
+   ],
+   "roles_view": [
+    "consumer",
+    "dpo",
+    "council",
+    "auditor",
+    "admin"
+   ],
+   "keywords": [
+    "คุณภาพข้อมูล",
+    "DQ",
+    "กฎ",
+    "คะแนน",
+    "Great Expectations",
+    "GX",
+    "มิติคุณภาพ",
+    "เกณฑ์",
+    "ความสดใหม่",
+    "ปัญหาข้อมูล",
+    "CDE"
+   ],
+   "related": [
+    "asset-detail",
+    "observability",
+    "inbox",
+    "dashboard"
+   ],
+   "prd": "DQ",
+   "summary": "ภาพรวมกฎคุณภาพข้อมูล คะแนน และปัญหาข้อมูลที่ยังเปิดอยู่ของทุกชุดข้อมูล",
+   "last_updated": "2026-10-24",
+   "version": "1.0.0",
+   "source_file": "help-content/th/quality.md",
+   "sections": [
+    {
+     "anchor": "what",
+     "heading": "หน้านี้คืออะไร",
+     "markdown": "หน้า **คุณภาพข้อมูล (Data Quality)** แสดงภาพรวมคุณภาพของทั้งแคตตาล็อก กฎกำหนดไว้ที่นี่ แล้ว DQ engine ของ Lakehouse (Great Expectations + PySpark) เป็นผู้รัน ผลลัพธ์จะส่งกลับมาที่ EDC ผ่าน API หรือ OpenLineage"
+    },
+    {
+     "anchor": "purpose",
+     "heading": "วัตถุประสงค์และเป้าหมาย",
+     "markdown": "- หาชุดข้อมูลที่คะแนนต่ำที่สุดเพื่อแก้ไขก่อน\n- ทำให้ข้อมูลสำคัญมีกฎตรวจครบ และเมื่อกฎไม่ผ่าน จะกลายเป็นปัญหาข้อมูลที่มีคนติดตาม"
+    },
+    {
+     "anchor": "who",
+     "heading": "ใครใช้หน้านี้",
+     "markdown": "Steward, Owner และ Custodian สร้างและนำเข้ากฎ ส่วนบทบาทอื่นดูได้อย่างเดียว"
+    },
+    {
+     "anchor": "how",
+     "heading": "วิธีใช้งาน",
+     "markdown": "1. ดูการ์ดสรุป: **Avg score · Critical**, **Rules** (รวมกฎที่ AI แนะนำซึ่งรอตรวจ), **Failing rules** และ **Freshness SLA breaches**\n2. ในตาราง **Datasets by score (lowest first)** ดู Score, Trend, Freshness และ Open issues\n3. คลิกชุดข้อมูลเพื่อเปิดแท็บ **คุณภาพข้อมูล** ของชุดนั้นและดูผลรายกฎ\n4. ติดตามรายการใน **Open data issues** (สถานะ Assigned, Root cause, Corrective action, Closed)"
+    },
+    {
+     "anchor": "fields",
+     "heading": "ฟิลด์และตัวชี้วัดสำคัญ",
+     "markdown": "- **สีของคะแนน**: เขียว ≥ 95%, ส้ม ≥ 85%, แดงต่ำกว่า 85%\n- **มิติคุณภาพ**: Accuracy (ความถูกต้อง), Completeness (ความครบถ้วน), Validity (ความสมเหตุสมผล), Consistency (ความสอดคล้อง), Uniqueness (ไม่ซ้ำ), Timeliness (ความทันเวลา)\n- **กฎ (Rule)**: ประกอบด้วยคอลัมน์ มิติ GX expectation ความรุนแรง เกณฑ์ และคะแนน ถ้าคะแนนต่ำกว่าเกณฑ์ถือว่าไม่ผ่าน\n- **Freshness SLA breach**: ข้อมูลมาช้ากว่าที่กำหนด ระบบจะสร้าง Data Issue ให้อัตโนมัติ"
+    },
+    {
+     "anchor": "tasks",
+     "heading": "งานที่ทำบ่อย",
+     "markdown": "- **New rule**: เลือกชุดข้อมูล คอลัมน์ มิติ expectation ความรุนแรง เกณฑ์ และสิ่งที่ต้องทำเมื่อไม่ผ่าน กฎใหม่จะรอผลจากการรัน GX รอบแรก\n- **Import GX suites**: อัปโหลดชุดกฎ Great Expectations (.json)\n- ตรวจกฎที่ AI แนะนำในแท็บคุณภาพข้อมูลของแต่ละชุดข้อมูล แล้วกด **Add to suite**"
+    },
+    {
+     "anchor": "tips",
+     "heading": "เคล็ดลับและคำถามที่พบบ่อย",
+     "markdown": "- กฎของคอลัมน์ CDE มีน้ำหนักเป็น 2 เท่าในคะแนน DQ\n- ชุดข้อมูลที่รับรองแล้วจะถูกถอนการรับรองอัตโนมัติ ถ้าคะแนนต่ำกว่าเกณฑ์ 3 รอบติดกัน\n- ถ้าต้องการดูความผิดปกติแบบเรียลไทม์ (ปริมาณ, schema, pipeline ล้มเหลว) ให้ไปที่ **การเฝ้าระวังข้อมูล**"
+    }
+   ]
+  },
+  {
+   "page_id": "roles",
+   "lang": "th",
+   "title": "บทบาทและสิทธิ์ (Roles & Permissions)",
+   "nav_label": "Roles & Permissions",
+   "section": "ผู้ดูแลระบบ",
+   "routes": [
+    "/roles"
+   ],
+   "roles_full": [
+    "admin"
+   ],
+   "roles_view": [
+    "consumer",
+    "steward",
+    "owner",
+    "custodian",
+    "dpo",
+    "council",
+    "auditor"
+   ],
+   "keywords": [
+    "บทบาท",
+    "สิทธิ์",
+    "RBAC",
+    "ABAC",
+    "ตารางสิทธิ์",
+    "สลับบทบาท",
+    "ผู้ใช้",
+    "เชิญผู้ใช้",
+    "IdP group",
+    "Keycloak",
+    "DAMA",
+    "รีเซ็ตข้อมูลเดโม"
+   ],
+   "related": [
+    "getting-started",
+    "settings",
+    "audit",
+    "access"
+   ],
+   "prd": "§3, NFR-01",
+   "summary": "แต่ละบทบาทเห็นและทำอะไรได้บ้างใน EDC พร้อมรายชื่อผู้ใช้และการจับคู่กลุ่มจาก identity provider",
+   "last_updated": "2026-10-24",
+   "version": "1.0.0",
+   "source_file": "help-content/th/roles.md",
+   "sections": [
+    {
+     "anchor": "what",
+     "heading": "หน้านี้คืออะไร",
+     "markdown": "หน้า **Roles & Permissions** แสดงการออกแบบสิทธิ์ตาม PRD v1.1 §3 (บทบาทตาม DAMA-DMBOK2) เป็นแบบ RBAC ที่จำกัดขอบเขตตามโดเมน ตารางสิทธิ์ชุดเดียวนี้ควบคุมทุกเมนู หน้า และปุ่มใน EDC1 มี 3 แท็บ คือ **Permission matrix**, **Roles** และ **Users & groups**"
+    },
+    {
+     "anchor": "purpose",
+     "heading": "วัตถุประสงค์และเป้าหมาย",
+     "markdown": "- ให้เห็นชัดว่าแต่ละบทบาทเห็นและทำอะไรได้บ้าง\n- จัดการผู้ใช้ และจับคู่กลุ่มจาก identity provider กับบทบาท"
+    },
+    {
+     "anchor": "who",
+     "heading": "ใครใช้หน้านี้",
+     "markdown": "ทุกบทบาทเปิดดูได้ แต่เฉพาะ **ผู้ดูแลระบบ** เท่านั้นที่เชิญผู้ใช้และจับคู่กลุ่มได้"
+    },
+    {
+     "anchor": "how",
+     "heading": "วิธีใช้งาน",
+     "markdown": "1. **Permission matrix**: เลือกดู All, Pages หรือ Actions แต่ละช่องเป็น full (ใช้และแก้ไขได้), view (ดูได้อย่างเดียว) หรือ none (ซ่อนหรือล็อก) คอลัมน์ของบทบาทปัจจุบันจะถูกไฮไลต์ คลิกหัวคอลัมน์บทบาทเพื่อสลับไปใช้บทบาทนั้น\n2. **Roles**: การ์ดของแต่ละบทบาท แสดงหน้าที่ สิทธิ์ใน EDC จำนวนฟังก์ชันที่ใช้ได้เต็มและดูได้อย่างเดียว และ persona สำหรับเดโม กด **Switch to this role** เพื่อลองใช้\n3. **Users & groups**: ดูผู้ใช้ บทบาท ขอบเขตโดเมน วิธีที่ได้สิทธิ์ และสถานะ ใช้ **Invite user** เพื่อเชิญผู้ใช้ และเพิ่ม **IdP group → role mapping**\n4. **Reset demo data** ล้างรายการที่สร้างจากฟอร์มในเดโม"
+    },
+    {
+     "anchor": "fields",
+     "heading": "ฟิลด์และตัวชี้วัดสำคัญ",
+     "markdown": "- **บทบาท**: Data Consumer, Data Steward, Data Owner, Data Custodian / Engineer, DPO / Privacy Officer, Data Governance Council, Auditor, Platform Admin\n- **Domain scope**: สิทธิ์ของ Owner และ Steward ใช้ได้เฉพาะในโดเมนที่ได้รับมอบหมาย\n- **ABAC**: ข้อมูล Restricted หรือ PII จะมีกฎเพิ่มตามชั้นความลับ"
+    },
+    {
+     "anchor": "tasks",
+     "heading": "งานที่ทำบ่อย",
+     "markdown": "- ตรวจว่าทำไมผู้ใช้บางคนมองไม่เห็นบางหน้า โดยหาแถวของหน้านั้นแล้วดูคอลัมน์ของบทบาทผู้ใช้\n- เพิ่ม Steward คนใหม่ โดยเชิญผู้ใช้ หรือจับคู่กลุ่ม IdP ของเขากับบทบาท Data Steward ของโดเมนนั้น"
+    },
+    {
+     "anchor": "tips",
+     "heading": "เคล็ดลับและคำถามที่พบบ่อย",
+     "markdown": "- การเข้าสู่ระบบใช้ OIDC ผ่าน Keycloak EDC ไม่เก็บรหัสผ่านใด ๆ\n- บทบาทที่เลือกในเดโมจะถูกจำไว้ในเบราว์เซอร์นี้ (`edc1.role`)"
+    }
+   ]
+  },
+  {
+   "page_id": "search",
+   "lang": "th",
+   "title": "ค้นหา",
+   "nav_label": "ค้นหา",
+   "section": "ค้นหาข้อมูล",
+   "routes": [
+    "/search"
+   ],
+   "roles_full": [
+    "consumer",
+    "steward",
+    "owner",
+    "custodian",
+    "dpo",
+    "council",
+    "auditor",
+    "admin"
+   ],
+   "roles_view": [],
+   "keywords": [
+    "ค้นหา",
+    "หาข้อมูล",
+    "ตัวกรอง",
+    "facet",
+    "certified",
+    "ชั้นความลับ",
+    "PII",
+    "โดเมน",
+    "layer",
+    "บันทึกการค้นหา",
+    "export",
+    "ค้นหาภาษาไทย"
+   ],
+   "related": [
+    "asset-detail",
+    "glossary",
+    "domains",
+    "home"
+   ],
+   "prd": "SRC-01–04, AI-01",
+   "summary": "ค้นหาตาราง คอลัมน์ รายงาน และคำศัพท์ได้ทั้งภาษาไทยและอังกฤษ แล้วใช้ตัวกรองคัดผลให้แคบลง",
+   "last_updated": "2026-10-24",
+   "version": "1.0.0",
+   "source_file": "help-content/th/search.md",
+   "sections": [
+    {
+     "anchor": "what",
+     "heading": "หน้านี้คืออะไร",
+     "markdown": "**หน้าค้นหา** แสดงชุดข้อมูลทั้งหมดในแคตตาล็อก (ตาราง, view, รายงาน, โมเดล ฯลฯ) ที่ตรงกับคำที่คุณพิมพ์ ค้นได้จากชื่อ คำอธิบาย คอลัมน์ คำศัพท์ธุรกิจ หรือแท็ก ทั้งภาษาไทยและอังกฤษ ตัวกรองด้านซ้ายช่วยคัดผลให้แคบลง"
+    },
+    {
+     "anchor": "purpose",
+     "heading": "วัตถุประสงค์และเป้าหมาย",
+     "markdown": "- หาชุดข้อมูลที่ต้องการได้เร็ว และเลือกใช้เวอร์ชันที่เชื่อถือได้\n- เปรียบเทียบตัวเลือกจากสถานะการรับรอง เจ้าของ ชั้นความลับ คุณภาพ และความสดใหม่ ก่อนนำไปใช้"
+    },
+    {
+     "anchor": "who",
+     "heading": "ใครใช้หน้านี้",
+     "markdown": "ทุกบทบาท ผู้ใช้ข้อมูลและนักวิเคราะห์ใช้มากที่สุด ส่วน Steward ใช้หาจุดที่ยังขาด เช่น ชุดข้อมูลที่ยังไม่มีเจ้าของ"
+    },
+    {
+     "anchor": "how",
+     "heading": "วิธีใช้งาน",
+     "markdown": "1. พิมพ์คำค้นในช่องค้นหาแล้วกด **Enter** ระบบตัดคำภาษาไทยให้อัตโนมัติ\n2. คัดผลด้วย **Filters**: Asset type, Domain, Certification, Classification, Personal data (PDPA), Layer และ Source system ตัวเลขด้านขวาบอกจำนวนผลของแต่ละค่า\n3. ใช้ **Quick filters**: **Missing owner** (ยังไม่มีเจ้าของ) หรือ **Fresh (within SLA)** (ข้อมูลยังสดตาม SLA)\n4. เปลี่ยนการเรียง (**Sort**) เป็น Relevance (ข้อมูลที่รับรองแล้วและนิยมขึ้นก่อน), Rating หรือ Data quality และสลับมุมมองแบบรายการหรือแบบตารางได้\n5. คลิกการ์ดผลลัพธ์เพื่อเปิดหน้ารายละเอียด\n6. ไม่แน่ใจว่าจะพิมพ์อะไร? กด **Ask in natural language** เพื่อถาม Softnix"
+    },
+    {
+     "anchor": "fields",
+     "heading": "ฟิลด์และตัวชี้วัดสำคัญ",
+     "markdown": "การ์ดผลลัพธ์แต่ละใบแสดง:\n\n- **ชื่อเชิงธุรกิจ** และชื่อทางเทคนิค พร้อม path เต็ม เช่น `lakehouse.gold.customer_360`\n- ป้าย **Certified**, **Authoritative**, **Critical**, **PII / Sensitive** และ **AI draft metadata**\n- **Domain**, **Owner** (ถ้ายังไม่มีจะขึ้น \"Unassigned\" สีแดง), **ชั้นความลับ**, **DQ %**, **Updated** (สีแดงถ้าเกิน SLA ความสดใหม่) และ **คะแนนรีวิว**\n- กล่องคำแนะนำจาก AI ด้านบนผลค้นหา จะแนะนำคำศัพท์ที่ตรงกันและแหล่งข้อมูลหลัก (authoritative source) พร้อมบอกว่ามีชุดข้อมูล Restricted ถูกซ่อนตามสิทธิ์ของคุณกี่รายการ"
+    },
+    {
+     "anchor": "tasks",
+     "heading": "งานที่ทำบ่อย",
+     "markdown": "- **Save search**: บันทึกคำค้นและตัวกรองไว้ใน \"My saved searches\"\n- **Export**: ดาวน์โหลดรายการผลลัพธ์เป็น Excel\n- เอาตัวกรองออกโดยคลิก × ที่ชิป หรือกด **Clear all**"
+    },
+    {
+     "anchor": "tips",
+     "heading": "เคล็ดลับและคำถามที่พบบ่อย",
+     "markdown": "- **ทำไมไม่เจอตารางที่รู้ว่ามีอยู่?** อาจเป็นข้อมูล Restricted ที่ถูกซ่อนตามสิทธิ์ ให้ติดต่อเจ้าของข้อมูลหรือขอสิทธิ์\n- ควรเลือกชุดข้อมูลที่เป็น **Certified** และ **Authoritative** เพราะมีเจ้าของ มีคำอธิบาย และยืนยันชั้นความลับแล้ว\n- ถ้าเห็นข้อความ \"No description yet — Steward action needed\" แปลว่าชุดข้อมูลนั้นยังไม่มีคำอธิบาย"
+    }
+   ]
+  },
+  {
+   "page_id": "settings",
+   "lang": "th",
+   "title": "ตั้งค่า",
+   "nav_label": "ตั้งค่า",
+   "section": "ผู้ดูแลระบบ",
+   "routes": [
+    "/settings"
+   ],
+   "roles_full": [
+    "admin"
+   ],
+   "roles_view": [
+    "custodian",
+    "auditor"
+   ],
+   "keywords": [
+    "ตั้งค่า",
+    "AI provider",
+    "โมเดล",
+    "guardrails",
+    "Ask Softnix",
+    "MCP server",
+    "metamodel",
+    "attribute",
+    "ภาษา",
+    "ปฏิทิน",
+    "identity provider",
+    "Keycloak"
+   ],
+   "related": [
+    "roles",
+    "audit",
+    "sources",
+    "privacy"
+   ],
+   "prd": "AI-09/10, MCP, CAT-03",
+   "summary": "ตั้งค่าแพลตฟอร์ม ทั้งโมเดล AI และ guardrails, MCP server, metamodel และค่าทั่วไป โดยไม่ต้อง deploy ใหม่",
+   "last_updated": "2026-10-24",
+   "version": "1.0.0",
+   "source_file": "help-content/th/settings.md",
+   "sections": [
+    {
+     "anchor": "what",
+     "heading": "หน้านี้คืออะไร",
+     "markdown": "หน้า **ตั้งค่า (Settings)** ใช้ปรับการทำงานของ EDC โดยไม่ต้อง deploy ใหม่ มี 4 แท็บ คือ **AI & Ask Softnix**, **MCP server**, **Metamodel** และ **General**"
+    },
+    {
+     "anchor": "purpose",
+     "heading": "วัตถุประสงค์และเป้าหมาย",
+     "markdown": "- ควบคุมว่าจะใช้โมเดล AI ตัวไหน และปกป้องข้อมูลอย่างไรเมื่อใช้ AI\n- ให้เครื่องมือ AI ภายนอกใช้แคตตาล็อกได้อย่างปลอดภัยผ่าน MCP\n- เพิ่ม metadata ที่ต้องเก็บสำหรับชุดข้อมูลแต่ละประเภท"
+    },
+    {
+     "anchor": "who",
+     "heading": "ใครใช้หน้านี้",
+     "markdown": "เฉพาะ **ผู้ดูแลระบบ (Platform Admin)** ที่แก้ไขได้ ส่วน Custodian และผู้ตรวจสอบดูได้อย่างเดียว"
+    },
+    {
+     "anchor": "how",
+     "heading": "วิธีใช้งาน",
+     "markdown": "1. **AI & Ask Softnix**: ดู **Model providers** ของแต่ละฟีเจอร์ (ทั้งหมดติดตั้งแบบ on-prem) และตั้งค่า **Guardrails** ได้แก่ การส่งข้อมูลตัวอย่างให้ LLM, การ mask PII ก่อนส่ง, ชุดข้อมูล Restricted ใช้ได้เฉพาะ on-prem, โหมดให้ AI บันทึกแบบต้องยืนยันก่อน, เสียง และประวัติแชต ด้านล่างแสดงโควตา token\n2. **MCP server**: ดู endpoint, transport, การยืนยันตัวตน (OAuth 2.1 ผ่าน Keycloak), write tools (เสนอได้อย่างเดียว), rate limit, client ที่อนุญาต และ tool ที่มีให้ใช้\n3. **Metamodel**: ดูรายการ attribute ที่เพิ่มเองแยกตามประเภทชุดข้อมูล แล้วกด **New attribute** เพื่อเพิ่ม\n4. **General**: ภาษาเริ่มต้น ปฏิทิน (ค.ศ. / พ.ศ.) identity provider และ tenant"
+    },
+    {
+     "anchor": "fields",
+     "heading": "ฟิลด์และตัวชี้วัดสำคัญ",
+     "markdown": "- **Guardrails** กำหนดว่า AI เห็นอะไรและทำอะไรได้ ค่าเริ่มต้นคือไม่ส่งข้อมูลตัวอย่าง, mask PII และใช้เฉพาะ on-prem กับชุดข้อมูล Restricted\n- **Write tools: Proposals only → workflow**: client ผ่าน MCP แก้ metadata ตรง ๆ ไม่ได้ ทุกการแก้ไขจะกลายเป็นงานใน workflow\n- **Required** ของ attribute: เช่น Critical, Yes หรือ \"If PII\" (บังคับเมื่อมี PII)"
+    },
+    {
+     "anchor": "tasks",
+     "heading": "งานที่ทำบ่อย",
+     "markdown": "- เพิ่ม attribute เช่น \"Cost center\" ให้ Data Product\n- อนุญาต MCP client ตัวใหม่หลังผ่านการตรวจความปลอดภัย"
+    },
+    {
+     "anchor": "tips",
+     "heading": "เคล็ดลับและคำถามที่พบบ่อย",
+     "markdown": "- ทุกการเปลี่ยนการตั้งค่าจะถูกบันทึกไว้ใน **ประวัติการตรวจสอบ**\n- ถ้าช่องติ๊กถูกล็อก แปลว่าบทบาทของคุณดูการตั้งค่าได้อย่างเดียว"
+    }
+   ]
+  },
+  {
+   "page_id": "sources",
+   "lang": "th",
+   "title": "แหล่งข้อมูลและการดึง Metadata",
+   "nav_label": "แหล่งข้อมูลและการดึง Metadata",
+   "section": "ผู้ดูแลระบบ",
+   "routes": [
+    "/sources"
+   ],
+   "roles_full": [
+    "custodian",
+    "admin"
+   ],
+   "roles_view": [
+    "steward",
+    "auditor"
+   ],
+   "keywords": [
+    "แหล่งข้อมูล",
+    "connector",
+    "harvest",
+    "ดึง metadata",
+    "Iceberg",
+    "Oracle",
+    "Snowflake",
+    "Power BI",
+    "OpenLineage",
+    "Trino",
+    "profiling",
+    "remote agent",
+    "ตารางเวลา",
+    "ทดสอบการเชื่อมต่อ"
+   ],
+   "related": [
+    "home",
+    "privacy",
+    "asset-detail",
+    "settings"
+   ],
+   "prd": "HRV",
+   "summary": "เชื่อมต่อระบบต้นทางและดึง metadata ตามรอบเวลา โดยไม่คัดลอกตัวข้อมูลจริง",
+   "last_updated": "2026-10-24",
+   "version": "1.0.0",
+   "source_file": "help-content/th/sources.md",
+   "sections": [
+    {
+     "anchor": "what",
+     "heading": "หน้านี้คืออะไร",
+     "markdown": "หน้า **แหล่งข้อมูลและการดึง Metadata (Sources & Harvest)** แสดง connector ที่อ่าน metadata จาก Lakehouse ฐานข้อมูล cloud storage เครื่องมือ BI และ API/ไฟล์ connector อ่าน **เฉพาะ metadata** ข้อมูลรับรอง (credential) เก็บไว้ใน secret store และ Lakehouse ยังเป็นระบบหลัก (system of record) เหมือนเดิม"
+    },
+    {
+     "anchor": "purpose",
+     "heading": "วัตถุประสงค์และเป้าหมาย",
+     "markdown": "- ทำให้แคตตาล็อกครบถ้วนและเป็นปัจจุบันโดยอัตโนมัติ\n- เห็นการดึงข้อมูลที่ล้มเหลวหรือได้ไม่ครบได้เร็ว ข้อมูลในแคตตาล็อกจะได้ไม่ล้าสมัย"
+    },
+    {
+     "anchor": "who",
+     "heading": "ใครใช้หน้านี้",
+     "markdown": "Custodian / Data Engineer และผู้ดูแลระบบเป็นผู้เพิ่มและสั่งรันแหล่งข้อมูล ส่วน Steward และผู้ตรวจสอบดูได้อย่างเดียว"
+    },
+    {
+     "anchor": "how",
+     "heading": "วิธีใช้งาน",
+     "markdown": "1. ดูการ์ดสรุป: Sources, Assets harvested, Schema changes (24h) และ Failed sources\n2. กรองตามกลุ่ม: All, Lakehouse, Databases, Cloud platforms, Storage, BI, API & files\n3. คลิกแถวเพื่อดูรายละเอียด: Connection, Credential (อ้างอิงใน vault), รูปแบบ Include / Exclude, Profiling และ Recent runs\n4. กด **Run** เพื่อดึงทันที, **Test connection** เพื่อทดสอบการเชื่อมต่อ หรือ **Configure** เพื่อแก้ไขการตั้งค่า\n5. กด **Add source** เพื่อเริ่มวิซาร์ด 7 ขั้น: Source type → Connection → Credentials & test → Scope → Schedule → Governance & PII → Review & create"
+    },
+    {
+     "anchor": "fields",
+     "heading": "ฟิลด์และตัวชี้วัดสำคัญ",
+     "markdown": "- **Status**: Healthy, Warning, Failed, Running, Queued\n- **Last run**: การดึงครั้งล่าสุดเกิดเมื่อไรและผลเป็นอย่างไร เช่น \"3 tables skipped (permission)\" หรือ \"ORA-12170 connect timeout\"\n- **Schedule**: เช่น ทุก 1 ชั่วโมงร่วมกับ DDL events, ทุกวัน 23:00 หรือแบบ push เรียลไทม์\n- ป้าย **lineage**: แหล่งนี้ส่ง lineage มาด้วย, ป้าย **remote agent**: ดึงผ่าน agent ที่ติดตั้งในองค์กร"
+    },
+    {
+     "anchor": "tasks",
+     "heading": "งานที่ทำบ่อย",
+     "markdown": "- แก้แหล่งข้อมูลที่ดึงไม่สำเร็จ: อ่าน error ใน Recent runs, กด **Test connection** และตรวจการออกเครือข่ายของ agent\n- เพิ่มฐานข้อมูลใหม่ แล้วกำหนดโดเมน Owner Steward และการสแกน PII ในวิซาร์ด"
+    },
+    {
+     "anchor": "tips",
+     "heading": "เคล็ดลับและคำถามที่พบบ่อย",
+     "markdown": "- การทำ profiling สุ่มตัวอย่างแถว (เช่น 100k แถว) บน resource group ที่มีลำดับความสำคัญต่ำ และไม่เก็บค่าจริงไว้\n- ปุ่ม **Remote agents** ที่มุมขวาบนบอกว่ามี agent ในองค์กรตัวไหนออนไลน์อยู่บ้าง"
+    }
+   ]
+  }
+ ]
+}
